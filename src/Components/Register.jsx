@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import image1 from "../assests/image1.png";
 import image2 from "../assests/image2.png";
 import image3 from "../assests/image3.png";
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const [firstName, setFirstName] = useState("");
@@ -181,7 +182,7 @@ const Register = () => {
 
                             <div className="flex items-center justify-center">
                                 <p className="text-gray-600">Have an account?</p>
-                                <a href="#" className="text-blue-500 hover:text-blue-700 ml-1">Sign In</a>
+                                <Link  to="/signin" className="text-blue-500 hover:text-blue-700 ml-1">Sign In</Link>
                             </div>
                         </form>
                     </div>
