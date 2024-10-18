@@ -216,6 +216,7 @@ import image2 from "../assests/image2.png";
 import image3 from "../assests/image3.png";
 import { Link } from 'react-router-dom';
 
+
 const Register = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -259,8 +260,9 @@ const Register = () => {
     return (
         <div className="container mx-auto px-4 py-16 w-full">
             <div className="flex justify-center space-x-4">
-                {/* Box 1 */}
-                <div className="max-w-md bg-white shadow-md rounded-lg overflow-hidden w-full">
+                <img src='https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7963.jpg'/>
+                <div className="max-w-md bg-white shadow-md rounded-lg overflow-hidden w-full ">
+                    
                     <div className="p-6">
                         <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Welcome!</h2>
                         <p className="text-gray-600 text-center mb-8">Create your new account</p>

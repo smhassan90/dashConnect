@@ -25,6 +25,8 @@ const Login = () => {
   return (
     <div className="container mx-auto px-4 py-16 w-full">
     <div className="flex justify-center space-x-4">
+    <img src='https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7963.jpg'/>
+
         <div className="max-w-md bg-white shadow-md rounded-lg overflow-hidden w-full">
             <div className="p-6">
                 <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">Hello Again!</h2>
