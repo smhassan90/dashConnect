@@ -27,6 +27,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './Components/Register';
 import Login from './Components/Login';
 import MySidebar from './Components/Dashboard'; // Assuming you renamed MySidebar correctly
+import AddStory from './Components/AddStory';
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/" element={<MySidebar />} />
+        <Route path="/add-story" element={<AddStory />} />
+
         {/* Add more routes as needed */}
       </Routes>
     </Router>
