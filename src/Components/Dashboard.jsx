@@ -122,14 +122,21 @@ import { IoSearch } from "react-icons/io5";
 import { AiOutlineMenu } from 'react-icons/ai'; // Importing menu icon
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { BsCalendar3 } from "react-icons/bs";
+import Table from './Table';
 
 
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(true); // Sidebar state
+  const [entries, setEntries] = useState(25);
+
 
   const currentDate = new Date().toLocaleDateString('en-GB'); // This will give you DD/MM/YYYY format
 
+
+  const handleChange = (event) => {
+    setEntries(parseInt(event.target.value));
+  };
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -244,6 +251,139 @@ const Dashboard = () => {
         <span className="text-2xl">{currentDate.replace(/\//g, '.')}</span> {/* Replace / with . */}
       </div>
     </div>
+    <div className="flex gap-4 mt-12 ml-8">
+      <div className="bg-gray-800 p-4 rounded-[15px] shadow-md w-72  h-44">
+        <h2 className="text-white  ml-3  text-3xl mb-7 w-13 ">Sales Board</h2>
+        <div className="flex items-center gap-2">
+          <span className="text-white text-3xl font-bold ml-3 ">23</span>
+         
+        </div>
+        <div className="flex mt-4 ml-24">
+        <div className="bg-white text-black font-bold rounded-full px-2 py-1">
+            +20
+          </div>
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+        </div>
+      </div>
+      {/* <div className="bg-gray-800 p-4 rounded-md shadow-md">
+        <h2 className="text-white font-bold text-lg mb-2">Appointments</h2>
+        <div className="flex items-center gap-2">
+          <span className="text-white text-3xl font-bold">43</span>
+          <div className="bg-white text-black font-bold rounded-full px-2 py-1">
+            +40
+          </div>
+        </div>
+        <div className="flex mt-4">
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+        </div>
+      </div> */}
+            <div className="bg-gray-800 p-4 rounded-[15px] shadow-md w-72 h-44">
+        <h2 className="text-white  ml-3  text-3xl mb-7 w-13 ">Appointments</h2>
+        <div className="flex items-center gap-2">
+          <span className="text-white text-3xl font-bold ml-3 ">43</span>
+         
+        </div>
+        <div className="flex mt-4 ml-24">
+        <div className="bg-white text-black font-bold rounded-full px-2 py-1">
+            +20
+          </div>
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+        </div>
+      </div>
+
+
+
+
+
+
+      {/* <div className="bg-gray-800 p-4 rounded-md shadow-md">
+ <h2 className="text-white font-bold text-lg mb-2">Leads</h2>
+        <div className="flex items-center gap-2">
+          <span className="text-white text-3xl font-bold">12</span>
+         
+        </div>
+        <div className="flex mt-4">
+        <div className="bg-white text-black font-bold rounded-full px-2 py-1">
+            +10
+          </div>
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+        </div>
+      </div> */}
+
+        <div className="bg-gray-800 p-4 rounded-[15px] shadow-md w-96 h-44">
+        <h2 className="text-white font-bold ml-3  text-3xl mb-7 w-13 ">Information of Sales</h2>
+        <div className="flex items-center gap-2">
+          <span className="text-white text-3xl font-bold ml-3 ">43</span>
+         
+        </div>
+        <div className="flex mt-4 ml-48">
+        <div className="bg-white text-black font-bold rounded-full px-2 py-1">
+            +20
+          </div>
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+        </div>
+      </div>
+
+
+      <div className="bg-gray-800 p-4 rounded-[15px] shadow-md w-[475px] h-44">
+        <h2 className="text-white  ml-3  text-3xl mb-7 w-15 ">Information of Appointments</h2>
+        <div className="flex items-center gap-2">
+          <span className="text-white text-3xl font-bold ml-3 ">43</span>
+         
+        </div>
+        <div className="flex mt-4 ml-64">
+        <div className="bg-white text-black font-bold rounded-full px-2 py-1">
+            +20
+          </div>
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+          <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+        </div>
+      </div>
+
+
+      
+
+
+      
+      
+      
+
+
+      
+
+
+
+
+
+    </div>
+
+    <div className="flex gap-2 ml-10 mt-7 text-2xl">
+      <span>Show</span>
+      <select className="border rounded" value={entries} onChange={handleChange}>
+        <option value={25}>25</option>
+        <option value={50}>50</option>
+        <option value={100}>100</option>
+      </select>
+      <span className='text-2xl '>entries</span>
+    </div>
+
+
+
+    <Table/>
+
+
+
 
 </div>
 
