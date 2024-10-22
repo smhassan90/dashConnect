@@ -132,24 +132,24 @@ const Storyboards = () => {
 <div className="mb-4 mt-5 relative">
   <input
     type="text"
-    className="w-11/12 p-2 pr-10 border rounded-[12px]" // Added padding to the right
+    className="w-11/12 p-2 pl-10 pr-3 border rounded-[12px] focus:outline-none" // Added padding to the left for the icon
     placeholder="Search a Metric..."
   />
-  <IoSearch className="absolute-left-2/3 top-2 text-xl sm:text-2xl text-gray-500" />
+  <IoSearch className="absolute left-3 top-2 text-xl sm:text-2xl text-gray-500" />
 
 
         
 
       </div>
-      <div className="border rounded-md p-4">
+      <div className="border  p-4 w-11/12 rounded-[12px] h-36 mt-5">
         <ul>
           {metrics.map((metric, index) => (
             <li key={index} className="mb-2">
-              <span className="font-bold">{metric.name}</span>: {metric.value}
+              <span className="font-bold">{metric.name}</span> <br></br> <p className='mt-5'>{metric.value}</p>
             </li>
           ))}
         </ul>
-        <button className="bg-gray-800 text-white font-bold py-2 px-4 rounded-md" onClick={handleAddMetric}>
+        <button className="bg-gray-800 text-white font-bold py-2 px-5 ml-[1250px]  rounded-[12px]" onClick={handleAddMetric}>
           + Add
         </button>
       </div>
