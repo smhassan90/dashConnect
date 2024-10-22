@@ -23,6 +23,13 @@
     const handleAddStory = () => {
       navigate('/add-story');
     };
+    const handleNavigation = () => {
+      navigate('/'); // Assuming your dashboard route is '/dashboard'
+  };
+
+  const StoryBoard = () => {
+    navigate('/storyboards'); // Assuming your dashboard route is '/dashboard'
+};
 
     const currentDate = new Date().toLocaleDateString('en-GB'); // This will give you DD/MM/YYYY format
 
@@ -51,15 +58,15 @@
           <p className={`text-gray-400 mt-7 ml-9 text-lg ${isOpen ? 'block' : 'hidden'}`}>Overview</p>
 
           {/* Sidebar Menu Items */}
-          <div className="flex gap-2 items-center mt-3 ">
+          <div className="flex gap-2 items-center mt-3 cursor-pointer" onClick={handleNavigation}>
             <MdDashboard />
             <span className={`font-poppins text-lg ${isOpen ? 'block' : 'hidden'}`}>Dashboard</span>
-          </div>
+        </div>
           <div className="flex gap-2 items-center mt-5">
             <IoMdPerson />
             <span className={`font-poppins text-lg ${isOpen ? 'block' : 'hidden'}`}>Employees</span>
           </div>
-          <div className="flex gap-2 items-center mt-5">
+          <div className="flex gap-2 items-center mt-5 cursor-pointer" onClick={StoryBoard}> 
             <BsPostcard />
             <span className={`font-poppins text-lg ${isOpen ? 'block' : 'hidden'}`}>Story boards</span>
           </div>

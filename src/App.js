@@ -28,6 +28,7 @@ import Register from './Components/Register';
 import Login from './Components/Login';
 import MySidebar from './Components/Dashboard'; // Assuming you renamed MySidebar correctly
 import AddStory from './Components/AddStory';
+import Storyboards from './Components/Storyboards';
 
 function App() {
   return (
@@ -36,6 +37,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/" element={<MySidebar />} />
+        <Route path="/storyboards" element={<Storyboards/>} />
+
         <Route path="/add-story" element={<AddStory />} />
 
         {/* Add more routes as needed */}
