@@ -72,14 +72,14 @@ const Storyboards = () => {
 
     {/* Main Content */}
     
-    <div className={`lg:w-[400px] lg:ml-[50px] flex-1 p-4 sm:p-6 transition-all duration-300 text-center  sm:text-left ${isOpen ? 'ml-0' : 'ml-0 w-full'}`}>
+    <div className={`   p-4 sm:p-6 transition-all duration-300 text-center  sm:text-left ${isOpen ? 'ml-0' : 'ml-0 w-full'}`}>
   {/* Flex container for the title and action buttons */}
   {/* <div className={`flex-1 p-4 sm:p-6 transition-all duration-300 text-center sm:text-left ${isOpen ? 'ml-0' : 'ml-0 w-full'} `}> */}
 
-  <div className="flex flex-col sm:flex-row justify-between items-center w-full">
+  <div className="flex flex-col sm:flex-row justify-between items-center ">
     
     {/* Title - Adjusting text for better visibility */}
-    <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-center sm:text-left mb-4 sm:mb-0 break-words w-full px-2 sm:px-10 ml-0 sm:ml-0 md:ml-0 lg:ml-0 mobile:ml-[50px] mobile:text-xl">
+    <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-center sm:text-left mb-4 sm:mb-0 break-words w-full px-2 sm:px-10 ml-0 sm:ml-0 md:ml-0 lg:ml-0 mobile:ml-[20px] mobile:text-xl">
   Story Boards > Information of appointments
 </h2>
 

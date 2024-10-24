@@ -103,104 +103,98 @@
 
         
         <div className={`flex-1 p-6 transition-all duration-300 ${isOpen ? 'ml-0' : 'ml-0 w-full'}`}>
-          <div className="flex justify-between items-center w-full">
-            <h2 className="text-2xl">Story boards</h2>
-            <div className="flex items-center space-x-4"> {/* Add space-x-4 for horizontal spacing */}
-              <IoSearch className="text-2xl mr-4" /> {/* Increase icon size */}
-              <IoIosNotificationsOutline className="text-2xl" /> {/* Increase icon size */}
-              <Link to="/add-story">
-  <button className="bg-black text-white font-bold py-2 px-4 rounded-full hover:bg-gray-800 transition duration-300">
-    + Add Story
-  </button>
-</Link>
-            </div>
-          </div>
+  <div className="flex justify-between items-center w-full">
+    <h2 className="text-2xl">Story Boards</h2>
+    <div className="flex items-center space-x-4"> {/* Add space-x-4 for horizontal spacing */}
+      <IoSearch className="text-2xl mr-4" /> {/* Increase icon size */}
+      <IoIosNotificationsOutline className="text-2xl" /> {/* Increase icon size */}
+      <Link to="/add-story">
+        <button className="bg-black text-white font-bold py-2 px-4 rounded-full hover:bg-gray-800 transition duration-300">
+          + Add Story
+        </button>
+      </Link>
+    </div>
+  </div>
+
+  <hr className="border-t border-gray-300 w-full mt-8" /> {/* Changed w-100 to w-full */}
+
+  {/* 2nd section */}
+  <div className="flex flex-col md:flex-row justify-between items-center mt-12 mx-auto max-w-6xl px-4"> {/* Added max-w-6xl and px-4 */}
+    <p className='font-bold text-3xl font-serif mb-2 md:mb-0'>
+      Welcome Back, Pritam
+    </p>
+    <div className="flex items-center">
+      <BsCalendar3 className="text-5xl mr-3" />
+      <span className="text-2xl">{currentDate.replace(/\//g, '.')}</span> {/* Replace / with . */}
+    </div>
+  </div>
 
 
-          <hr className="border-t border-gray-300 w-100 mt-8" />
 
-          {/* 2nd section */}
-          <div className="flex justify-between items-center mt-12 ml-8">
-            <p className='font-bold text-3xl font-serif'>
-              Welcome Back, Pritam
-            </p>
-            <div className="flex items-center">
-              <BsCalendar3 className="text-5xl mr-2" />
-              <span className="text-2xl">{currentDate.replace(/\//g, '.')}</span> {/* Replace / with . */}
-            </div>
-          </div>
-          <div className="flex gap-4 mt-12 ml-8">
-            <div className="bg-gray-800 p-4 rounded-[15px] shadow-md w-72  h-44">
-              <h2 className="text-white  ml-3  text-3xl mb-7 w-13 ">Sales Board</h2>
-              <div className="flex items-center gap-2">
-                <span className="text-white text-3xl font-bold ml-3 ">23</span>
-
-              </div>
-              <div className="flex mt-4 ml-24">
-                <div className="bg-white text-black font-bold rounded-full px-2 py-1">
-                  +20
-                </div>
-                <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
-                <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
-                <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
-              </div>
-            </div>
-            <div className="bg-gray-800 p-4 rounded-[15px] shadow-md w-72 h-44">
-              <h2 className="text-white  ml-3  text-3xl mb-7 w-13 ">Appointments</h2>
-              <div className="flex items-center gap-2">
-                <span className="text-white text-3xl font-bold ml-3 ">43</span>
-
-              </div>
-              <div className="flex mt-4 ml-24">
-                <div className="bg-white text-black font-bold rounded-full px-2 py-1">
-                  +20
-                </div>
-                <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
-                <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
-                <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
-              </div>
-            </div>
-            <div className="bg-gray-800 p-4 rounded-[15px] shadow-md w-96 h-44">
-              <h2 className="text-white font-bold ml-3  text-3xl mb-7 w-13 ">Information of Sales</h2>
-              <div className="flex items-center gap-2">
-                <span className="text-white text-3xl font-bold ml-3 ">43</span>
-              </div>
-              <div className="flex mt-4 ml-48">
-                <div className="bg-white text-black font-bold rounded-full px-2 py-1">
-                  +20
-                </div>
-                <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
-                <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
-                <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
-              </div>
-            </div>
-            <div className="bg-gray-800 p-4 rounded-[15px] shadow-md w-[475px] h-44">
-              <h2 className="text-white  ml-3  text-3xl mb-7 w-15 ">Information of Appointments</h2>
-              <div className="flex items-center gap-2">
-                <span className="text-white text-3xl font-bold ml-3 ">43</span>
-              </div>
-              <div className="flex mt-4 ml-64">
-                <div className="bg-white text-black font-bold rounded-full px-2 py-1">
-                  +20
-                </div>
-                <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
-                <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
-                <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
-              </div>
-            </div>
-          </div>
-          <div className="flex gap-2 ml-10 mt-7 text-2xl">
-            <span>Show</span>
-            <select className="border rounded" value={entries} onChange={handleChange}>
-              <option value={25}>25</option>
-              <option value={50}>50</option>
-              <option value={100}>100</option>
-            </select>
-            <span className='text-2xl '>entries</span>
-          </div>
-          <Table />
-        </div>
+  <div className="flex flex-col md:flex-row gap-4 mt-12 mx-auto max-w-6xl px-4"> {/* Added max-w-6xl and px-4 */}
+    <div className="bg-gray-800 p-4 rounded-[15px] shadow-md w-full md:w-72 h-44">
+      <h2 className="text-white ml-3 text-3xl mb-7">Sales Board</h2>
+      <div className="flex items-center gap-2">
+        <span className="text-white text-3xl font-bold ml-3">23</span>
       </div>
+      <div className="flex mt-4 ml-24">
+        <div className="bg-white text-black font-bold rounded-full px-2 py-1">+20</div>
+        <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+        <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+        <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+      </div>
+    </div>
+    <div className="bg-gray-800 p-4 rounded-[15px] shadow-md w-full md:w-72 h-44">
+      <h2 className="text-white ml-3 text-3xl mb-7">Appointments</h2>
+      <div className="flex items-center gap-2">
+        <span className="text-white text-3xl font-bold ml-3">43</span>
+      </div>
+      <div className="flex mt-4 ml-24">
+        <div className="bg-white text-black font-bold rounded-full px-2 py-1">+20</div>
+        <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+        <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+        <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+      </div>
+    </div>
+    <div className="bg-gray-800 p-4 rounded-[15px] shadow-md w-full md:w-96 h-44">
+      <h2 className="text-white font-bold ml-3 text-3xl mb-7">Information of Sales</h2>
+      <div className="flex items-center gap-2">
+        <span className="text-white text-3xl font-bold ml-3">43</span>
+      </div>
+      <div className="flex mt-4 ml-48">
+        <div className="bg-white text-black font-bold rounded-full px-2 py-1">+20</div>
+        <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+        <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+        <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+      </div>
+    </div>
+    <div className="bg-gray-800 p-4 rounded-[15px] shadow-md w-full md:w-[475px] h-44">
+      <h2 className="text-white ml-3 text-3xl mb-7">Information of Appointments</h2>
+      <div className="flex items-center gap-2">
+        <span className="text-white text-3xl font-bold ml-3">43</span>
+      </div>
+      <div className="flex mt-4 ml-64">
+        <div className="bg-white text-black font-bold rounded-full px-2 py-1">+20</div>
+        <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+        <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+        <img src="https://via.placeholder.com/30" alt="Profile Pic" className="rounded-full" />
+      </div>
+    </div>
+  </div>
+
+  <div className="flex gap-2 ml-10 mt-7 text-2xl">
+    <span>Show</span>
+    <select className="border rounded" value={entries} onChange={handleChange}>
+      <option value={25}>25</option>
+      <option value={50}>50</option>
+      <option value={100}>100</option>
+    </select>
+    <span className='text-2xl'>entries</span>
+  </div>
+  
+  <Table />
+</div>
+</div>
     );
   }
   export default Dashboard;
