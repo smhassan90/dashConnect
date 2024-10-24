@@ -115,7 +115,11 @@
 </Link>
             </div>
           </div>
+
+
           <hr className="border-t border-gray-300 w-100 mt-8" />
+
+          {/* 2nd section */}
           <div className="flex justify-between items-center mt-12 ml-8">
             <p className='font-bold text-3xl font-serif'>
               Welcome Back, Pritam
