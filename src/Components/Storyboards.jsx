@@ -19,7 +19,7 @@ import { MdDashboard } from "react-icons/md";
 
 
   import { Link, useNavigate } from 'react-router-dom';
-import SIdebar from './SIdebar';
+import SIdebar from '../Reuseable/SIdebar';
 
 const Storyboards = () => {
     const [isOpen, setIsOpen] = useState(true); // Sidebar state
