@@ -22,7 +22,7 @@ const Sidebar = () => {
 
     return (
         <div>
-            <div className={`bg-gray-100 p-5 flex flex-col gap-4 transition-all duration-300 
+            <div className={`bg-gray-100 p-5 flex flex-col gap-4 transition-all duration-300 h-full
                 ${isOpen ? 'w-60' : 'w-16'} 
                 sm:relative fixed top-0 left-0 h-full z-50 sm:h-auto`}
             >
