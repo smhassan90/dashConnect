@@ -1,25 +1,18 @@
 import React, { useState } from 'react'
-import { MdDashboard } from "react-icons/md";
-  import { IoMdPerson } from "react-icons/io";
-  import { BsPostcard } from "react-icons/bs";
-  import { FaSearchengin } from "react-icons/fa6";
-  import { FaDatabase } from "react-icons/fa";
-  import { RiDashboardHorizontalLine } from "react-icons/ri";
   import { IoSearch } from "react-icons/io5";
-  import { AiOutlineMenu } from 'react-icons/ai'; // Importing menu icon
   import { IoIosNotificationsOutline } from "react-icons/io";
   import { SlArrowDown } from "react-icons/sl";
   import { RxCross2 } from "react-icons/rx";
 
 
   import { BsCalendar3 } from "react-icons/bs";
-  import Table from './Table';
   import { LineChart } from '@mui/x-charts/LineChart';
 //   import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 
 
-  import { Link, useNavigate } from 'react-router-dom';
+  import { Link,  } from 'react-router-dom';
 import SIdebar from '../Reuseable/SIdebar';
+import { Bar } from 'recharts';
 
 const Storyboards = () => {
     const [isOpen, setIsOpen] = useState(true); // Sidebar state
@@ -42,22 +35,9 @@ const Storyboards = () => {
         const handleSqlChange = (event) => {
             setSql(event.target.value);
           };
-      
+
+
    
-    const navigate =useNavigate();
-
-    const handleNavigation = () => {
-        navigate('/'); // Assuming your dashboard route is '/dashboard'
-    };
-
-    const storyBoardName = ()=>{
-        navigate('/storyboards')
-    }
-
-
-    const toggleSidebar = () => {
-        setIsOpen(!isOpen);
-      };
 //       const [metrics, setMetrics] = useState([]);
 
 //   const handleAddMetric = () => {
@@ -69,6 +49,11 @@ const Storyboards = () => {
     <div className="flex h-screen ">
     {/* Sidebar */}
     <SIdebar/>
+
+    <Bar title=" texStory Board"/>
+
+
+
 
     {/* Main Content */}
     

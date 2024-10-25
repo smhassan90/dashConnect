@@ -272,11 +272,11 @@ const Register = () => {
     };
 
     return (
-        <div className="container mx-auto px-4 py-16 w-full">
+        <div className="container mx-auto px-4 py-16 w-full h-32">
             <div className="flex flex-col md:flex-row justify-center space-x-0 md:space-x-4">
                 <img src='https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7963.jpg' alt="Illustration" className="mb-4 md:mb-0" />
                 <div className="max-w-md bg-white shadow-md rounded-lg overflow-hidden w-full">
-                    <div className="p-6">
+                    <div className="p-3 h-11">
                         <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Welcome!</h2>
                         <p className="text-gray-600 text-center mb-8">Create your new account</p>
                         {error && <p className="text-red-500 text-center">{error}</p>} {/* Display error message */}
