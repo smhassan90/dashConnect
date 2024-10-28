@@ -1,5 +1,5 @@
 
-import Sidebar from '../Reuseable/SIdebar'
+import Sidebar from '../Reuseable/Sidebar'
 import React from 'react';
 // import Sidebar from '../Reuseable/Sidebar';
 import Bar from '../Reuseable/Bar';

@@ -6,7 +6,7 @@ import Table from './Table';
 import { Link, useNavigate } from 'react-router-dom';
 import DashboardCard from "../Reuseable/DashboardCard ";
 import Bar from '../Reuseable/Bar';
-import Sidebar from '../Reuseable/SIdebar';
+import Sidebar from '../Reuseable/Sidebar';
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(true);

@@ -323,7 +323,7 @@
 
 // export default EmployessPage;
 import React, { useState } from 'react';
-import Sidebar from '../Reuseable/SIdebar';
+import Sidebar from '../Reuseable/Sidebar';
 import Bar from '../Reuseable/Bar';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
