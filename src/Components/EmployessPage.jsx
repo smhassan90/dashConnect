@@ -435,15 +435,15 @@ const EmployessPage = () => {
               placeholder="Search by Story Board Name"
               className="w-full p-2 pl-10 text-sm text-gray-700 mb-4"
             />
-            <div className="overflow-x-auto">
+            {/* <div className="overflow-x-auto">
               <table className="min-w-full bg-white">
                 <thead>
                   <tr className="text-left font-bold">
-                    <th className="px-4 py-3">Story Board Name</th>
-                    <th className="px-4 py-3">Description</th>
-                    <th className="px-4 py-3">Integration</th>
-                    <th className="px-4 py-3">Complementary Datasets</th>
-                    <th className="px-4 py-3">Actions</th>
+                    <th className="px-1 py-1">Story Board Name</th>
+                    <th className="px-1 py-1">Description</th>
+                    <th className="px-1 py-1">Integration</th>
+                    <th className="px-1 py-1">Complementary Datasets</th>
+                    <th className="px-1 py-1">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -475,7 +475,51 @@ const EmployessPage = () => {
                     ))}
                 </tbody>
               </table>
-            </div>
+            </div> */}
+<div className="overflow-x-auto">
+  <table className="min-w-full bg-white">
+    <thead>
+      <tr className="text-left font-bold">
+        <th className="px-2 py-1 text-xs sm:text-sm md:text-base">Story Board Name</th>
+        <th className="px-2 py-1 text-xs sm:text-sm md:text-base">Description</th>
+        <th className="px-2 py-1 text-xs sm:text-sm md:text-base">Integration</th>
+        <th className="px-2 py-1 text-xs sm:text-sm md:text-base">Complementary Datasets</th>
+        <th className="px-2 py-1 text-xs sm:text-sm md:text-base">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {data
+        .filter((item) =>
+          item.storyBoardName.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .map((item, index) => (
+          <tr key={index} className="hover:bg-gray-100">
+            <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words">{item.storyBoardName}</td>
+            <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words">{item.description}</td>
+            <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words">{item.integration}</td>
+            <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words">{item.complementaryDatasets}</td>
+            <td className="px-2 py-3 text-xs sm:text-sm md:text-base">
+              <div className="flex justify-center space-x-1">
+                <button
+                  onClick={() => handleDelete(index)}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs"
+                >
+                  <FaTrash />
+                </button>
+                <button
+                  onClick={() => handleEdit(index)}
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs"
+                >
+                  <FaEdit />
+                </button>
+              </div>
+            </td>
+          </tr>
+        ))}
+    </tbody>
+  </table>
+</div>
+
 
             {showDeleteConfirm && (
               <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
