@@ -4,11 +4,12 @@ import React from 'react';
 // import Sidebar from '../Reuseable/Sidebar';
 import Bar from '../Reuseable/Bar';
 import { IoSearch } from 'react-icons/io5'
+import imag4 from '../assests/image4.png' 
 
 const integrations = [
     {
       name: 'Acuity',
-      icon: 'https://www.rotalink.com/wp-content/uploads/2024/01/modular-motor-design.jpg',
+      icon: {imag4},
       description: 'You can set up your Acuity account as a source of data here.',
     },
     {
@@ -97,14 +98,14 @@ const Integrations = () => {
 <div className="container mx-auto px-4 py-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4">
         {integrations.map((integration, index) => (
-          <div key={index} className="bg-black rounded-lg shadow-md p-4 text-white h-52 w-96 flex flex-col ml-10 mt-5">
+          <div key={index} className="bg-black rounded-lg shadow-md  text-white h-52 w-96 flex flex-col  mt-5">
             <div className="flex items-center mb-2">
               <img
-                src={integration.icon}
+                src={imag4}
                 alt={`${integration.name} Icon`}
-                className="w-32 h-16 mt-10 ml-4 mr-2" 
+                className="w-32 h-32 mt-7 mr-16" 
               />
-              {/* <h3 className="text-lg font-bold">Integrate With {integration.name}</h3> */}
+              <h3 className="text-lg text-left  mb-24 mr-12">Integrate With {integration.name}</h3>
             </div>
             {/* <p className="text-xs mb-2">{integration.description}</p>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-md text-sm">
