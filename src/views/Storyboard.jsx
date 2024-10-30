@@ -31,7 +31,7 @@ function Storyboard() {
             <span className="font-bold text-lg">How many appointments do we have?</span>
             <p className="text-xl font-semibold mt-2">20</p>
           </div>
-          <CustomButton text="+ Add" />
+          {/* <CustomButton text="+ Add story" /> */}
         </div>
       </div>
   
@@ -87,7 +87,7 @@ function Storyboard() {
       <div className="ml-1 mr-5 w-full mb-4 h-[800px] p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-blue-500 transition-all duration-300">
         <div className='flex justify-between items-center'>
           <p className="text-base sm:text-lg">View all the answers to the questions you have asked.</p>
-         <CustomButton text="Close" /> 
+         {/* <CustomButton text="Close" />  */}
         </div>
   
         {/* First LineChart */}
