@@ -8,10 +8,10 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 const Bar = ({ title, onAddStory, buttonText }) => {
   return (
     <div>
-      <div className="flex justify-between items-center w-full p-4">
-        <h2 className="text-2xl">{title}</h2> {/* Title on the left */}
+      <div className="flex justify-between items-center w-full p-4 mobile:w-40 mobile:ml-12">
+        <h2 className="text-2xl mobile:text-left">{title}</h2> {/* Title on the left */}
         <div className="flex items-center space-x-4"> 
-          <IoSearch className="text-2xl" />
+          <IoSearch className="text-2xl mobile:ml-3" />
           <IoIosNotificationsOutline className="text-2xl" />
           <button
             onClick={onAddStory} 

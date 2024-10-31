@@ -3,6 +3,7 @@ import React from 'react'
   import { IoSearch } from "react-icons/io5";
   import { SlArrowDown } from "react-icons/sl";
   import { LineChart } from '@mui/x-charts/LineChart';
+import Bar from '../Reuseable/Bar';
 
 
 function Storyboard() {
@@ -10,6 +11,7 @@ function Storyboard() {
     <div className="flex">
     <div className="flex-1 p-4"> {/* Take remaining space for content */}
       {/* Descriptive text */}
+      <Bar title="Story Board" buttonText="+ Add Story" />
       <p className="text-center text-black mt-4 sm:mt-5 text-base sm:text-lg px-2 sm:px-16">
         Ask a data question, check the SQL, add it to your model
       </p>

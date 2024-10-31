@@ -63,7 +63,7 @@ root.render(
       <Sidebar className="w-60 fixed top-0 left-0 h-full bg-gray-800 text-white" />
 
       {/* Main content area */}
-      <div className="">
+      <div className="p-4 w-full">
         <Routes>
           {/* Render /admin routes with the sidebar always visible */}
           <Route path="/admin/dashboard" element={<Dashboard />} />

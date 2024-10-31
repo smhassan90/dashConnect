@@ -28,7 +28,7 @@ const Sidebar = () => {
 
     return (
         <div className="flex h-screen overflow-hidden">
-            <div className={`bg-gray-100 p-5 flex flex-col gap-4 transition-all duration-300 ${isOpen ? 'w-60' : 'w-16'} fixed top-0 left-0 h-full z-50`}>
+            <div className={`bg-gray-100 p-3 flex flex-col gap-4 transition-all duration-300 ${isOpen ? 'w-60' : 'w-16'} fixed top-0 left-0 h-full z-50`}>
                 <div className="flex items-center justify-between">
                     {isOpen ? (
                         <>
@@ -36,7 +36,7 @@ const Sidebar = () => {
                             <AiOutlineArrowLeft className="cursor-pointer text-2xl" onClick={toggleSidebar} />
                         </>
                     ) : (
-                        <AiOutlineMenu className="cursor-pointer text-2xl" onClick={toggleSidebar} />
+                        <AiOutlineMenu className="cursor-pointer text-2xl ml-2" onClick={toggleSidebar} />
                     )}
                 </div>
 
@@ -46,7 +46,7 @@ const Sidebar = () => {
                     className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-gray-300 p-2 rounded ${isActive('/admin/dashboard') ? 'bg-gray-300' : ''}`}
                     onClick={() => handleNavigation('/admin/dashboard')}
                 >
-                    <MdDashboard className={`text-xl ${isOpen ? '' : 'text-2xl'}`} />
+                    <MdDashboard className={` ${isOpen ? 'text-xl' : ' text-2xl'}`} />
                     <span className={`font-poppins text-base ${isOpen ? 'block' : 'hidden'}`}>Dashboard</span>
                 </div>
                 <div
@@ -64,7 +64,7 @@ const Sidebar = () => {
                     <span className={`font-poppins text-base ${isOpen ? 'block' : 'hidden'}`}>Story boards</span>
                 </div>
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-gray-300 p-2 rounded ${isActive('/investigation') ? 'bg-gray-300' : ''}`}
+                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-gray-300 p-2 rounded w-18 h-10 ${isActive('/investigation') ? 'bg-gray-300' : ''}`}
                 >
                     <FaSearchengin className={`text-xl ${isOpen ? '' : 'text-2xl'}`} />
                     <span className={`font-poppins text-base ${isOpen ? 'block' : 'hidden'}`}>Investigation</span>
@@ -76,8 +76,8 @@ const Sidebar = () => {
                     <span className={`font-poppins text-base ${isOpen ? 'block' : 'hidden'}`}>Complimentary Datasets</span>
                 </div>
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-gray-300 p-2 rounded ${isActive('/integrations') ? 'bg-gray-300' : ''}`}
-                    onClick={() => handleNavigation('/integrations')}
+                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-gray-300 p-2 rounded ${isActive('/admin/integration') ? 'bg-gray-300' : ''}`}
+                    onClick={() => handleNavigation('/admin/integration')}
                 >
                     <RiDashboardHorizontalLine className={`text-xl ${isOpen ? '' : 'text-2xl'}`} />
                     <span className={`font-poppins text-base ${isOpen ? 'block' : 'hidden'}`}>Integrations</span>
@@ -96,7 +96,7 @@ const Sidebar = () => {
             </div>
 
             {/* Content Area */}
-            <div className={`flex-1 h-screen overflow-y-auto p-3 transition-all duration-300 ${isOpen ? 'ml-52' : 'ml-7'}`}>
+            <div className={`flex-1 h-screen overflow-y-auto p-5 transition-all duration-300 ${isOpen ? 'ml-64' : 'p-8 '}`}>
     {/* Place your main content here */}
 </div>
 

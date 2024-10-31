@@ -843,7 +843,7 @@ function Table() {
   };
 
   return (
-    <div className="flex flex-col w-full max-w-7xl mx-auto px-4 mt-7">
+    <div className="flex flex-col w-full max-w-7xl mx-auto px-4 mt-7 mobile:w-80 mobile:ml-10">
       <div className="overflow-x-auto">
         <div className="py-2 align-middle inline-block min-w-full">
           <div className="shadow overflow-hidden border-b border-gray-700 sm:rounded-lg">

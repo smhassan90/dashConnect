@@ -13,9 +13,11 @@ function Dashboard() {
     setEntries(parseInt(event.target.value));
   };
   return (
-    <div className=" flex-1 p-4 sm:ml-0 ml-[45px]">
+    <div>
 
-      <Bar title="Story Board" buttonText="+ Add Story" />
+      <Bar title="DashBoard" buttonText="+ Add Story " />
+
+
 
 
       <div className="flex flex-col md:flex-row justify-between items-center mt-4 mx-auto max-w-7xl px-4">
@@ -26,7 +28,8 @@ function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 mx-auto px-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 ml-5  lg:grid-cols-4  mt-6 mx-aut0 mobile:w-3/4 mobile:ml-16
+      ">
         <DashboardCard
           title="Sales Board"
           value={23}
@@ -52,7 +55,7 @@ function Dashboard() {
           imgSrc="https://via.placeholder.com/30"
         />
       </div>
-      <div className="flex gap-2  mt-7 text-2xl  mx-auto max-w-7xl px-4 ">
+      <div className="flex gap-2  mt-7 text-2xl  mx-auto max-w-7xl px-4 mobile:w-3/4 mobile:ml-11 ">
         <span>Show</span>
         <select className="border rounded" value={entries} onChange={handleChange}>
           <option value={25}>25</option>
