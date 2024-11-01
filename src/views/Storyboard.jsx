@@ -20,10 +20,10 @@ function Storyboard() {
       <div className="mb-4 mt-5 relative flex justify-center mobile:ml-5 ">
         <input
           type="text"
-          className="w-full p-2 pl-10 pr-3 border rounded-[12px] focus:outline-none"
+          className="text-sm text-gray-700 mb-4 border border-gray-300 rounded p-3 w-full max-sm mobile:w-3/4 mobile:ml-11"
           placeholder="Search a Metric..."
         />
-        <IoSearch className="absolute left-3 top-2 text-xl sm:text-2xl text-gray-500" />
+        {/* <IoSearch className="absolute left-3 top-2 text-xl sm:text-2xl text-gray-500" /> */}
       </div>
   
       {/* Appointment Info */}

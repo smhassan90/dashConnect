@@ -40,7 +40,7 @@ function Integration() {
 <div className=" w-full h-[35px]  mobile:w-full">
   <input
     type="text"
-    className="bg-white rounded-[12px] w-full h-full pl-10 pr-4 mobile:w-full"
+    className="bg-white rounded-[12px] w-full h-full pl-10 pr-20 mobile:w-full"
     placeholder="Search Integration..."
   />
   <span className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500">

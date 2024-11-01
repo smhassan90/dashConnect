@@ -22,6 +22,7 @@
 // import complementoryDataset from "views/complementoryDataset.js";
 // import investigation from "views/investigation.js";
 
+import Register from "./Components/Register";
 import Dashboard from "./views/Dashboard";
 import Employees from "./views/Employees";
 import Integration from "./views/Integration";
@@ -67,7 +68,8 @@ const dashboardRoutes = [
     icon: "nc-icon nc-pin-3",
     component: Investigation,
     layout: "/admin"
-  }
+  },
+  
  
 ];
 

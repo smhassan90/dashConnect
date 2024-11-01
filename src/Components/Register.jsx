@@ -48,7 +48,7 @@ const Register = () => {
             const response = await axios.post('http://localhost:3000/api/user/register', formData);
             alert(response.data.message);
             // After successful registration, navigate to the login page
-            navigate('/signin'); // Redirects to the Sign In page after successful registration
+            navigate('/login'); // Redirects to the Sign In page after successful registration
         } catch (error) {
             console.error('Error sending data:', error);
             setError("Registration failed. Please try again.");
@@ -56,12 +56,14 @@ const Register = () => {
     };
 
     return (
-        <div className="container mx-auto px-4 py-16 w-full h-32">
-            <div className="flex flex-col md:flex-row justify-center space-x-0 md:space-x-4">
-                <img src='https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7963.jpg' alt="Illustration" className="mb-4 md:mb-0" />
-                <div className="max-w-md bg-white shadow-md rounded-lg overflow-hidden w-full">
-                    <div className="p-3 h-11">
-                        <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Welcome!</h2>
+        <div className="flex items-center justify-center h-screen overflow-hidden bg-white ">
+            <div className="flex flex-col sm:flex-row justify-center items-stretch space-y-4 sm:space-y-0 sm:space-x-4 w-full max-w-5xl">
+            <div className="flex flex-col sm:flex-row w-full">
+                <img src='https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7963.jpg' alt="Illustration" className="w-full sm:w-1/2 h-full object-cover rounded-lg mr-10 mobile:w-40 mobile:h-20 mobile:flex flex-col" />
+               
+                <div className="bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-1/2 flex flex-col mobile:40 mobile:h-full">
+                    <div className="p-4 flex-1">
+                        <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">Welcome!</h2>
                         <p className="text-gray-600 text-center mb-8">Create your new account</p>
                         {error && <p className="text-red-500 text-center">{error}</p>} {/* Display error message */}
                         <form onSubmit={handleSubmit}>
@@ -197,12 +199,13 @@ const Register = () => {
 
                             <div className="flex items-center justify-center">
                                 <p className="text-gray-600">Have an account?</p>
-                                <Link to="/signin" className="text-blue-500 hover:text-blue-700 ml-1">Sign In</Link>
+                                <Link to="/login" className="text-blue-500 hover:text-blue-700 ml-1">Sign In</Link>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 }
