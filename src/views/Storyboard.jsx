@@ -12,12 +12,12 @@ function Storyboard() {
     <div className="flex-1 "> {/* Take remaining space for content */}
       {/* Descriptive text */}
       <Bar title="Story Board" buttonText="+ Add Story" />
-      <p className="text-center text-black mt-4  mobile:w-64  mobile:ml-5 mobile:text-center">
+      <p className="text-center text-black mt-5  mobile:w-64  mobile:ml-5 mobile:text-center">
         Ask a data question, check the SQL, add it to your model
       </p>
   
       {/* Centered Search Input */}
-      <div className="mb-4 mt-5 relative flex justify-center mobile:ml-5 ">
+      <div className=" mt-5 relative flex justify-center mobile:ml-5 ">
         <input
           type="text"
           className="text-sm text-gray-700 mb-4 border border-gray-300 rounded p-3 w-full max-sm mobile:w-3/4 mobile:ml-11"
@@ -27,7 +27,7 @@ function Storyboard() {
       </div>
   
       {/* Appointment Info */}
-      <div className="border p-4 rounded-[12px] h-24 mt-7 flex flex-col justify-between mb-5 mobile:ml-5 mobile:h-32" >
+      <div className="border p-4 rounded-[12px] h-24 mt-5 flex flex-col justify-between mb-5 mobile:ml-5 mobile:h-32" >
         <div className="flex justify-between items-center"> {/* Flex container for title and button */}
           <div>
             <span className="font-bold text-lg">How many appointments do we have?</span>

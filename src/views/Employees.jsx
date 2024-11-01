@@ -1,46 +1,50 @@
 
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Bar from '../Reuseable/Bar';
+import axios from 'axios';  
 
 function Employees() {
-    const [data, setData] = useState([
-        {
-            storyBoardName: 'Project A',
-            description: 'Description for Project A',
-            integration: 'Integration A',
-            password: "12345067",
-            complementaryDatasets: 'Dataset A',
-        },
-        {
-            storyBoardName: 'Project B',
-            description: 'Description for Project B',
-            integration: 'Integration B',
-            password: "12345067",
-            complementaryDatasets: 'Dataset B',
-        },
-    ]);
+    // const [data, setData] = useState([
+    //     {
+    //         firstName: 'Project A',
+    //         lastName: 'lastName for Project A',
+    //         email: 'email A',
+    //         password: "12345067",
+    //         role: 'Dataset A',
+    //     },
+    //     {
+    //         firstName: 'Project B',
+    //         lastName: 'lastName for Project B',
+    //         email: 'email B',
+    //         password: "12345067",
+    //         role: 'Dataset B',
+    //     },
+    // ]);
 
     const [searchTerm, setSearchTerm] = useState('');
     const [isEditing, setIsEditing] = useState(false);
+    const [error, setError] = useState(''); // Define the error state
+
     const [editData, setEditData] = useState({
-        storyBoardName: '',
-        description: '',
-        integration: '',
-        complementaryDatasets: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        role: '',
         password: '',
     });
     const [editIndex, setEditIndex] = useState(null);
+    const [data, setData] = useState([]); // To hold employee data
+
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [deleteIndex, setDeleteIndex] = useState(null);
     const [showAddForm, setShowAddForm] = useState(false);
 
     const [newEntry, setNewEntry] = useState({
-        storyBoardName: '',
-        description: '',
-        integration: '',
-        complementaryDatasets: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        role: '',
         password: '',
     });
 
@@ -77,18 +81,70 @@ function Employees() {
         setData(updatedData);
         setIsEditing(false);
     };
+    const addNewEntry = async () => {
+        try {
+            const token = localStorage.getItem('your_access_token'); // Retrieve token from local storage
+            // Ensure all fields in newEntry are filled
+            if (!newEntry.firstName || !newEntry.lastName || !newEntry.email || !newEntry.role || !newEntry.password) {
+                throw new Error("All fields are required.");
+            }
 
-    const addNewEntry = () => {
-        setData((prevData) => [...prevData, newEntry]);
-        setShowAddForm(false);
-        setNewEntry({
-            storyBoardName: '',
-            description: '',
-            integration: '',
-            complementaryDatasets: '',
-            password: '',
-        });
+            const response = await axios.post('http://localhost:3000/api/user/addEmployee', newEntry, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            const data = response.data;
+            console.log('Employee added successfully:', data);
+            
+            // Update the data state
+            setData(prevData => [...prevData, data]); // Add new entry to existing data
+
+            setShowAddForm(false);
+            setNewEntry({
+                firstName: '',
+                lastName: '',
+                email: '',
+                role: '',
+                password: '',
+            });
+        } catch (error) {
+            console.error('Error adding employee:', error.response ? error.response.data : error.message);
+            setError(error.response ? error.response.data.message : 'Something went wrong!'); // Handle server response
+        }
     };
+
+    // Fetch employee data
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const token = localStorage.getItem('your_access_token'); // Retrieve token here
+                if (!token) {
+                    throw new Error("No token found. Please log in."); // Handle case where token is not found
+                }
+
+                const response = await axios.get('http://localhost:3000/api/user/getEmployees', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+                setData(response.data); // Set the fetched data into state
+            } catch (error) {
+                console.error('Error fetching employee data:', error);
+                setError(error.message); // Set error message for display
+            }
+        };
+
+        fetchData();
+    }, []); // Empty dependency array ensures this runs once on mount
+
+    
+    
+
+
+ 
 
     const handleAddChange = (e) => {
         const { name, value } = e.target;
@@ -98,12 +154,16 @@ function Employees() {
     return (
 
         <div className="">
+
             {/* <Bar title="Employees" /> */}
             <Bar title="Employees" onAddStory={() => setShowAddForm(true)}
                 buttonText="+ Add Employee" />
             {/* <div className=" md:p-6">
-        <h1 className="text-3xl font-bold mb-4">Employees List</h1>
+        <h1 className="text-3xl font-bold
+         mb-4">Employees List</h1>
          */}
+                     {error && <p className="text-red-500">{error}</p>} {/* Display error message */}
+
             <div className=" ml-4 mt-4">
                 <h1 className="text-2xl md:text-3xl font-bold mb-3  md:mb-4 max-sm   mobile:ml-11  ">Employees List</h1>
 
@@ -130,24 +190,24 @@ function Employees() {
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {data
-                                .filter((item) =>
-                                    item.storyBoardName.toLowerCase().includes(searchTerm.toLowerCase())
-                                )
+                        {/* <tbody>
+
+                                    {data.filter(item => item.firstName.toLowerCase().includes(searchTerm.toLowerCase()))
+
+                                
                                 .map((item, index) => (
                                     <tr key={index} className="hover:bg-gray-100">
                                         <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">
-                                            {item.storyBoardName}
+                                            {item.firstName}
                                         </td>
                                         <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">
-                                            {item.description}
+                                            {item.lastName}
                                         </td>
                                         <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">
-                                            {item.integration}
+                                            {item.email}
                                         </td>
                                         <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">
-                                            {item.complementaryDatasets}
+                                            {item.role}
                                         </td>
                                         <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">
                                             {item.password}
@@ -170,7 +230,67 @@ function Employees() {
                                         </td>
                                     </tr>
                                 ))}
-                        </tbody>
+                        </tbody> */}
+
+{/* <tbody>
+    {data && data.length > 0 ? (
+        data.filter(item => item && item.firstName && item.firstName.toLowerCase().includes(searchTerm.toLowerCase()))
+            .map((item, index) => (
+                <tr key={index} className="hover:bg-gray-100">
+                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.firstName}</td>
+                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.lastName}</td>
+                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.email}</td>
+                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.role}</td>
+                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.password}</td>
+                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base">
+                        <div className="flex justify-center space-x-3">
+                            <button onClick={() => handleDelete(index)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs">
+                                <FaTrash />
+                            </button>
+                            <button onClick={() => handleEdit(index)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs">
+                                <FaEdit />
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            ))
+    ) : (
+        <tr>
+            <td colSpan={6} className="text-center py-4">No employees found</td>
+        </tr>
+    )}
+</tbody> */}
+<tbody>
+    {data && data.length > 0 ? (
+        data
+            .filter(item => item && item.firstName && typeof item.firstName === 'string' && item.firstName.toLowerCase().includes(searchTerm.toLowerCase()))
+            .map((item, index) => (
+                <tr key={index} className="hover:bg-gray-100">
+                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.firstName}</td>
+                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.lastName}</td>
+                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.email}</td>
+                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.role}</td>
+                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.password}</td>
+                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base">
+                        <div className="flex justify-center space-x-3">
+                            <button onClick={() => handleDelete(index)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs">
+                                <FaTrash />
+                            </button>
+                            <button onClick={() => handleEdit(index)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs">
+                                <FaEdit />
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            ))
+    ) : (
+        <tr>
+            <td colSpan={6} className="text-center py-4">No employees found</td>
+        </tr>
+    )}
+</tbody>
+
+              
                     </table>
                 </div>
 
@@ -216,10 +336,11 @@ function Employees() {
                                         <input
                                             required
                                             className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
-                                            id="storyBoardName"
-                                            name="storyBoardName"
-                                            value={newEntry.storyBoardName}
-                                            onChange={handleAddChange}
+                                            id="firstName"
+                                            name="firstName"
+                                            value={newEntry.firstName}
+                                            onChange={e => setNewEntry({ ...newEntry, firstName: e.target.value })}
+                                            required
                                         />
                                     </fieldset>
                                     <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60 "> {/* Adjust width and height */}
@@ -227,10 +348,11 @@ function Employees() {
                                         <input
                                             required
                                             className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
-                                            id="description"
-                                            name="description"
-                                            value={newEntry.description}
-                                            onChange={handleAddChange}
+                                            id="lastName"
+                                            name="lastName"
+                                            value={newEntry.lastName}
+                                            onChange={e => setNewEntry({ ...newEntry, lastName: e.target.value })}
+                        required
 
                                         />
                                     </fieldset>
@@ -240,10 +362,11 @@ function Employees() {
                                             type='Email'
                                             required
                                             className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
-                                            id="integration"
-                                            name="integration"
-                                            value={newEntry.integration}
-                                            onChange={handleAddChange}
+                                            id="email"
+                                            name="email"
+                                            value={newEntry.email}
+                                            onChange={e => setNewEntry({ ...newEntry, email: e.target.value })}
+                                            required
 
                                         />
                                     </fieldset>
@@ -256,7 +379,8 @@ function Employees() {
                                             id="password"
                                             name="password"
                                             value={newEntry.password}
-                                            onChange={handleAddChange}
+                                            onChange={e => setNewEntry({ ...newEntry, password: e.target.value })}
+                        required
 
                                         />
                                     </fieldset>
@@ -266,10 +390,11 @@ function Employees() {
                                 <fieldset className="border border-gray-400 rounded p-2 w-96 h-16 mobile:w-60 "> {/* Adjust width and height */}
                                     <legend className="text-gray-500 text-sm px-2">Role</legend>
                                     <select
-                                        id="complementaryDatasets"
-                                        name="complementaryDatasets"
-                                        value={newEntry.complementaryDatasets}
-                                        onChange={handleAddChange}
+                                        id="role"
+                                        name="role"
+                                        value={newEntry.role}
+                                        onChange={e => setNewEntry({ ...newEntry, role: e.target.value })}
+                                        required
                                         className="bg-transparent rounded w-full  text-gray-700 leading-tight focus:outline-none border-none" // No border on input
                                     >
                                         <option value="">Select an option</option>
@@ -284,7 +409,7 @@ function Employees() {
 
 
                                 <div className="flex justify-end space-x-2 mt-10">
-                                    <button onClick={() => setShowAddForm(false)} className="bg-gray-500 text-white font-bold py-2 px-4 rounded">
+                                    <button onClick={() => setShowAddForm(true)} className="bg-gray-500 text-white font-bold py-2 px-4 rounded">
                                         Cancel
                                     </button>
                                     <button type="submit" className="bg-green-500 text-white font-bold py-2 px-4 rounded">
@@ -312,9 +437,9 @@ function Employees() {
 
                                     <input
                                         className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
-                                        id="storyBoardName"
-                                        name="storyBoardName"
-                                        value={editData.storyBoardName}
+                                        id="firstName"
+                                        name="firstName"
+                                        value={editData.firstName}
                                         onChange={handleEditChange}
                                     />
                                 </fieldset>
@@ -324,9 +449,9 @@ function Employees() {
                                     <input
                                         required
                                         className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
-                                        id="description"
-                                        name="description"
-                                        value={editData.description}
+                                        id="lastName"
+                                        name="lastName"
+                                        value={editData.lastName}
                                         onChange={handleEditChange}
 
                                     />
@@ -340,9 +465,9 @@ function Employees() {
                                         type='Email'
                                         required
                                         className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
-                                        id="integration"
-                                        name="integration"
-                                        value={editData.integration}
+                                        id="email"
+                                        name="email"
+                                        value={editData.email}
                                         onChange={handleEditChange}
 
                                     />
@@ -370,9 +495,9 @@ function Employees() {
                                 <fieldset className="border border-gray-400 rounded p-2 w-96 h-16 mobile:w-60 "> {/* Adjust width and height */}
                                     <legend className="text-gray-500 text-sm px-2">Role</legend>
                                     <select
-                                        id="complementaryDatasets"
-                                        name="complementaryDatasets"
-                                        value={editData.complementaryDatasets}
+                                        id="role"
+                                        name="role"
+                                        value={editData.role}
                                         onChange={handleEditChange}
                                         className="bg-transparent rounded w-full  text-gray-700 leading-tight focus:outline-none border-none" // No border on input
                                     >
@@ -420,3 +545,4 @@ const LabelWithInput = ({ label, name, value, onChange }) => (
 );
 
 export default Employees;
+

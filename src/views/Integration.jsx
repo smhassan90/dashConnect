@@ -40,7 +40,7 @@ function Integration() {
 <div className=" w-full h-[35px]  mobile:w-full">
   <input
     type="text"
-    className="bg-white rounded-[12px] w-full h-full pl-10 pr-20 mobile:w-full"
+    className="bg-white rounded-[12px]  w-full h-full pl-10 pr-20 mobile:w-full"
     placeholder="Search Integration..."
   />
   <span className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500">
@@ -62,14 +62,7 @@ function Integration() {
       ALL
       <span class="absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
   </p>
-  <p class="category group cursor-pointer relative pb-1 text-gray-600 hover:text-blue-500">
-      Community
-      <span class="absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-  </p>
-  <p class="category group cursor-pointer relative pb-1 text-gray-600 hover:text-blue-500">
-      Commercial
-      <span class="absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-  </p>
+ 
 </div>
 <hr className="mt-2 border-t border-gray-500" /> {/* Horizontal line with margin */}
 
