@@ -7,7 +7,7 @@ import Bar from '../Reuseable/Bar';
 const integrations = [
         {
           name: 'Acuity',
-          icon: imag4,
+          icon:'https://static.wixstatic.com/media/ec0692_9e284a7992da4b74bcbc91f107606a80~mv2.png/v1/fill/w_220,h_224,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ec0692_9e284a7992da4b74bcbc91f107606a80~mv2.png',
           description: 'You can setup your acuity account as source of data here',
         },
         {
@@ -17,12 +17,12 @@ const integrations = [
         },
         {
           name: 'MYOB',
-          icon: imag4,
+          icon: 'https://haadanalytics.com/wp-content/uploads/2024/01/1-1.png',
           description: 'You can set up your QuickBooks account as a source of data here.',
         },
         {
           name: 'MYOB',
-          icon: imag5,
+          icon: 'https://haadanalytics.com/wp-content/uploads/2024/01/1-1.png',
           description: 'You can set up your Square account as a source of data here.',
         },
       ];
@@ -37,10 +37,10 @@ function Integration() {
        
         <div className="mt-10 bg-custom-gray text-white p-4 rounded-lg  h-[200px] flex items-center mobile:w-80 mobile:h-20">
 {/* Search Bar Container */}
-<div className=" w-full h-[35px]  mobile: mobile:w-20">
+<div className=" w-full h-[35px]  mobile:w-full">
   <input
     type="text"
-    className="bg-white rounded-[12px] w-full h-full pl-10 pr-4"
+    className="bg-white rounded-[12px] w-full h-full pl-10 pr-4 mobile:w-full"
     placeholder="Search Integration..."
   />
   <span className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500">
@@ -77,7 +77,7 @@ function Integration() {
 <div className="mt-4">
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 ">
       {integrations.map((integration, index) => (
-        <div key={index} className="bg-black rounded-lg shadow-md  text-white h-48  flex flex-col  mt-5">
+        <div key={index} className="bg-gray-700 rounded-lg shadow-md  text-white h-48  flex flex-col  mt-5 mobile:w-72 mobile:ml-5" >
           {/* <div className="flex items-center mb-2">
             <img
               src={imag4}
@@ -90,19 +90,23 @@ function Integration() {
   <img
     src={integration.icon}
     alt={`${integration.icon} Icon`}
-    className="w-48 h-32 mt-7 "  // Adjust margins as necessary
+    className="w-32 h-32 mt-5"  // Adjust margins as necessary
   />
-  <div className="ml-5 w-full m-auto w-56"> {/* Added a container for title and description */}
+  <div className="ml-5 w-full m-auto "> {/* Added a container for title and description */}
     <h3 className="text-lg text-left  mb-1 font-sans font-bold">Integrate With {integration.name}</h3>
-    <p className="text-sm text-left mt-5 text-white"> {/* Description below the title */}
+    <p className="text-sm text-left mt-3 text-white"> {/* Description below the title */}
       {integration.description}.
+
     </p>
+    
   </div>
+  
 </div>
-          
-           <button className= "  mr-3 text-right  hover:bg-blue-700 text-white font-bold  rounded-md text-sm">
+<button className= "  mr-3 text-right   text-white font-bold  rounded-md text-sm">
             View Now >>>
-          </button> */
+          </button> 
+          
+           
         </div>
       ))}
     </div>

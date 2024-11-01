@@ -68,6 +68,7 @@ const dashboardRoutes = [
     component: Investigation,
     layout: "/admin"
   }
+ 
 ];
 
 export default dashboardRoutes;

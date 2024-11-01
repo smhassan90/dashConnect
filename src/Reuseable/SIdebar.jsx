@@ -28,7 +28,7 @@ const Sidebar = () => {
 
     return (
         <div className="flex h-screen overflow-hidden">
-            <div className={`bg-gray-100 p-3 flex flex-col gap-4 transition-all duration-300 ${isOpen ? 'w-60' : 'w-16'} fixed top-0 left-0 h-full z-50`}>
+            <div className={`bg-gray-100 p-2 flex flex-col gap-4 transition-all duration-300 ${isOpen ? 'w-60' : 'w-16'} fixed top-0 left-0 h-full z-50`}>
                 <div className="flex items-center justify-between">
                     {isOpen ? (
                         <>

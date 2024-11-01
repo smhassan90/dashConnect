@@ -9,15 +9,15 @@ import Bar from '../Reuseable/Bar';
 function Storyboard() {
   return (
     <div className="flex">
-    <div className="flex-1 p-4"> {/* Take remaining space for content */}
+    <div className="flex-1 "> {/* Take remaining space for content */}
       {/* Descriptive text */}
       <Bar title="Story Board" buttonText="+ Add Story" />
-      <p className="text-center text-black mt-4 sm:mt-5 text-base sm:text-lg px-2 sm:px-16">
+      <p className="text-center text-black mt-4  mobile:w-64  mobile:ml-5 mobile:text-center">
         Ask a data question, check the SQL, add it to your model
       </p>
   
       {/* Centered Search Input */}
-      <div className="mb-4 mt-5 relative flex justify-center w-96 mx-auto">
+      <div className="mb-4 mt-5 relative flex justify-center mobile:ml-5 ">
         <input
           type="text"
           className="w-full p-2 pl-10 pr-3 border rounded-[12px] focus:outline-none"
@@ -27,7 +27,7 @@ function Storyboard() {
       </div>
   
       {/* Appointment Info */}
-      <div className="border p-4 rounded-[12px] h-24 mt-7 flex flex-col justify-between mb-5">
+      <div className="border p-4 rounded-[12px] h-24 mt-7 flex flex-col justify-between mb-5 mobile:ml-5 mobile:h-32" >
         <div className="flex justify-between items-center"> {/* Flex container for title and button */}
           <div>
             <span className="font-bold text-lg">How many appointments do we have?</span>
@@ -38,9 +38,9 @@ function Storyboard() {
       </div>
   
       {/* Additional Content Section */}
-      <div className='flex flex-col sm:flex-row justify-between items-start mt-10'>
+      <div className='flex flex-col sm:flex-row justify-between items-start mt-10  gap-8 mobile:ml-5'>
         {/* Appointments Chart */}
-        <div className="w-full sm:w-[700px] p-4 h-[330px] bg-white rounded-[12px] shadow-md mb-5 border hover:border-blue-500 transition-all duration-300"> {/* Adjusted width */}
+        <div className="w-full p-4 h-[330px] bg-white rounded-[12px] shadow-md mb-5 border hover:border-blue-500 transition-all duration-300  gap-6"> {/* Adjusted width */}
           <div className='flex justify-between items-center'>
             <p className="text-base sm:text-lg">Appointments</p>
             <p className='mr-10 flex items-center whitespace-nowrap text-sm sm:text-base'>
@@ -48,12 +48,12 @@ function Storyboard() {
             </p>
           </div>
   
-          <div className="w-full h-full">
+          <div className="w-full">
             <LineChart
               xAxis={[{ data: [1, 2, 3, 5, 8, 10], showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' }, show: false }]}
               yAxis={[{ showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' } }]}
               series={[{ data: [2, 6, 2, 8.5, 1.5, 5], area: true, color: '#007bff' }]}
-              width={window.innerWidth < 640 ? window.innerWidth - 40 : 700} // Adjusted width
+             // Adjusted width
               height={300}
               sx={{
                 '& .MuiAxis-root': {
@@ -65,7 +65,7 @@ function Storyboard() {
         </div>
   
         {/* SQL Statement Section */}
-        <div className="w-full sm:w-[280px] mb-12 h-[330px] p-4 bg-white rounded-[12px] shadow-md border hover:border-blue-500 transition-all duration-300 ml-5">
+        <div className="  mb-12 h-[330px] p-4 bg-white rounded-[12px] shadow-md border hover:border-blue-500 transition-all duration-300 ">
           <div className='flex justify-between items-center'>
             <p className='h-10 flex items-center whitespace-nowrap text-sm sm:text-base'>
               SQL Statement <span className="ml-1"><SlArrowDown /></span>
@@ -83,30 +83,29 @@ function Storyboard() {
             )
           </p>
         </div>
-      </div>
+      </div> 
   
       {/* New Content Section */}
-      <div className="ml-1 mr-5 w-full mb-4 h-[800px] p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-blue-500 transition-all duration-300">
-        <div className='flex justify-between items-center'>
-          <p className="text-base sm:text-lg">View all the answers to the questions you have asked.</p>
+      <div className="   h-[800px] p-5 bg-white rounded-[12px]  mt-5 border hover:border-blue-500 transition-all duration-300 mobile:ml-5 mobile:p-2 mobile:h-[750px] ">
+        <div className='flex justify-between items-center '>
+          <p className="text-base ">View all the answers to the questions you have asked.</p>
          {/* <CustomButton text="Close" />  */}
         </div>
   
         {/* First LineChart */}
-        <div className="w-full p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-blue-500 transition-all duration-300">
+        <div className=" p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-blue-500 transition-all duration-300  ">
           <div className='flex justify-between items-center'>
             <p className="text-base sm:text-lg">Appointments</p>
-            <p className='mr-10 flex items-center whitespace-nowrap text-sm sm:text-base'>
+            <p className='ml-10 flex items-center whitespace-nowrap text-sm sm:text-base'>
               This Month <span className="ml-1"><SlArrowDown /></span>
             </p>
           </div>
   
-          <div className="w-auto">
+          <div className="w-full">
             <LineChart
               xAxis={[{ data: [1, 2, 3, 5, 8, 10], showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' }, show: false }]}
               yAxis={[{ showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' } }]}
               series={[{ data: [2, 6, 2, 8.5, 1.5, 5], area: true, color: '#007bff' }]}
-              width={window.innerWidth < 640 ? window.innerWidth - 40 : 900} // Adjusted width
               height={250} // Adjusted height
               sx={{
                 '& .MuiAxis-root': {
@@ -118,10 +117,10 @@ function Storyboard() {
         </div>
   
         {/* Second LineChart */}
-        <div className="w-full p-4 bg-white rounded-[12px] shadow-md mt-14 border hover:border-blue-500 transition-all duration-300">
+        <div className=" p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-blue-500 transition-all duration-300  ">
           <div className='flex justify-between items-center'>
             <p className="text-base sm:text-lg">Appointments</p>
-            <p className='mr-10 flex items-center whitespace-nowrap text-sm sm:text-base'>
+            <p className='ml-10 flex items-center whitespace-nowrap text-sm sm:text-base'>
               This Month <span className="ml-1"><SlArrowDown /></span>
             </p>
           </div>
@@ -131,7 +130,6 @@ function Storyboard() {
               xAxis={[{ data: [1, 2, 3, 5, 8, 10], showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' }, show: false }]}
               yAxis={[{ showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' } }]}
               series={[{ data: [2, 6, 2, 8.5, 1.5, 5], area: true, color: '#82e0aa' }]}
-              width={window.innerWidth < 640 ? window.innerWidth - 40 : 900} // Adjusted width
               height={250} // Adjusted height
               sx={{
                 '& .MuiAxis-root': {
