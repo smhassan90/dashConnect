@@ -190,76 +190,7 @@ function Employees() {
                                 <th></th>
                             </tr>
                         </thead>
-                        {/* <tbody>
-
-                                    {data.filter(item => item.firstName.toLowerCase().includes(searchTerm.toLowerCase()))
-
-                                
-                                .map((item, index) => (
-                                    <tr key={index} className="hover:bg-gray-100">
-                                        <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">
-                                            {item.firstName}
-                                        </td>
-                                        <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">
-                                            {item.lastName}
-                                        </td>
-                                        <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">
-                                            {item.email}
-                                        </td>
-                                        <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">
-                                            {item.role}
-                                        </td>
-                                        <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">
-                                            {item.password}
-                                        </td>
-                                        <td className="px-2 py-3 text-xs sm:text-sm md:text-base ">
-                                            <div className="flex justify-center space-x-3">
-                                                <button
-                                                    onClick={() => handleDelete(index)}
-                                                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs "
-                                                >
-                                                    <FaTrash />
-                                                </button>
-                                                <button
-                                                    onClick={() => handleEdit(index)}
-                                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs"
-                                                >
-                                                    <FaEdit />
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                        </tbody> */}
-
-{/* <tbody>
-    {data && data.length > 0 ? (
-        data.filter(item => item && item.firstName && item.firstName.toLowerCase().includes(searchTerm.toLowerCase()))
-            .map((item, index) => (
-                <tr key={index} className="hover:bg-gray-100">
-                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.firstName}</td>
-                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.lastName}</td>
-                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.email}</td>
-                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.role}</td>
-                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">{item.password}</td>
-                    <td className="px-2 py-3 text-xs sm:text-sm md:text-base">
-                        <div className="flex justify-center space-x-3">
-                            <button onClick={() => handleDelete(index)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs">
-                                <FaTrash />
-                            </button>
-                            <button onClick={() => handleEdit(index)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs">
-                                <FaEdit />
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            ))
-    ) : (
-        <tr>
-            <td colSpan={6} className="text-center py-4">No employees found</td>
-        </tr>
-    )}
-</tbody> */}
+            
 <tbody>
     {data && data.length > 0 ? (
         data
@@ -412,7 +343,7 @@ function Employees() {
                                     <button onClick={() => setShowAddForm(true)} className="bg-gray-500 text-white font-bold py-2 px-4 rounded">
                                         Cancel
                                     </button>
-                                    <button type="submit" className="bg-green-500 text-white font-bold py-2 px-4 rounded">
+                                    <button type="submit" className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
                                         Add
                                     </button>
                                 </div>

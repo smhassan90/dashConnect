@@ -27,6 +27,7 @@ import Dashboard from "./views/Dashboard";
 import Employees from "./views/Employees";
 import Integration from "./views/Integration";
 import Investigation from "./views/Investigation";
+import Profile from "./views/Profile";
 import Storyboard from "./views/Storyboard";
 
 
@@ -67,6 +68,13 @@ const dashboardRoutes = [
     name: "investigation",
     icon: "nc-icon nc-pin-3",
     component: Investigation,
+    layout: "/admin"
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    icon: "nc-icon nc-pin-3",
+    component: Profile,
     layout: "/admin"
   },
   

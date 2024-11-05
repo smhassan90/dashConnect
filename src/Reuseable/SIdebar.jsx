@@ -7,6 +7,7 @@ import { BsPostcard } from 'react-icons/bs';
 import { FaSearchengin, FaDatabase } from 'react-icons/fa';
 import { RiDashboardHorizontalLine } from 'react-icons/ri';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
     const navigate = useNavigate();
@@ -85,14 +86,26 @@ const Sidebar = () => {
 
                 <hr className="border-t border-gray-300 w-full" />
 
-                <div className={`flex gap-2 items-center ${isOpen ? 'block' : 'hidden'}`}>
+                {/* <div className={`flex gap-2 items-center ${isOpen ? 'block' : 'hidden'}`}>
                     <img
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH-F4ROquOZPV5XtKKC3WUjmDGnDbW7nBbA0b2b-qpY3Lo6N2xk-IGNNl1R7kPUgv0DyQ&usqp=CAU"
                         className="w-[55px] h-[57px] rounded-full"
                         alt="Profile"
                     />
                     <span className="font-poppins text-base font-normal leading-[30px] text-center ml-7">Pritam Ghosh</span>
-                </div>
+                </div> */}
+                <div className={`flex gap-2 items-center ${isOpen ? 'block' : 'hidden'}`}>
+    <Link to="/admin/profile" className="flex items-center gap-2">
+        <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH-F4ROquOZPV5XtKKC3WUjmDGnDbW7nBbA0b2b-qpY3Lo6N2xk-IGNNl1R7kPUgv0DyQ&usqp=CAU"
+            className="w-[55px] h-[57px] rounded-full"
+            alt="Profile"
+        />
+        <span className="font-poppins text-base font-normal leading-[30px] text-center ml-7">
+            Pritam Ghosh
+        </span>
+    </Link>
+</div>
             </div>
 
             {/* Content Area */}
