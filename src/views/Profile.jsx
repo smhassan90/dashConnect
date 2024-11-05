@@ -174,7 +174,7 @@ function Profile() {
                             onChange={(e) => setOldPassword(e.target.value)}
                             className="border border-gray-300 rounded px-3 py-2 w-full mb-4"
                         /> */}
-                                                            <fieldset className="border border-gray-400 rounded p-2 w-80 h-14 mobile:w-60"> {/* Adjust width and height */}
+                                                            <fieldset className="border border-gray-400 rounded p-2 w-80  h-14 mobile:w-60"> {/* Adjust width and height */}
                                         <legend className="text-gray-500 text-sm px-2">Enter your old password</legend>
 
                                         <input
@@ -198,7 +198,7 @@ function Profile() {
                             onChange={(e) => setNewPassword(e.target.value)}
                             className="border border-gray-300 rounded px-3 py-2 w-full mb-4"
                         /> */}
-                           <fieldset className="border border-gray-400 rounded p-2 w-80 h-14 mobile:w-60"> {/* Adjust width and height */}
+                           <fieldset className="border border-gray-400 rounded p-2 w-80 h-14 mt-3 mobile:w-60"> {/* Adjust width and height */}
                                         <legend className="text-gray-500 text-sm px-2">Enter your New password </legend>
 
                                         <input
@@ -213,14 +213,36 @@ function Profile() {
                                         />
                                     </fieldset>
 
-                        <input
+                        {/* <input
                             type="password"
                             placeholder="Confirm new password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             className="border border-gray-300 rounded px-3 py-2 w-full mb-4"
-                        />
-                        <div className="flex justify-end">
+                        /> */}
+
+<fieldset className="border border-gray-400 rounded p-2  mt-3 w-80 h-14 mobile:w-60"> {/* Adjust width and height */}
+                                        <legend className="text-gray-500 text-sm px-2">Enter your Confirm password </legend>
+
+                                        <input
+                                            required
+                                            type="password"
+                                            className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
+                                            
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
+
+                                            value={confirmPassword}
+                                                                                    
+                                        />
+                                    </fieldset>
+
+
+
+
+
+
+                        
+                        <div className="flex justify-end mt-3 mr-4">
                             <button
                                 onClick={handleUpdatePassword}
                                 className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 mr-2"
