@@ -25,15 +25,29 @@
 //       const response = await axios.post('http://localhost:3000/api/user/login', formData);
 //       alert(response.data.message);
 
+//       // Get the token from the response
 //       const token = response.data.token;
+
+//       // Check if the token exists
 //       if (token) {
+//         // Store the token in local storage
 //         localStorage.setItem('your_access_token', token);
-//         navigate('/admin/dashboard'); // Redirects to the homepage after successful login
+        
+//         // Optionally, you can also set it in a state if you plan to use it in your component
+//         // setAccessToken(token); // This would require defining setAccessToken with useState
+
+//         // Redirect to the admin dashboard
+//         navigate('/admin/dashboard');
 //       } else {
 //         setError("Login failed. No token received.");
 //       }
 //     } catch (error) {
-//       setError("Login failed. Please try again.");
+//       // Check if error response has a specific message to show
+//       if (error.response && error.response.data) {
+//         setError(error.response.data.message || "Login failed. Please try again.");
+//       } else {
+//         setError("Login failed. Please try again.");
+//       }
 //     }
 //   };
 
@@ -49,7 +63,7 @@
 //           <img
 //             src='https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7963.jpg'
 //             alt="Login Illustration"
-//             className="w-full sm:w-1/2 h-full object-cover rounded-lg mr-10 mobile:mt-5" // Responsive width and full height
+//             className="w-full sm:w-1/2 h-full object-cover rounded-lg mr-10 mobile:mt-5"
 //           />
           
 //           {/* Login Form Section */}
@@ -146,11 +160,12 @@
 
 // export default Login;
 
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import image1 from "../assests/image1.png";
-import image2 from "../assests/image2.png";
-import image3 from "../assests/image3.png";
+import image1 from "../assests/image1.png"; // Google logo
+import image2 from "../assests/image2.png"; // Apple logo
+import image3 from "../assests/image3.png"; // Facebook logo
 import axios from 'axios';
 
 const Login = () => {
@@ -171,24 +186,19 @@ const Login = () => {
       const response = await axios.post('http://localhost:3000/api/user/login', formData);
       alert(response.data.message);
 
-      // Get the token from the response
       const token = response.data.token;
 
-      // Check if the token exists
+      // if (token) {
+      //   localStorage.setItem('your_access_token', token);
+      //   navigate('/admin/dashboard');
       if (token) {
-        // Store the token in local storage
         localStorage.setItem('your_access_token', token);
-        
-        // Optionally, you can also set it in a state if you plan to use it in your component
-        // setAccessToken(token); // This would require defining setAccessToken with useState
-
-        // Redirect to the admin dashboard
         navigate('/admin/dashboard');
+    
       } else {
         setError("Login failed. No token received.");
       }
     } catch (error) {
-      // Check if error response has a specific message to show
       if (error.response && error.response.data) {
         setError(error.response.data.message || "Login failed. Please try again.");
       } else {
@@ -199,7 +209,6 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center h-screen overflow-hidden bg-white">
-      {/* Flex Container for Image and Login Form */}
       <div className="flex flex-col sm:flex-row justify-center items-stretch space-y-4 sm:space-y-0 sm:space-x-4 w-full max-w-4xl">
         
         {/* Combined Div for Image and Form */}

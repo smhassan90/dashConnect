@@ -86,26 +86,20 @@ const Sidebar = () => {
 
                 <hr className="border-t border-gray-300 w-full" />
 
-                {/* <div className={`flex gap-2 items-center ${isOpen ? 'block' : 'hidden'}`}>
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH-F4ROquOZPV5XtKKC3WUjmDGnDbW7nBbA0b2b-qpY3Lo6N2xk-IGNNl1R7kPUgv0DyQ&usqp=CAU"
-                        className="w-[55px] h-[57px] rounded-full"
-                        alt="Profile"
-                    />
-                    <span className="font-poppins text-base font-normal leading-[30px] text-center ml-7">Pritam Ghosh</span>
-                </div> */}
-                <div className={`flex gap-2 items-center ${isOpen ? 'block' : 'hidden'}`}>
-    <Link to="/admin/profile" className="flex items-center gap-2">
-        <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH-F4ROquOZPV5XtKKC3WUjmDGnDbW7nBbA0b2b-qpY3Lo6N2xk-IGNNl1R7kPUgv0DyQ&usqp=CAU"
-            className="w-[55px] h-[57px] rounded-full"
-            alt="Profile"
-        />
-        <span className="font-poppins text-base font-normal leading-[30px] text-center ml-7">
-            Pritam Ghosh
-        </span>
-    </Link>
-</div>
+
+               
+                <div className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-gray-300 p-2 rounded ${isActive('/admin/profile') ? 'bg-gray-300' : ''}`}>
+                    <Link to="/admin/profile" className="flex items-center gap-2">
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH-F4ROquOZPV5XtKKC3WUjmDGnDbW7nBbA0b2b-qpY3Lo6N2xk-IGNNl1R7kPUgv0DyQ&usqp=CAU"
+                            className="w-[55px] h-[57px] rounded-full"
+                            alt="Profile"
+                        />
+                        <span className={`font-poppins text-base font-normal leading-[30px] text-center ml-7 ${isOpen ? 'block' : 'hidden'}`}>
+                            Pritam Ghosh
+                        </span>
+                    </Link>
+                </div>
             </div>
 
             {/* Content Area */}
