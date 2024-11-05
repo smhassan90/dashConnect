@@ -271,8 +271,8 @@ const Login = () => {
                   <hr className="flex-grow border-t border-gray-500" />
                 </div>
 
-                <div className="flex justify-center gap-4 p-4">
-                  {/* Google Image */}
+                {/* <div className="flex justify-center gap-4 p-4">
+                
                   <div className="flex items-center justify-center border border-gray-300 rounded-lg shadow-lg p-1 w-16 h-16">
                     <img
                       src={image1}
@@ -281,7 +281,7 @@ const Login = () => {
                     />
                   </div>
 
-                  {/* Facebook Image */}
+                  
                   <div className="flex items-center justify-center border border-gray-300 rounded-lg shadow-lg p-1 w-16 h-16">
                     <img
                       src={image3}
@@ -290,7 +290,7 @@ const Login = () => {
                     />
                   </div>
 
-                  {/* Apple Image */}
+                
                   <div className="flex items-center justify-center border border-gray-300 rounded-lg shadow-lg p-1 w-16 h-16">
                     <img
                       src={image2}
@@ -298,7 +298,7 @@ const Login = () => {
                       className="max-w-full h-auto rounded-lg"
                     />
                   </div>
-                </div>
+                </div> */}
 
                 <div className="flex items-center justify-center mt-4">
                   <p className="text-gray-600">Not a member? </p>

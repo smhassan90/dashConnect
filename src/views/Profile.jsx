@@ -50,12 +50,25 @@ function Profile() {
 
 
     const handleLogout = async () => {
-        try {
-            await axios.post('http://localhost:3000/api/user/logout');
-            alert('Logged out successfully');
-        } catch (error) {
-            alert('Error logging out');
+        const cookies = document.cookie.split("; ");
+        for (let cookie of cookies) {
+            const eqPos = cookie.indexOf("=");
+            const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            // Expire the cookie by setting a past expiration date
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
         }
+    
+        // Clear localStorage
+        localStorage.clear();
+    
+        // Clear sessionStorage if you're using it
+        sessionStorage.clear();
+    
+        // Optionally, redirect to the login page or display a logout message
+        toast.success("You have been logged out.");
+        // Example: Redirect to login
+        window.location.href = '/login';
+    
     };
 
     //   password update method 
@@ -154,20 +167,52 @@ function Profile() {
                 <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
                         <h3 className="text-lg font-semibold mb-4">Change Password</h3>
-                        <input
+                        {/* <input
                             type="password"
                             placeholder="Enter your old password"
                             value={oldPassword}
                             onChange={(e) => setOldPassword(e.target.value)}
                             className="border border-gray-300 rounded px-3 py-2 w-full mb-4"
-                        />
-                        <input
+                        /> */}
+                                                            <fieldset className="border border-gray-400 rounded p-2 w-80 h-14 mobile:w-60"> {/* Adjust width and height */}
+                                        <legend className="text-gray-500 text-sm px-2">Enter your old password</legend>
+
+                                        <input
+                                            required
+                                            type="password"
+                                            className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
+                                            
+                                            onChange={(e) => setOldPassword(e.target.value)}
+
+                                            value={oldPassword}
+                                                                                    
+                                        />
+                                    </fieldset>
+
+
+
+                        {/* <input
                             type="password"
                             placeholder="Enter new password"
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
                             className="border border-gray-300 rounded px-3 py-2 w-full mb-4"
-                        />
+                        /> */}
+                           <fieldset className="border border-gray-400 rounded p-2 w-80 h-14 mobile:w-60"> {/* Adjust width and height */}
+                                        <legend className="text-gray-500 text-sm px-2">Enter your New password </legend>
+
+                                        <input
+                                            required
+                                            type="password"
+                                            className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
+                                            
+                                            onChange={(e) => setNewPassword(e.target.value)}
+
+                                            value={newPassword}
+                                                                                    
+                                        />
+                                    </fieldset>
+
                         <input
                             type="password"
                             placeholder="Confirm new password"
