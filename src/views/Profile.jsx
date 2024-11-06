@@ -286,89 +286,28 @@ function Profile() {
     const handleOpenUploadModal = () => setIsUploadModalOpen(true);
     const handleCloseUploadModal = () => setIsUploadModalOpen(false);
 
-    // const handleImageUpload = async (event) => {
-    //     const file = event.target.files[0];
-    //     if (file) {
-    //         const formData = new FormData();
-    //         formData.append('image', file);
+    
 
-    //         try {
-    //             const response = await axios.post('http://localhost:3000/api/user/uploadImage', formData, {
-    //                 headers: {
-    //                     'Authorization': `Bearer ${token}`,
-    //                     'Content-Type': 'multipart/form-data',
-    //                 }
-    //             });
-
-    //             if (response.data.status === 'ok') {
-    //                 setProfileImage(response.data.image); // Update profile image on successful upload
-    //                 toast.success("Profile picture updated successfully.");
-    //                 handleCloseUploadModal();
-    //             } else {
-    //                 toast.error("Failed to upload image.");
-    //             }
-    //         } catch (error) {
-    //             console.error('Error uploading image:', error);
-    //             toast.error("Error uploading image.");
-    //         }
-    //     }
-    // };
-    
-    // const handleImageUpload = async (event) => {
-    //     const file = event.target.files[0];
-    //     if (file) {
-    //         const formData = new FormData();
-    //         formData.append('image', file);
-    
-    //         try {
-    //             const response = await axios.post('http://localhost:3000/api/user/uploadImage', formData, {
-    //                 headers: {
-    //                     'Authorization': `Bearer ${token}`,
-    //                     'Content-Type': 'multipart/form-data', // Ensure this is included
-    //                 }
-    //             });
-    
-    //             console.log('Response:', response.data);  // Debugging log
-    
-    //             if (response.data.status === 'ok') {
-    //                 setProfileImage(response.data.image);
-    //                 toast.success("Profile picture updated successfully.");
-    //                 handleCloseUploadModal();
-    //             } else {
-    //                 toast.error("Failed to upload image.");
-    //             }
-    //         } catch (error) {
-    //             if (error.response) {
-    //                 console.error('Backend Response Error:', error.response.data);  // Inspect the error from the backend
-    //                 toast.error(`Error: ${error.response.data.message || "Error uploading image."}`);
-    //             } else if (error.request) {
-    //                 console.error('No Response from Server:', error.request);
-    //                 toast.error("No response from the server.");
-    //             } else {
-    //                 console.error('Request Error:', error.message);
-    //                 toast.error("Error with the request.");
-    //             }
-    //         }
-    //     }
     const handleImageUpload = async (event) => {
         const file = event.target.files[0];
         if (file) {
             const formData = new FormData();
-            formData.append('image', file);
+            formData.append('profile_pictures', file);  // Ensure this matches backend
     
             try {
-                const response = await axios.post('http://localhost:3000/api/user/uploadimage', formData, {
+                const response = await axios.post('http://localhost:3000/api/user/uploadImage', formData, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'multipart/form-data', // Ensure this is included
+                        'Content-Type': 'multipart/form-data',
                     }
                 });
     
+                // Use console.log to check the actual response data
                 console.log('Response:', response.data);  // Debugging log
     
-                // Check for message instead of status
-                if (response.data.message === 'File uploaded successfully') {
-                    setProfileImage(response.data.file);  // Assuming 'file' is the image URL or data returned
+                // Ensure the success condition checks the exact message from the response
+                if (response.data.message === 'Profile picture uploaded successfully.') {
+                    setProfileImage(response.data.path);  // Set the path returned by backend
                     toast.success("Profile picture updated successfully.");
                     handleCloseUploadModal();
                 } else {
@@ -376,7 +315,7 @@ function Profile() {
                 }
             } catch (error) {
                 if (error.response) {
-                    console.error('Backend Response Error:', error.response.data);  // Inspect the error from the backend
+                    console.error('Backend Response Error:', error.response.data);
                     toast.error(`Error: ${error.response.data.message || "Error uploading image."}`);
                 } else if (error.request) {
                     console.error('No Response from Server:', error.request);
@@ -387,6 +326,8 @@ function Profile() {
                 }
             }
         }
+
+    
     
     
     
