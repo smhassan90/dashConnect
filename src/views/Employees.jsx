@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Bar from '../Reuseable/Bar';
 import axios from 'axios';  
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Employees() {
     // const [data, setData] = useState([
@@ -58,6 +60,30 @@ function Employees() {
         setData(updatedData);
         setShowDeleteConfirm(false);
     };
+    // const confirmDelete = async () => {
+    //     try {
+    //         const response = await fetch("/deleteEmployee", {
+    //             method: "DELETE",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 Authorization: `Bearer ${yourAuthToken}`, // Ensure token is included
+    //             },
+    //             body: JSON.stringify({ employeeId: selectedEmployeeId }),
+    //         });
+    
+    //         const result = await response.json();
+    
+    //         if (response.ok) {
+    //             alert(result.message); // Successfully deleted
+    //             // Optionally, refresh employee list here
+    //         } else {
+    //             alert(result.message || "Failed to delete employee");
+    //         }
+    //     } catch (error) {
+    //         console.error("Error:", error);
+    //         alert("An error occurred while deleting the employee.");
+    //     }
+    // };
 
     const handleSearch = (e) => {
         setSearchTerm(e.target.value);
@@ -98,6 +124,8 @@ function Employees() {
 
             const data = response.data;
             console.log('Employee added successfully:', data);
+            toast.success('Employee added successfully!'); // Show success notification
+
             
             // Update the data state
             setData(prevData => [...prevData, data]); // Add new entry to existing data
@@ -472,6 +500,8 @@ const LabelWithInput = ({ label, name, value, onChange }) => (
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder={label}
         />
+        <ToastContainer position="top-center" autoClose={3000} />
+
     </div>
 );
 
