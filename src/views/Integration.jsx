@@ -52,7 +52,7 @@ function Integration() {
 <img
   src="https://cdn-bleeo.nitrocdn.com/AaeMEdZeBsunREidvDPNNmqpWUCXDbiq/assets/images/optimized/rev-b3c35fe/www.lazzarospallanzani.it/wp-content/uploads/2021/02/dolori-smart-working-blog-copertina-400x250.jpg"
   alt="Integration"
-  className="ml-16  h-[250px] rounded-lg mobile:w-40 mobile:h-28" 
+  className="ml-16  h-[250px] rounded-lg mobile:hidden" 
 />
 </div> 
 
@@ -71,23 +71,15 @@ function Integration() {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 ">
       {integrations.map((integration, index) => (
         <div key={index} className="bg-gray-700 rounded-lg shadow-md  text-white h-48  flex flex-col  mt-5 mobile:w-72 mobile:ml-5" >
-          {/* <div className="flex items-center mb-2">
-            <img
-              src={imag4}
-              alt={`${integration.name} Icon`}
-              className="w-32 h-32 mt-7 mr-16" 
-            />
-          </div>
-          <h3 className="text-lg text-left  mb-24 mr-12">Integrate With {integration.name}</h3> */}
     <div className="flex items-center mb-2">
   <img
     src={integration.icon}
     alt={`${integration.icon} Icon`}
-    className="w-32 h-32 mt-5"  // Adjust margins as necessary
+    className="w-32 h-32 mt-5"  
   />
-  <div className="ml-5 w-full m-auto "> {/* Added a container for title and description */}
+  <div className="ml-5 w-full m-auto "> 
     <h3 className="text-lg text-left  mb-1 font-sans font-bold">Integrate With {integration.name}</h3>
-    <p className="text-sm text-left mt-3 text-white"> {/* Description below the title */}
+    <p className="text-sm text-left mt-3 text-white"> 
       {integration.description}.
 
     </p>

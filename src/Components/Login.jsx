@@ -371,7 +371,7 @@ const Login = () => {
           <img
             src='https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7963.jpg'
             alt="Login Illustration"
-            className="w-full sm:w-1/2 h-full object-cover rounded-lg mr-10 mobile:mt-5"
+            className="w-full sm:w-1/2 h-full object-cover rounded-lg mr-10 mobile:hidden"
           />
           
           {/* Login Form Section */}

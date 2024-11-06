@@ -79,7 +79,7 @@ const Register = () => {
         <div className="flex items-center justify-center h-screen overflow-hidden bg-white ">
             <div className="flex flex-col sm:flex-row justify-center items-stretch space-y-4 sm:space-y-0 sm:space-x-4 w-full max-w-5xl">
                 <div className="flex flex-col sm:flex-row w-full">
-                    <img src='https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7963.jpg' alt="Illustration" className="w-full sm:w-1/2 h-full object-cover rounded-lg mr-10 mobile:w-40 mobile:h-20 mobile:flex flex-col" />
+                    <img src='https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7963.jpg' alt="Illustration" className="w-full sm:w-1/2 h-full object-cover rounded-lg mr-10 mobile:hidden" />
                     <div className="bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-1/2 flex flex-col mobile:40 mobile:h-full">
                         <div className="p-4 flex-1">
                             <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">Welcome!</h2>
