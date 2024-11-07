@@ -12,7 +12,7 @@ function Profile() {
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [oldPassword, setOldPassword] = useState("");
-    const [profileImage, setProfileImage] = useState("");
+    const [profileImage, setProfileImage] = useState(""); 
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
     
     const navigate = useNavigate();
@@ -28,7 +28,7 @@ function Profile() {
         }
     }, [navigate, token]);
 
-    // Fetch profile image from server
+    
     const fetchProfileImage = async () => {
         try {
             const response = await axios.get('http://localhost:3000/api/user/getProfilePicture', {
@@ -156,23 +156,7 @@ function Profile() {
     return (
         <div className="bg-white shadow-md rounded-lg p-6 max-w-md mx-auto mt-10 mobile:w-72">
             <div className="flex justify-center relative mb-4">
-            {/* <img
-    src={profileImage || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVA_HrQLjkHiJ2Ag5RGuwbFeDKRLfldnDasw&s"}
-    alt="Profile"
-    className="rounded-full w-24 h-24 object-cover"
-/> */}
-{/* <img
-    src={profileImage ||"}
-    alt="Profile"
-    className="rounded-full w-24 h-24 object-cover"
-/>
- */}
- {/* <img
-    src={profileImage && profileImage !== "" ? profileImage : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVA_HrQLjkHiJ2Ag5RGuwbFeDKRLfldnDasw&s"}
-    alt="Profile"
-    className="rounded-full w-24 h-24 object-cover"
-    onError={(e) => e.target.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVA_HrQLjkHiJ2Ag5RGuwbFeDKRLfldnDasw&s"}  // Fallback image
-/> */}
+
 <img
     src={profileImage ? profileImage : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVA_HrQLjkHiJ2Ag5RGuwbFeDKRLfldnDasw&s"}
     alt="Profile"
