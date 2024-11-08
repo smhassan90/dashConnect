@@ -29,18 +29,39 @@ function Profile() {
     }, [navigate, token]);
 
     
+    // const fetchProfileImage = async () => {
+    //     try {
+    //         const response = await axios.get('http://localhost:3000/api/user/getProfilePicture', {
+    //             headers: {
+    //                 'Authorization': `Bearer ${token}`
+    //             }
+    //         });
+    //         if (response.data.status === 'ok') {
+    //             setProfileImage(response.data.image);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error fetching profile image:', error);
+    //     }
+    // };
     const fetchProfileImage = async () => {
-        try {
-            const response = await axios.get('http://localhost:3000/api/user/getProfilePicture', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
+        const storedImage = localStorage.getItem('profileImage'); // Check if an image URL is stored in localStorage
+        if (storedImage) {
+            setProfileImage(storedImage); // Set the profile image from localStorage
+        } else {
+            try {
+                const response = await axios.get('http://localhost:3000/api/user/getProfilePicture', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (response.data.status === 'ok') {
+                    const imageUrl = response.data.image;
+                    setProfileImage(imageUrl);
+                    localStorage.setItem('profileImage', imageUrl); // Store the image URL in localStorage
                 }
-            });
-            if (response.data.status === 'ok') {
-                setProfileImage(response.data.image);
+            } catch (error) {
+                console.error('Error fetching profile image:', error);
             }
-        } catch (error) {
-            console.error('Error fetching profile image:', error);
         }
     };
 
@@ -54,6 +75,42 @@ function Profile() {
     const handleOpenUploadModal = () => setIsUploadModalOpen(true);
     const handleCloseUploadModal = () => setIsUploadModalOpen(false);
 
+    // const handleImageUpload = async (event) => {
+    //     const file = event.target.files[0];
+    //     if (file) {
+    //         const formData = new FormData();
+    //         formData.append('profileImage', file);
+    
+    //         try {
+    //             const response = await axios.post('http://localhost:3000/api/user/uploadImage', formData, {
+    //                 headers: {
+    //                     'Authorization': `Bearer ${token}`,
+    //                     'Content-Type': 'multipart/form-data',
+    //                 }
+    //             });
+    
+    //             console.log('Response:', response.data);
+    
+    //             if (response.data.message === 'Profile picture uploaded successfully.') {
+                    
+    //                 const imagePath = `http://localhost:3000/${response.data.path.replace(/\\/g, "/")}`;
+    
+                    
+    //                 setProfileImage(`${imagePath}?timestamp=${new Date().getTime()}`); 
+    
+    //                 console.log('Profile Image URL:', imagePath);
+    
+    //                 toast.success("Profile picture updated successfully.");
+    //                 handleCloseUploadModal();
+    //             } else {
+    //                 toast.error("Failed to upload image.");
+    //             }
+    
+    //         } catch (error) {
+    //             console.error('Error:', error);
+    //             toast.error("Error uploading image.");
+    //         }
+    //     }
     const handleImageUpload = async (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -68,16 +125,14 @@ function Profile() {
                     }
                 });
     
-                console.log('Response:', response.data);
-    
                 if (response.data.message === 'Profile picture uploaded successfully.') {
-                    
                     const imagePath = `http://localhost:3000/${response.data.path.replace(/\\/g, "/")}`;
     
-                    
-                    setProfileImage(`${imagePath}?timestamp=${new Date().getTime()}`); 
+                    // Save image URL in localStorage
+                    localStorage.setItem('profileImage', imagePath);
     
-                    console.log('Profile Image URL:', imagePath);
+                    // Update the state with the new image URL
+                    setProfileImage(`${imagePath}?timestamp=${new Date().getTime()}`);
     
                     toast.success("Profile picture updated successfully.");
                     handleCloseUploadModal();
@@ -90,6 +145,8 @@ function Profile() {
                 toast.error("Error uploading image.");
             }
         }
+    };
+    
     
     
     
@@ -99,7 +156,7 @@ function Profile() {
     
     
     
-    };
+
     
 
     const handleLogout = async () => {
