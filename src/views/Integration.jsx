@@ -381,7 +381,6 @@ function Integration() {
       <hr className="mt-2 border-t border-gray-500 mobile:w-[500px`]" /> {/* Horizontal line with margin */}
 
       <div className="mt-4">
-        {/* Grid layout for integrations */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4">
           {integrations.map((integration, index) => (
             <div
