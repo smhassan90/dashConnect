@@ -383,10 +383,16 @@ function Integration() {
       <div className="mt-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4">
           {integrations.map((integration, index) => (
-            <div
-              key={index}
-              className="bg-gray-700 rounded-lg shadow-md text-white h-48 flex flex-col mt-4 mobile:w-full mobile:mb-4"
-            >
+            // <div
+            //   key={index}
+            //   className="bg-gray-700 rounded-lg shadow-md text-white h-48 flex flex-col mt-4 mobile:w-full mobile:mb-4"
+            // >
+<div
+  key={index}
+  className="bg-cover bg-center text-white h-48 flex flex-col mt-4 mobile:w-full mobile:mb-4"
+  style={{ backgroundImage: "url('https://img.freepik.com/premium-vector/geometric-dark-message-board-wallpaper-with-copy-space-modern-designs_796268-123.jpg')" }}
+>
+
               <div className="flex items-center mb-2">
                 <img
                   src={integration.icon}
