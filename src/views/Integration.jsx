@@ -412,8 +412,8 @@ function Integration() {
 
               <div className="mt-auto px-4 pb-4 flex justify-end">
                 {/* Button aligned to the right */}
-                <button className="text-white font-bold rounded-md text-sm">
-                  View Now >>>
+                <button className=" bg-blue-500 w-20 text-white font-bold rounded-md text-sm">
+                  Connect 
                 </button>
               </div>
             </div>
