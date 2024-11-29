@@ -43,7 +43,7 @@
               <p className="text-xl font-semibold mt-2">20</p>
             </div>
             <button
-            className=" text-white  bg-blue-500 border-2 border-blue-500 font-bold py-2 px-4 rounded-[10px]"
+            className=" text-white  bg-black border-2 border-black font-bold py-2 px-4 rounded-[10px]"
           >
             + Add
           </button>
@@ -53,7 +53,7 @@
         {/* Additional Content Section */}
         <div className='flex flex-col sm:flex-row justify-between items-start mt-10  gap-8 mobile:ml-5'>
           {/* Appointments Chart */}
-          <div className="w-full p-4 h-[330px] bg-white rounded-[12px] shadow-md mb-5 border hover:border-blue-500 transition-all duration-300  gap-6"> {/* Adjusted width */}
+          <div className="w-full p-4 h-[330px] bg-white rounded-[12px] shadow-md mb-5 border hover:border-black transition-all duration-300  gap-6"> {/* Adjusted width */}
             <div className='flex justify-between items-center'>
               <p className="text-base sm:text-lg">Appointments</p>
               <p className='mr-10 flex items-center whitespace-nowrap text-sm sm:text-base'>
@@ -77,7 +77,7 @@
             </div>
           </div>
     
-          <div className="  mb-12 h-[330px] p-4 bg-white rounded-[12px] shadow-md border hover:border-blue-500 transition-all duration-300 ">
+          <div className="  mb-12 h-[330px] p-4 bg-white rounded-[12px] shadow-md border hover:border-black transition-all duration-300 ">
             <div className='flex justify-between items-center'>
               <p className='h-10 flex items-center whitespace-nowrap text-sm sm:text-base'>
                 SQL Statement <span className="ml-1"><SlArrowDown /></span>
@@ -98,14 +98,14 @@
         </div> 
     
         
-        {/* <div className="   h-[800px] p-5 bg-white rounded-[12px]  mt-5 border hover:border-blue-500 transition-all duration-300 mobile:ml-5 mobile:p-2 mobile:h-[750px] ">
+        {/* <div className="   h-[800px] p-5 bg-white rounded-[12px]  mt-5 border hover:border-black transition-all duration-300 mobile:ml-5 mobile:p-2 mobile:h-[750px] ">
           <div className='flex justify-between items-center '>
             <p className="text-base ">View all the answers to the questions you have asked.</p>
           
           </div>
     
           
-          <div className=" p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-blue-500 transition-all duration-300  ">
+          <div className=" p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-black transition-all duration-300  ">
             <div className='flex justify-between items-center'>
               <p className="text-base sm:text-lg">Appointments</p>
               <p className='ml-10 flex items-center whitespace-nowrap text-sm sm:text-base'>
@@ -129,7 +129,7 @@
           </div>
     
           
-          <div className=" p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-blue-500 transition-all duration-300  ">
+          <div className=" p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-black transition-all duration-300  ">
             <div className='flex justify-between items-center'>
               <p className="text-base sm:text-lg">Appointments</p>
               <p className='ml-10 flex items-center whitespace-nowrap text-sm sm:text-base'>
@@ -155,18 +155,18 @@
             <div>
       
 
-        <div className="h-[800px] p-5 bg-white rounded-[12px] mt-5 border hover:border-blue-500 transition-all duration-300 mobile:ml-5 mobile:p-2 mobile:h-[750px]">
+        <div className="h-[800px] p-5 bg-white rounded-[12px] mt-5 border hover:border-black transition-all duration-300 mobile:ml-5 mobile:p-2 mobile:h-[750px]">
           <div className="flex justify-between items-center">
             <p className="text-base">View all the answers to the questions you have asked.</p>
             {/* Close button */}
             {/* <button onClick={handleClose} 
-    className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold w-32 "
+    className="bg-white text-black hover:bg-blue-600 border-2 border-black font-bold w-32 "
     > CLOSE
               <IoClose />
 
             </button> */}
             <button onClick={handleClose} 
-  className="bg-blue-500 text-white rounded-[10px]  border-2 border-blue-500 font-bold w-32 flex items-center justify-center space-x-2">
+  className="bg-black text-white rounded-[10px]  border-2 border-black font-bold w-32 flex items-center justify-center space-x-2">
        <IoClose />
 
     <span>CLOSE</span>
@@ -175,7 +175,7 @@
           </div>
 
           {/* First chart */}
-          <div className="p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-blue-500 transition-all duration-300">
+          <div className="p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-black transition-all duration-300">
             <div className="flex justify-between items-center">
               <p className="text-base sm:text-lg">Appointments</p>
               <p className="ml-10 flex items-center whitespace-nowrap text-sm sm:text-base">
@@ -198,7 +198,7 @@
           </div>
 
           {/* Second chart */}
-          <div className="p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-blue-500 transition-all duration-300">
+          <div className="p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-black transition-all duration-300">
             <div className="flex justify-between items-center">
               <p className="text-base sm:text-lg">Appointments</p>
               <p className="ml-10 flex items-center whitespace-nowrap text-sm sm:text-base">

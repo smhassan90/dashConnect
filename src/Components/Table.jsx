@@ -178,7 +178,7 @@
 //                     <td className="px-2 py-4 whitespace-no-wrap border-b border-gray-200">
 //                       <div className="flex justify-center space-x-2">
 //                         <button
-//                           className="text-blue-500 hover:text-blue-700"
+//                           className="text-black hover:text-blue-700"
 //                           onClick={() => handleEdit(item)}
 //                         >
 //                           <MdEdit size={20} />
@@ -379,10 +379,10 @@ function Table() {
                     <td className="px-2 py-4 text-gray-900">{item.connectedDatabase}</td>
                     <td className="px-2 py-4 text-gray-900">{item.category}</td>
                     <td className="px-2 py-4 text-center">
-                      <button className="text-blue-500 hover:text-blue-700" onClick={() => handleEditClick(item)}>
+                      <button className="text-black hover:text-blue-700" onClick={() => handleEditClick(item)}>
                         <MdEdit size={20} />
                       </button>
-                      <button className="text-blue-500 hover:text-blue-700"
+                      <button className="text-black hover:text-blue-700"
                       onClick={() => handleDeleteClick(item.id)}>
                         <MdDelete size={20} />
                       </button>
@@ -408,7 +408,7 @@ function Table() {
 
                   <input
                     required
-                    className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
+                    className="bg-transparentrounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
                     type="text"
                     name="storyName"
                     value={newStory.storyName}
@@ -419,7 +419,7 @@ function Table() {
                   <legend className="text-gray-500 text-sm px-2"> Story info	</legend>
                   <input
                     required
-                    className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
+                    className="bg-transparentrounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
                     type="text"
                     name="storyInfo"
                     
@@ -432,7 +432,7 @@ function Table() {
                   <input
 
                     required
-                    className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
+                    className="bg-transparentrounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
                     type="text"
                     name="connectedDatabase"
                     value={newStory.connectedDatabase}
@@ -445,7 +445,7 @@ function Table() {
                   <input
 
                     required
-                    className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
+                    className="bg-transparentrounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
                     type="text"
                     name="category"
                     value={newStory.category}
@@ -485,7 +485,7 @@ function Table() {
                 <legend className="text-gray-500 text-sm px-2 mt-3">Story  NAME</legend>
 
                 <input
-                  className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
+                  className="bg-transparentrounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
                   type="text"
                   name="storyName"
                   value={currentEditItem.storyName}
@@ -498,7 +498,7 @@ function Table() {
                 <legend className="text-gray-500 text-sm px-2"> Story info	</legend>
                 <input
                   required
-                  className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
+                  className="bg-transparentrounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
                   type="text"
                   name="storyInfo"
                   value={currentEditItem.storyInfo}
@@ -513,7 +513,7 @@ function Table() {
                 <legend className="text-gray-500 text-sm px-2"> Connected Database	</legend>
                 <input
 
-                  className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
+                  className="bg-transparentrounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
                   type="text"
                   name="connectedDatabase"
                   value={currentEditItem.connectedDatabase}
@@ -529,7 +529,7 @@ function Table() {
                 <legend className="text-gray-500 text-sm px-2"> Category	</legend>
                 <input
 
-                  className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
+                  className="bg-transparentrounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
                   type="text"
                   name="category"
                   placeholder="Category"
@@ -546,12 +546,12 @@ function Table() {
 
               <div className=" mt-3 flex justify-end space-x-2  mobile:w-60">
                 <button onClick={() => setShowEditModal(false)}
-                            className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6"
+                            className="bg-white text-black hover:bg-black border-2  hover:text-white border-black font-bold py-2 px-4rounded w-full mt-6"
 >
                   Cancel
                 </button>
                 <button onClick={saveEdit} 
-                            className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6"
+                            className="bg-white text-black hover:bg-black border-2 hover:text-white border-black font-bold py-2 px-4 rounded w-[342px] h-[44px]  mt-6"
 >
                   Save
                 </button>
@@ -568,13 +568,13 @@ function Table() {
             <div className="flex justify-end space-x-2">
               <button
                 onClick={cancelDelete}
-                className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6"
+                className="bg-white text-black hover:bg-black border-2  hover:text-white border-black font-bold py-2 px-4rounded w-full mt-6"
                 >
                 Cancel
               </button>
               <button
                 onClick={confirmDelete}
-                className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6"
+                className="bg-white text-black hover:bg-black  border-2  hover:text-white border-black font-bold py-2 px-4rounded w-full mt-6"
                 >
                 Yes
               </button>

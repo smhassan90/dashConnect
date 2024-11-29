@@ -44,7 +44,7 @@
 //                 <p className={`text-gray-400 mt-3 text-base ${isOpen ? 'block' : 'hidden'}`}>Overview</p>
 
 //                 <div
-//                     className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-blue-500 p-2 rounded ${isActive('/admin/dashboard') ? 'bg-gray-300' : ''}`}
+//                     className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black p-2 rounded ${isActive('/admin/dashboard') ? 'bg-gray-300' : ''}`}
 //                     onClick={() => handleNavigation('/admin/dashboard')}
 //                 >
 //                     <MdDashboard className={` ${isOpen ? 'text-xl' : ' text-2xl'}`} />
@@ -167,8 +167,8 @@ const Sidebar = () => {
                 </p>
 
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-blue-500 p-2 rounded ml-4 ${
-                        isActive('/admin/dashboard') ? 'bg-blue-400' : ''
+                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded ml-4 ${
+                        isActive('/admin/dashboard') ? 'bg-black text-white' : ''
                     }`}
                     onClick={() => handleNavigation('/admin/dashboard')}
                 >
@@ -181,8 +181,8 @@ const Sidebar = () => {
                 </div>
 
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-blue-500 p-2 rounded ml-4 ${
-                        isActive('/admin/employees') ? 'bg-blue-400' : ''
+                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded ml-4 ${
+                        isActive('/admin/employees') ? 'bg-black text-white' : ''
                     }`}
                     onClick={() => handleNavigation('/admin/employees')}
                 >
@@ -195,8 +195,8 @@ const Sidebar = () => {
                 </div>
 
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-blue-500 p-2 rounded ml-4 ${
-                        isActive('/admin/storyboards') ? 'bg-blue-400' : ''
+                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded ml-4 ${
+                        isActive('/admin/storyboards') ? 'bg-black text-white' : ''
                     }`}
                     onClick={() => handleNavigation('/admin/storyboards')}
                 >
@@ -209,8 +209,8 @@ const Sidebar = () => {
                 </div>
 
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-blue-500 p-2 rounded ml-4 ${
-                        isActive('/investigation') ? 'bg-blue-400' : ''
+                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded ml-4 ${
+                        isActive('/investigation') ? 'bg-black text-white' : ''
                     }`}
                 >
                     <FaSearchengin className="text-xl" />
@@ -222,8 +222,8 @@ const Sidebar = () => {
                 </div>
 
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-blue-500 p-2 rounded ml-4 ${
-                        isActive('/datasets') ? 'bg-blue-400' : ''
+                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded ml-4 ${
+                        isActive('/datasets') ? 'bg-black text-white' : ''
                     }`}
                 >
                     <FaDatabase className="text-xl" />
@@ -235,8 +235,8 @@ const Sidebar = () => {
                 </div>
 
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-blue-500 p-2 rounded ml-4 ${
-                        isActive('/admin/integration') ? 'bg-blue-400' : ''
+                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded ml-4 ${
+                        isActive('/admin/integration') ? 'bg-black text-white' : ''
                     }`}
                     onClick={() => handleNavigation('/admin/integration')}
                 >
@@ -251,8 +251,8 @@ const Sidebar = () => {
                 <hr className="border-t border-gray-300 w-full ml-4" />
 
                 <div
-                    className={`flex gap-2 items-center mt-8 cursor-pointer hover:bg-blue-500 p-2 rounded ml-4 ${
-                        isActive('/admin/profile') ? 'bg-blue-400' : ''
+                    className={`flex gap-2 items-center mt-8 cursor-pointer hover:bg-black hover:text-white p-2 rounded ml-4 ${
+                        isActive('/admin/profile') ? 'bg-black text-white ' : ''
                     }`}
                 >
                     <Link to="/admin/profile" className="flex items-center gap-2">
