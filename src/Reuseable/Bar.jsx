@@ -70,7 +70,7 @@ const Bar = ({ title, type, onAddStory, buttonText }) => {
               </div>
               <button
                 onClick={onAddStory}
-                className="bg-black text-white font-bold py-2 px-4 rounded-full hover:bg-gray-800 transition duration-300"
+                className="bg-blue-500 text-white font-bold py-2 px-4 rounded-full  transition duration-300"
               >
                 {buttonText}
               </button>

@@ -21,31 +21,30 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = { email, password };
-
-    try {
-      const response = await axios.post('http://localhost:3000/api/user/login', formData);
-      const token = response.data.token;
-
-      if (token) {
-        localStorage.setItem('your_access_token', token);
-        toast.success("Login successful!");
-        navigate('/admin/dashboard');
-      } else {
-        setError("Login failed. No token received.");
-        toast.error("Login failed. No token received.");
+        event.preventDefault();
+        const formData = { email, password };
+    
+        try {
+          const response = await axios.post("http://localhost:3000/api/user/login", formData);
+          const token = response.data.token;
+    
+          if (token) {
+            localStorage.setItem("isLoggedIn", "true"); // Set login status
+            localStorage.setItem("your_access_token", token); // Store the token
+            toast.success("Login successful!");
+            navigate("/admin/dashboard"); // Redirect to dashboard after login
+          } else {
+            setError("Login failed. No token received.");
+            toast.error("Login failed. No token received.");
+          }
+        } catch (error) {
+          const errorMessage = error.response && error.response.data ? error.response.data.message : "Login failed. Please try again.";
+          setError(errorMessage);
+          toast.error(errorMessage);
+        }
       }
-    } catch (error) {
-      const errorMessage = error.response && error.response.data ? 
-                            error.response.data.message : 
-                            "Login failed. Please try again.";
-      setError(errorMessage);
-      toast.error(errorMessage);
-    }
-  };
-
     const handleForgotPassword = async (e) => {
     e.preventDefault();
     
@@ -214,17 +213,14 @@ const Login = () => {
 
       <div className="flex flex-col sm:flex-row justify-center items-stretch space-y-4 sm:space-y-0 sm:space-x-4 w-full max-w-4xl">
         
-        {/* Combined Div for Image and Form */}
         <div className="flex flex-col sm:flex-row w-full">
           
-          {/* Image Section */}
           <img
             src='https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7963.jpg'
             alt="Login Illustration"
             className="w-full sm:w-1/2 h-full object-cover rounded-lg mr-10 mobile:hidden"
           />
           
-          {/* Login Form Section */}
           <div className="bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-1/2 flex flex-col mobile:h-full mobile:mb-20">
             <div className="p-6 flex-1">
               <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">Hello Again!</h2>
@@ -279,17 +275,10 @@ const Login = () => {
                 <span className="text-gray-500 font-bold">OR</span>
                 <hr className="border-gray-400 flex-grow" />
               </div>
-
-              {/* <div className="flex justify-between mt-8">
-                <img src={image1} alt="Google" className="w-10 h-10" />
-                <img src={image2} alt="Apple" className="w-10 h-10" />
-                <img src={image3} alt="Facebook" className="w-10 h-10" />
-              </div> */}
-
               <p className="text-center text-gray-600 mt-6">
                 Not a member? 
                 <Link to="/signup" className="text-blue-500 hover:underline">
-                  Register Now
+                     Register Now
                 </Link>
               </p>
             </div>
@@ -299,5 +288,6 @@ const Login = () => {
     </div>
   );
 };
+
 
 export default Login;

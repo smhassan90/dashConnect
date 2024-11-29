@@ -55,14 +55,14 @@ function Dashboard() {
           imgSrc="https://via.placeholder.com/30"
         />
       </div>
-      <div className="flex gap-2  mt-7 text-2xl  mx-auto max-w-7xl px-4 mobile:w-3/4 mobile:ml-11 ">
+      <div className="flex gap-2  ml-2 mt-7   mx-auto max-w-7xl px-4 mobile:w-3/4 mobile:ml-11 ">
         <span>Show</span>
         <select className="border rounded" value={entries} onChange={handleChange}>
           <option value={25}>25</option>
           <option value={50}>50</option>
           <option value={100}>100</option>
         </select>
-        <span className='text-2xl'>entries</span>
+        <span className=''>entries</span>
       </div>
       <Table className="mt-6" />
     </div>

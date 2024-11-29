@@ -382,7 +382,8 @@ function Table() {
                       <button className="text-blue-500 hover:text-blue-700" onClick={() => handleEditClick(item)}>
                         <MdEdit size={20} />
                       </button>
-                      <button className="text-red-500 hover:text-red-700" onClick={() => handleDeleteClick(item.id)}>
+                      <button className="text-blue-500 hover:text-blue-700"
+                      onClick={() => handleDeleteClick(item.id)}>
                         <MdDelete size={20} />
                       </button>
                     </td>
@@ -480,8 +481,8 @@ function Table() {
             <h2 className="text-2xl font-bold mb-4 mobile:text-center">Edit story</h2>
             <form className=''>
 
-              <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60"> {/* Adjust width and height */}
-                <legend className="text-gray-500 text-sm px-2">Story  NAME</legend>
+              <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60 mt-3"> {/* Adjust width and height */}
+                <legend className="text-gray-500 text-sm px-2 mt-3">Story  NAME</legend>
 
                 <input
                   className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
@@ -493,7 +494,7 @@ function Table() {
                 />
               </fieldset>
 
-              <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60 "> {/* Adjust width and height */}
+              <fieldset className="mt-3 border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60 "> {/* Adjust width and height */}
                 <legend className="text-gray-500 text-sm px-2"> Story info	</legend>
                 <input
                   required
@@ -508,7 +509,7 @@ function Table() {
 
 
 
-              <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
+              <fieldset className="mt-3 border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
                 <legend className="text-gray-500 text-sm px-2"> Connected Database	</legend>
                 <input
 
@@ -524,7 +525,7 @@ function Table() {
 
 
 
-              <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60"> {/* Adjust width and height */}
+              <fieldset className=" mt-3 border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60"> {/* Adjust width and height */}
                 <legend className="text-gray-500 text-sm px-2"> Category	</legend>
                 <input
 
@@ -543,11 +544,15 @@ function Table() {
 
 
 
-              <div className="flex justify-end space-x-2 mt-10 mobile:w-60">
-                <button onClick={() => setShowEditModal(false)} className="bg-gray-500 text-white font-bold py-2 px-4 rounded">
+              <div className=" mt-3 flex justify-end space-x-2  mobile:w-60">
+                <button onClick={() => setShowEditModal(false)}
+                            className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6"
+>
                   Cancel
                 </button>
-                <button onClick={saveEdit} className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
+                <button onClick={saveEdit} 
+                            className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6"
+>
                   Save
                 </button>
               </div>
@@ -563,14 +568,14 @@ function Table() {
             <div className="flex justify-end space-x-2">
               <button
                 onClick={cancelDelete}
-                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-              >
+                className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6"
+                >
                 Cancel
               </button>
               <button
                 onClick={confirmDelete}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-              >
+                className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6"
+                >
                 Yes
               </button>
             </div>

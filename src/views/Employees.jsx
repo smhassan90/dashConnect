@@ -5,6 +5,8 @@ import Bar from '../Reuseable/Bar';
 import axios from 'axios';  
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { IoClose } from 'react-icons/io5';
+
 
 function Employees() {
     // const [data, setData] = useState([
@@ -279,106 +281,112 @@ function Employees() {
                 )}
 
 
-                {showAddForm && (
-                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                        <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full mobile:w-72 mobile:ml-14">
-                            <h2 className="text-2xl font-bold mb-4 mobile:text-center">Add  Employees</h2>
-                            <form onSubmit={(e) => {
-                                e.preventDefault();
-                                addNewEntry();
-                            }}>
+{showAddForm && (
+  <div className="w-[1500px] fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full mobile:w-72 mobile:ml-14">
+      
+      {/* Container for the heading and close button */}
+      <div className="flex items-center justify-between mb-4">
+        {/* Close Button */}
 
-                                <div className=''>
-                                    <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60"> {/* Adjust width and height */}
-                                        <legend className="text-gray-500 text-sm px-2">FULL NAME</legend>
+        {/* Add Employees Heading */}
+        <h2 className="text-2xl font-bold mobile:text-center">Add Employees</h2>
+        <button
+          onClick={() => setShowAddForm(false)}
+          className="text-gray-600 hover:text-gray-800"
+        >
+          <IoClose size={24} />
+        </button>
 
-                                        <input
-                                            required
-                                            className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
-                                            id="firstName"
-                                            name="firstName"
-                                            value={newEntry.firstName}
-                                            onChange={e => setNewEntry({ ...newEntry, firstName: e.target.value })}
-                                            required
-                                        />
-                                    </fieldset>
-                                    <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60 "> {/* Adjust width and height */}
-                                        <legend className="text-gray-500 text-sm px-2"> Last Name	</legend>
-                                        <input
-                                            required
-                                            className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
-                                            id="lastName"
-                                            name="lastName"
-                                            value={newEntry.lastName}
-                                            onChange={e => setNewEntry({ ...newEntry, lastName: e.target.value })}
-                        required
+      </div>
 
-                                        />
-                                    </fieldset>
-                                    <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60"> {/* Adjust width and height */}
-                                        <legend className="text-gray-500 text-sm px-2"> Email	</legend>
-                                        <input
-                                            type='Email'
-                                            required
-                                            className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
-                                            id="email"
-                                            name="email"
-                                            value={newEntry.email}
-                                            onChange={e => setNewEntry({ ...newEntry, email: e.target.value })}
-                                            required
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        addNewEntry();
+      }}>
+        <div className="">
+          <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
+            <legend className="text-gray-500 text-sm px-2">FULL NAME</legend>
+            <input
+              required
+              className=" bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
+              id="firstName"
+              name="firstName"
+              value={newEntry.firstName}
+              onChange={e => setNewEntry({ ...newEntry, firstName: e.target.value })}
+            />
+          </fieldset>
+          <fieldset className="mt-3 border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
+            <legend className="text-gray-500 text-sm px-2">Last Name</legend>
+            <input
+              required
+              className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
+              id="lastName"
+              name="lastName"
+              value={newEntry.lastName}
+              onChange={e => setNewEntry({ ...newEntry, lastName: e.target.value })}
+            />
+          </fieldset>
+          <fieldset className=" mt-3 border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
+            <legend className="text-gray-500 text-sm px-2">Email</legend>
+            <input
+              type="email"
+              required
+              className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
+              id="email"
+              name="email"
+              value={newEntry.email}
+              onChange={e => setNewEntry({ ...newEntry, email: e.target.value })}
+            />
+          </fieldset>
+          <fieldset className=" mt-3 border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
+            <legend className="text-gray-500 text-sm px-2">Password</legend>
+            <input
+              type="password"
+              required
+              className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
+              id="password"
+              name="password"
+              value={newEntry.password}
+              onChange={e => setNewEntry({ ...newEntry, password: e.target.value })}
+            />
+          </fieldset>
+        </div>
 
-                                        />
-                                    </fieldset>
-                                    <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60"> {/* Adjust width and height */}
-                                        <legend className="text-gray-500 text-sm px-2"> password	</legend>
-                                        <input
-                                            type='password'
-                                            required
-                                            className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
-                                            id="password"
-                                            name="password"
-                                            value={newEntry.password}
-                                            onChange={e => setNewEntry({ ...newEntry, password: e.target.value })}
-                        required
+        <fieldset className="mt-3  border border-gray-400 rounded p-2 w-96 h-16 mobile:w-60">
+          <legend className="text-gray-500 text-sm px-2">Role</legend>
+          <select
+            id="role"
+            name="role"
+            value={newEntry.role}
+            onChange={e => setNewEntry({ ...newEntry, role: e.target.value })}
+            required
+            className="bg-transparent rounded w-full text-gray-700 leading-tight focus:outline-none border-none"
+          >
+            <option value="">Select an option</option>
+            <option value="Admin">Admin</option>
+            <option value="Editor">Editor</option>
+            <option value="Employee">Employee</option>
+          </select>
+        </fieldset>
 
-                                        />
-                                    </fieldset>
-                                </div>
-
-
-                                <fieldset className="border border-gray-400 rounded p-2 w-96 h-16 mobile:w-60 "> {/* Adjust width and height */}
-                                    <legend className="text-gray-500 text-sm px-2">Role</legend>
-                                    <select
-                                        id="role"
-                                        name="role"
-                                        value={newEntry.role}
-                                        onChange={e => setNewEntry({ ...newEntry, role: e.target.value })}
-                                        required
-                                        className="bg-transparent rounded w-full  text-gray-700 leading-tight focus:outline-none border-none" // No border on input
-                                    >
-                                        <option value="">Select an option</option>
-                                        <option value="Admin">Admin</option>
-                                        <option value="Editor">Editor</option>
-                                        <option value="Employee">Employee</option>
-                                    </select>
-                                </fieldset>
-
-
-
-
-
-                                <div className="flex justify-end space-x-2 mt-10">
-                                    <button onClick={() => setShowAddForm(true)} className="bg-gray-500 text-white font-bold py-2 px-4 rounded">
-                                        Cancel
-                                    </button>
-                                    <button type="submit" className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
-                                        Add
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                )}
+        <div className="flex justify-end space-x-2 mt-10">
+          <button
+            onClick={() => setShowAddForm(false)}
+            className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6"
+          >
+            Cancel
+          </button>
+          <button type="submit"
+            className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6"
+          >
+            Add
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+)}
 
 
                 {/* Edit Entry Modal */}
