@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import DashboardCard from '../Reuseable/DashboardCard '
 import Bar from '../Reuseable/Bar'
@@ -21,7 +22,7 @@ function Dashboard() {
 
 
       <div className="flex flex-col md:flex-row justify-between items-center mt-4 mx-auto max-w-7xl px-4">
-        <p className="text-2xl font-serif m-0 md:mr-4 whitespace-nowrap">     Welcome Back, Pritam
+        <p className="text-2xl font-medium m-0 md:mr-4  whitespace-nowrap">     Welcome Back, Pritam
         </p> <div className="flex items-center">
           <BsCalendar3 className="text-xl mr-2" />
           <span className="text-xl">{currentDate.replace(/\//g, '.')}</span>

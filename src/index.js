@@ -20,7 +20,7 @@ const App = () => {
   return (
     <Routes>
       {/* Public routes */}
-      <Route path="/" element={<Login />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Register />} />
 
       {/* Admin routes with authentication check */}
@@ -40,7 +40,7 @@ const App = () => {
               </div>
             </div>
           ) : (
-            <Navigate to="/" replace />
+            <Navigate to="/login" replace />
           )
         }
       />

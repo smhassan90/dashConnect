@@ -1,10 +1,10 @@
-// DashboardCard.jsx
+
 import React from 'react';
 
 const DashboardCard = ({ title, value, additionalCount, imgSrc }) => {
   return (
     <div className="bg-gray-800 p-4 rounded-[15px] shadow-md flex flex-col justify-between  md:w-[260px] mobile:mt-5 h-44">
-    <h2 className="text-white text-lg mb-2">{title}</h2>
+    <h2 className="text-white text-custom-18 font-normal mb-2">{title}</h2>
     <div className="flex items-center justify-between ">
       <div className='mb-10'>
       <span className="text-white text-2xl ">{value}</span>
