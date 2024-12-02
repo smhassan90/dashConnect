@@ -123,6 +123,8 @@ function Integration() {
       
           <>
       {isModalOpen && (
+
+        
         <div className="ml-36 mt-24 fixed inset-0 bg-blue bg-opacity-50 flex justify-center items-center">
           <div className="bg-white rounded-lg p-6 w-96 relative text-center">
             <button
