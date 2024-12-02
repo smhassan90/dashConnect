@@ -28,14 +28,12 @@ const Sidebar = () => {
     return (
         <div className="flex h-screen overflow-hidden">
             <div
-                className={`bg-gray-100 p-2 flex flex-col gap-4 transition-all duration-300 ${
-                    isOpen ? 'w-60' : 'w-16'
-                } fixed top-0 left-0 h-full z-50`}
+                className={`bg-gray-100 p-2 flex flex-col gap-3 transition-all duration-300 ${isOpen ? 'w-64' : 'w-20'} fixed top-0 left-0 h-full z-50`}
             >
-                <div className="flex items-center justify-between ml-4">
+                <div className="flex items-center justify-between ml-6 mt-6">
                     {isOpen ? (
                         <>
-                            <h2 className="text-2xl font-medium text-black text-left">LOGO</h2>
+                            <h2 className="text-custom-20 font-medium text-black text-left">LOGO</h2>
                             <AiOutlineArrowLeft
                                 className="cursor-pointer text-2xl"
                                 onClick={toggleSidebar}
@@ -49,122 +47,136 @@ const Sidebar = () => {
                     )}
                 </div>
 
-                <p className={`text-[#434343] mt-3 text-base ml-4 ${isOpen ? 'block' : 'hidden'}`}>
-                    Overview
-                </p>
+                <p className={`text-[#434343] mt-4 text-custom-14 ml-4 ${isOpen ? 'block' : 'hidden'}`}>Overview</p>
 
+                {/* Dashboard Item */}
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-4 ${
-                        isActive('/admin/dashboard') ? 'bg-black text-white' : ''
-                    }`}
+                    className={`flex gap-2 items-center mt-1 cursor-pointer ${
+                        isOpen
+                            ? 'hover:bg-black hover:text-white p-2 rounded-10'
+                            : 'hover:bg-black hover:text-white p-2 rounded-10 w-[40px] justify-center' // Shrink and center the background
+                    } ml-4 ${isActive('/admin/dashboard') ? 'bg-black text-white' : ''}`}
                     onClick={() => handleNavigation('/admin/dashboard')}
                 >
-                    <MdDashboard className="text-xl" />
+                    <MdDashboard className="text-custom-14" />
                     <span
-                        className={`font-poppins font-normal text-custom-18 ${isOpen ? 'block' : 'hidden'}`}
+                        className={`font-poppins font-normal text-custom-14 ${isOpen ? 'block' : 'hidden'}`}
                     >
                         Dashboard
                     </span>
                 </div>
 
+                {/* Employees Item */}
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-4 ${
-                        isActive('/admin/employees') ? 'bg-black text-white' : ''
-                    }`}
+                    className={`flex gap-2 items-center mt-1 cursor-pointer ${
+                        isOpen
+                            ? 'hover:bg-black hover:text-white p-2 rounded-10'
+                            : 'hover:bg-black hover:text-white p-2 rounded-10 w-[40px] justify-center' // Shrink and center the background
+                    } ml-4 ${isActive('/admin/employees') ? 'bg-black text-white' : ''}`}
                     onClick={() => handleNavigation('/admin/employees')}
                 >
-                    <IoMdPerson className="text-xl" />
+                    <IoMdPerson className="text-custom-14" />
                     <span
-                        className={`font-poppins font-normal text-custom-18 ${isOpen ? 'block' : 'hidden'}`}
+                        className={`font-poppins font-normal text-custom-14 ${isOpen ? 'block' : 'hidden'}`}
                     >
                         Employees
                     </span>
                 </div>
 
+                {/* Storyboards Item */}
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-4 ${
-                        isActive('/admin/storyboards') ? 'bg-black text-white' : ''
-                    }`}
+                    className={`flex gap-2 items-center mt-1 cursor-pointer ${
+                        isOpen
+                            ? 'hover:bg-black hover:text-white p-2 rounded-10'
+                            : 'hover:bg-black hover:text-white p-2 rounded-10 w-[40px] justify-center' // Shrink and center the background
+                    } ml-4 ${isActive('/admin/storyboards') ? 'bg-black text-white' : ''}`}
                     onClick={() => handleNavigation('/admin/storyboards')}
                 >
-                    <BsPostcard className="text-xl" />
+                    <BsPostcard className="text-custom-14" />
                     <span
-                        className={`font-poppins font-normal text-custom-18 ${isOpen ? 'block' : 'hidden'}`}
+                        className={`font-poppins font-normal text-custom-14 ${isOpen ? 'block' : 'hidden'}`}
                     >
                         Story boards
                     </span>
                 </div>
 
+                {/* Investigation Item */}
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-4 ${
-                        isActive('/investigation') ? 'bg-black text-white' : ''
-                    }`}
+                    className={`flex gap-2 items-center mt-1 cursor-pointer ${
+                        isOpen
+                            ? 'hover:bg-black hover:text-white p-2 rounded-10'
+                            : 'hover:bg-black hover:text-white p-2 rounded-10 w-[40px] justify-center' // Shrink and center the background
+                    } ml-4 ${isActive('/investigation') ? 'bg-black text-white' : ''}`}
                 >
-                    <FaSearchengin className="text-xl" />
+                    <FaSearchengin className="text-custom-14" />
                     <span
-                        className={`font-poppins font-normal text-custom-18 ${isOpen ? 'block' : 'hidden'}`}
+                        className={`font-poppins font-normal text-custom-14 ${isOpen ? 'block' : 'hidden'}`}
                     >
                         Investigation
                     </span>
                 </div>
 
+                {/* Complimentary Datasets Item */}
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-4 ${
-                        isActive('/datasets') ? 'bg-black text-white' : ''
-                    }`}
+                    className={`flex gap-2 items-center mt-1 cursor-pointer ${
+                        isOpen
+                            ? 'hover:bg-black hover:text-white p-2 rounded-10'
+                            : 'hover:bg-black hover:text-white p-2 rounded-10 w-[40px] justify-center' // Shrink and center the background
+                    } ml-4 ${isActive('/datasets') ? 'bg-black text-white' : ''}`}
                 >
-                    <FaDatabase className="text-xl" />
+                    <FaDatabase className="text-custom-14" />
                     <span
-                        className={`font-poppins font-normal text-custom-18 ${isOpen ? 'block' : 'hidden'}`}
+                        className={`font-poppins font-normal text-custom-14 ${isOpen ? 'block' : 'hidden'}`}
                     >
                         Complimentary Datasets
                     </span>
                 </div>
 
+                {/* Integrations Item */}
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-4 ${
-                        isActive('/admin/integration') ? 'bg-black text-white' : ''
-                    }`}
+                    className={`flex gap-2 items-center mt-1 cursor-pointer ${
+                        isOpen
+                            ? 'hover:bg-black hover:text-white p-2 rounded-10'
+                            : 'hover:bg-black hover:text-white p-2 rounded-10 w-[40px] justify-center' // Shrink and center the background
+                    } ml-4 ${isActive('/admin/integration') ? 'bg-black text-white' : ''}`}
                     onClick={() => handleNavigation('/admin/integration')}
                 >
-                    <RiDashboardHorizontalLine className="text-xl" />
+                    <RiDashboardHorizontalLine className="text-custom-14" />
                     <span
-                        className={`font-poppins font-normal text-custom-18 ${isOpen ? 'block' : 'hidden'}`}
+                        className={`font-poppins font-normal text-custom-14 ${isOpen ? 'block' : 'hidden'}`}
                     >
                         Integrations
                     </span>
                 </div>
 
-                <hr className="border-t border-gray-300 w-full ml-4" />
+                <hr className="border-t border-gray-300 w-full " />
 
                 <div
-                    className={`flex gap-2 items-center mt-6 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-4 ${
-                        isActive('/admin/profile') ? 'bg-black text-white ' : ''
-                    }`}
-                >
-                    <Link to="/admin/profile" className="flex items-center gap-2">
-                        <img
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH-F4ROquOZPV5XtKKC3WUjmDGnDbW7nBbA0b2b-qpY3Lo6N2xk-IGNNl1R7kPUgv0DyQ&usqp=CAU"
-                            className="w-[55px] h-[57px] rounded-full"
-                            alt="Profile"
-                        />
-                        <span
-                            className={`font-poppins text-custom-18 font-normal leading-[30px] text-center ml-7 ${
-                                isOpen ? 'block' : 'hidden'
-                            }`}
-                        >
-                            Pritam Ghosh
-                        </span>
-                    </Link>
-                </div>
+className={`flex gap-2 items-center mt-4 cursor-pointer p-2 rounded-10 ml-4 ${
+    isActive('/admin/profile') ? 'bg-black text-white ' : ''
+}`}
+>
+<Link to="/admin/profile" className="flex items-center gap-2">
+    <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH-F4ROquOZPV5XtKKC3WUjmDGnDbW7nBbA0b2b-qpY3Lo6N2xk-IGNNl1R7kPUgv0DyQ&usqp=CAU"
+        className="w-[55px] object-cover h-[57px] rounded-full"
+        alt="Profile"
+    />
+    <span
+        className={`font-poppins text-custom-14 font-normal leading-[30px] text-center ml-7 ${
+            isOpen ? 'block' : 'hidden'
+        }`}
+    >
+        Pritam Ghosh
+    </span>
+</Link>
+</div>
             </div>
 
             <div
-                className={`flex-1 h-screen overflow-y-auto p-5 transition-all duration-300 ${
-                    isOpen ? 'ml-64' : 'p-8'
-                }`}
+                className={`flex-1 h-screen overflow-y-auto p-5 transition-all duration-300 ${isOpen ? 'ml-64' : 'p-8'}`}
             >
-                {/* Place your main content here */}
+                {/* Main Content */}
             </div>
         </div>
     );

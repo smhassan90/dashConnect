@@ -338,7 +338,6 @@ function Employees() {
             className="hover:text-black hover:bg-white border-2 border-black"
 
     text="Add"
-    hoverEffect="hover:bg-blue-600 hover:text-white"
   />
 
          

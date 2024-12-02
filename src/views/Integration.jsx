@@ -5,6 +5,7 @@ import { IoClose } from 'react-icons/io5';
 import imag5 from '../assests/image5.png';
 import Bar from '../Reuseable/Bar';
 import image from '../assests/dolori-smart-working-blog-copertina-400x250-removebg-preview.png';
+import CustomButton from '../Components/Button';
 
 const integrations = [
   {
@@ -50,7 +51,7 @@ function Integration() {
         <div className="w-full h-[35px] mobile:w-[400px] relative">
           <input
             type="text"
-            className="bg-white border-blue-500 rounded-[12px] w-full h-full pl-10 pr-20 mobile:w-full"
+            className="bg-white text-b border-blue-500 rounded-[12px] w-full h-full pl-10 pr-20 mobile:w-full"
             placeholder="Search Integration..."
           />
           <span className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500">
@@ -133,20 +134,30 @@ function Integration() {
             <h2 className="text-lg text-center font-bold mb-4">
               Connect Integration
             </h2>
-            <button
+            {/* <button
               className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6"
               onClick={handleTestClick}
             >
               Test
-            </button>
-            <button
-              className={`bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6 ${
-                isConnectEnabled ? "cursor-pointer" : "cursor-not-allowed opacity-50"
+            </button> */}
+        <div className="flex justify-center space-x-4 mt-10">
+
+<CustomButton
+    text="test"
+    onClick={handleTestClick}
+    className="hover:text-black hover:bg-white border-2 border-black"
+  />
+            <CustomButton
+                text="connect"
+
+              className={`hover:text-black hover:bg-white border-2 border-black ${
+                isConnectEnabled ? "cursor-pointer" : "cursor-not-allowed "
               }`}
               disabled={!isConnectEnabled} // Disable the button when `isConnectEnabled` is false
-            >
-              Connect
-            </button>
+            
+              
+            />
+            </div>
           </div>
         </div>
       )}
