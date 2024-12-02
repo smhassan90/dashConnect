@@ -75,42 +75,7 @@ function Profile() {
     const handleOpenUploadModal = () => setIsUploadModalOpen(true);
     const handleCloseUploadModal = () => setIsUploadModalOpen(false);
 
-    // const handleImageUpload = async (event) => {
-    //     const file = event.target.files[0];
-    //     if (file) {
-    //         const formData = new FormData();
-    //         formData.append('profileImage', file);
-    
-    //         try {
-    //             const response = await axios.post('http://localhost:3000/api/user/uploadImage', formData, {
-    //                 headers: {
-    //                     'Authorization': `Bearer ${token}`,
-    //                     'Content-Type': 'multipart/form-data',
-    //                 }
-    //             });
-    
-    //             console.log('Response:', response.data);
-    
-    //             if (response.data.message === 'Profile picture uploaded successfully.') {
-                    
-    //                 const imagePath = `http://localhost:3000/${response.data.path.replace(/\\/g, "/")}`;
-    
-                    
-    //                 setProfileImage(`${imagePath}?timestamp=${new Date().getTime()}`); 
-    
-    //                 console.log('Profile Image URL:', imagePath);
-    
-    //                 toast.success("Profile picture updated successfully.");
-    //                 handleCloseUploadModal();
-    //             } else {
-    //                 toast.error("Failed to upload image.");
-    //             }
-    
-    //         } catch (error) {
-    //             console.error('Error:', error);
-    //             toast.error("Error uploading image.");
-    //         }
-    //     }
+  
     const handleImageUpload = async (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -146,19 +111,6 @@ function Profile() {
             }
         }
     };
-    
-    
-    
-    
-    
-
-    
-    
-    
-    
-
-    
-
     const handleLogout = async () => {
         const cookies = document.cookie.split("; ");
         for (let cookie of cookies) {

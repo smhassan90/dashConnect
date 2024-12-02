@@ -98,73 +98,14 @@
         </div> 
     
         
-        {/* <div className="   h-[800px] p-5 bg-white rounded-[12px]  mt-5 border hover:border-black transition-all duration-300 mobile:ml-5 mobile:p-2 mobile:h-[750px] ">
-          <div className='flex justify-between items-center '>
-            <p className="text-base ">View all the answers to the questions you have asked.</p>
-          
-          </div>
-    
-          
-          <div className=" p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-black transition-all duration-300  ">
-            <div className='flex justify-between items-center'>
-              <p className="text-base sm:text-lg">Appointments</p>
-              <p className='ml-10 flex items-center whitespace-nowrap text-sm sm:text-base'>
-                This Month <span className="ml-1"><SlArrowDown /></span>
-              </p>
-            </div>
-    
-            <div className="w-full">
-              <LineChart
-                xAxis={[{ data: [1, 2, 3, 5, 8, 10], showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' }, show: false }]}
-                yAxis={[{ showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' } }]}
-                series={[{ data: [2, 6, 2, 8.5, 1.5, 5], area: true, color: '#007bff' }]}
-                height={250} 
-                sx={{
-                  '& .MuiAxis-root': {
-                    display: 'none',
-                  },
-                }}
-              />
-            </div>
-          </div>
-    
-          
-          <div className=" p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-black transition-all duration-300  ">
-            <div className='flex justify-between items-center'>
-              <p className="text-base sm:text-lg">Appointments</p>
-              <p className='ml-10 flex items-center whitespace-nowrap text-sm sm:text-base'>
-                This Month <span className="ml-1"><SlArrowDown /></span>
-              </p>
-            </div>
-    
-            <div className="w-full h-full">
-              <LineChart
-                xAxis={[{ data: [1, 2, 3, 5, 8, 10], showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' }, show: false }]}
-                yAxis={[{ showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' } }]}
-                series={[{ data: [2, 6, 2, 8.5, 1.5, 5], area: true, color: '#82e0aa' }]}
-                height={250} 
-                sx={{
-                  '& .MuiAxis-root': {
-                    display: 'none',
-                  },
-                }}
-              />
-            </div>
-          </div>  
-        </div> */}
+     
             <div>
       
 
         <div className="h-[800px] p-5 bg-white rounded-[12px] mt-5 border hover:border-black transition-all duration-300 mobile:ml-5 mobile:p-2 mobile:h-[750px]">
           <div className="flex justify-between items-center">
             <p className="text-base">View all the answers to the questions you have asked.</p>
-            {/* Close button */}
-            {/* <button onClick={handleClose} 
-    className="bg-white text-black hover:bg-blue-600 border-2 border-black font-bold w-32 "
-    > CLOSE
-              <IoClose />
-
-            </button> */}
+          
             <button onClick={handleClose} 
   className="bg-black text-white rounded-[10px]  border-2 border-black font-bold w-32 flex items-center justify-center space-x-2">
        <IoClose />

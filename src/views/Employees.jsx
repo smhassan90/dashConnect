@@ -9,22 +9,6 @@ import { IoClose } from 'react-icons/io5';
 
 
 function Employees() {
-    // const [data, setData] = useState([
-    //     {
-    //         firstName: 'Project A',
-    //         lastName: 'lastName for Project A',
-    //         email: 'email A',
-    //         password: "12345067",
-    //         role: 'Dataset A',
-    //     },
-    //     {
-    //         firstName: 'Project B',
-    //         lastName: 'lastName for Project B',
-    //         email: 'email B',
-    //         password: "12345067",
-    //         role: 'Dataset B',
-    //     },
-    // ]);
 
     const [searchTerm, setSearchTerm] = useState('');
     const [isEditing, setIsEditing] = useState(false);
@@ -62,30 +46,6 @@ function Employees() {
         setData(updatedData);
         setShowDeleteConfirm(false);
     };
-    // const confirmDelete = async () => {
-    //     try {
-    //         const response = await fetch("/deleteEmployee", {
-    //             method: "DELETE",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 Authorization: `Bearer ${yourAuthToken}`, // Ensure token is included
-    //             },
-    //             body: JSON.stringify({ employeeId: selectedEmployeeId }),
-    //         });
-    
-    //         const result = await response.json();
-    
-    //         if (response.ok) {
-    //             alert(result.message); // Successfully deleted
-    //             // Optionally, refresh employee list here
-    //         } else {
-    //             alert(result.message || "Failed to delete employee");
-    //         }
-    //     } catch (error) {
-    //         console.error("Error:", error);
-    //         alert("An error occurred while deleting the employee.");
-    //     }
-    // };
 
     const handleSearch = (e) => {
         setSearchTerm(e.target.value);

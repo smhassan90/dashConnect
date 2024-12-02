@@ -71,44 +71,6 @@ function Integration() {
       <span className=" ml-7 absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>         </p>
       </div>
       <hr className=" ml-7 mt-2 border-t border-gray-500" />
-
-      {/* Integrations List */}
-      {/* <div className=" ml-7 mt-4 rounded-[12px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-16">
-        {integrations.map((integration, index) => (
-          <div
-            key={index}
-            className=" rounded-[11px] w-[449px] h-[200px] bg-cover bg-center text-white  flex flex-col mt-4 mobile:w-full mobile:mb-4"
-            style={{
-              backgroundImage:
-                "url('https://img.freepik.com/premium-vector/geometric-dark-message-board-wallpaper-with-copy-space-modern-designs_796268-123.jpg')",
-            }}
-          >
-            <div className="flex items-center mb-2">
-              <img
-                src={integration.icon}
-                alt={`${integration.icon} Icon`}
-                className="w-32 h-32 mt-8 ml-2 mobile:w-24 mobile:h-24"
-              />
-              <div className="ml-5 w-full">
-                <h3 className="text-lg text-left mb-1 font-sans font-bold">
-                  Integrate With {integration.name}
-                </h3>
-                <p className="text-sm text-left mt-3 text-white">
-                  {integration.description}.
-                </p>
-              </div>
-            </div>
-            <div className="mt-auto px-4 pb-4 flex justify-end">
-              <button
-                className="bg-blue-500 w-20 text-white font-bold rounded-md text-sm"
-                onClick={handleOpenModal}
-              >
-                Connect
-              </button>
-            </div>
-          </div>
-        ))}
-      </div> */}
       <div className="ml-7 mt-12 rounded-[12px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-14 items-center">
   {integrations.map((integration, index) => (
     <div
@@ -132,13 +94,7 @@ function Integration() {
           <p className="text-sm text-left mt-3 text-white">
             {integration.description}.
           </p>
-          {/* <button
-    className="bg-white   ml-14 rounded-[10px] text-black hover:bg-blue-600 border-2 border-blue-500 font-bold  px-4 rounded "
-    
-          onClick={handleOpenModal}
-        >
-          Connect
-        </button> */}
+        
         </div>
       </div>
         <div className="ml-52 ">
