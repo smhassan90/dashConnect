@@ -39,7 +39,7 @@ const Bar = ({ title, type, onAddStory, buttonText }) => {
                 </span>
               </div>
              
-              <CustomButton text={'+ Add Story'} />
+              <CustomButton text={buttonText} onClick={onAddStory}  />
             </>
           )}
         </div>

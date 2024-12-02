@@ -4,6 +4,7 @@
     import { SlArrowDown } from "react-icons/sl";
     import { LineChart } from '@mui/x-charts/LineChart';
   import Bar from '../Reuseable/Bar';
+import CustomButton from '../Components/Button';
 
 
   function Storyboard() {
@@ -42,11 +43,12 @@
               <span className="font-bold text-lg">How many appointments do we have?</span>
               <p className="text-xl font-semibold mt-2">20</p>
             </div>
-            <button
+            {/* <button
             className=" text-white  bg-black border-2 border-black font-bold py-2 px-4 rounded-[10px]"
           >
             + Add
-          </button>
+          </button> */}
+          <CustomButton text="+ Add" />
           </div>
         </div>
     
@@ -106,12 +108,16 @@
           <div className="flex justify-between items-center">
             <p className="text-base">View all the answers to the questions you have asked.</p>
           
-            <button onClick={handleClose} 
+            {/* <button onClick={handleClose} 
   className="bg-black text-white rounded-[10px]  border-2 border-black font-bold w-32 flex items-center justify-center space-x-2">
        <IoClose />
 
     <span>CLOSE</span>
-</button>
+</button> */}
+<CustomButton text="×
+Close"
+  icon={<IoClose />} 
+  />
 
           </div>
 

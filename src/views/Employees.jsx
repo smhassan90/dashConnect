@@ -6,6 +6,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { IoClose } from 'react-icons/io5';
+import CustomButton from '../Components/Button';
 
 
 function Employees() {
@@ -330,18 +331,23 @@ function Employees() {
           </select>
         </fieldset>
 
-        <div className="flex justify-end space-x-2 mt-10">
-          <button
-            onClick={() => setShowAddForm(false)}
-            className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6"
-          >
-            Cancel
-          </button>
-          <button type="submit"
-            className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6"
-          >
-            Add
-          </button>
+        <div className="flex justify-center space-x-4 mt-10">
+        
+            <CustomButton
+            type='submit'
+            className="hover:text-black hover:bg-white border-2 border-black"
+
+    text="Add"
+    hoverEffect="hover:bg-blue-600 hover:text-white"
+  />
+
+         
+            <CustomButton
+    text="Cancel"
+    onClick={() => setShowAddForm(false)}
+    className="hover:text-black hover:bg-white border-2 border-black"
+  />
+
         </div>
       </form>
     </div>

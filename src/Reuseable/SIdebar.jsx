@@ -35,7 +35,7 @@ const Sidebar = () => {
                 <div className="flex items-center justify-between ml-4">
                     {isOpen ? (
                         <>
-                            <h2 className="text-2xl font-medium text-black text-left mt-[42px] ml-8">LOGO</h2>
+                            <h2 className="text-2xl font-medium text-black text-left">LOGO</h2>
                             <AiOutlineArrowLeft
                                 className="cursor-pointer text-2xl"
                                 onClick={toggleSidebar}
@@ -49,12 +49,12 @@ const Sidebar = () => {
                     )}
                 </div>
 
-                <p className={`text-gray-400 mt-3 text-base ml-4 ${isOpen ? 'block' : 'hidden'}`}>
+                <p className={`text-[#434343] mt-3 text-base ml-4 ${isOpen ? 'block' : 'hidden'}`}>
                     Overview
                 </p>
 
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded ml-4 ${
+                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-4 ${
                         isActive('/admin/dashboard') ? 'bg-black text-white' : ''
                     }`}
                     onClick={() => handleNavigation('/admin/dashboard')}
@@ -68,7 +68,7 @@ const Sidebar = () => {
                 </div>
 
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded ml-4 ${
+                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-4 ${
                         isActive('/admin/employees') ? 'bg-black text-white' : ''
                     }`}
                     onClick={() => handleNavigation('/admin/employees')}
@@ -82,7 +82,7 @@ const Sidebar = () => {
                 </div>
 
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded ml-4 ${
+                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-4 ${
                         isActive('/admin/storyboards') ? 'bg-black text-white' : ''
                     }`}
                     onClick={() => handleNavigation('/admin/storyboards')}
@@ -96,7 +96,7 @@ const Sidebar = () => {
                 </div>
 
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded ml-4 ${
+                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-4 ${
                         isActive('/investigation') ? 'bg-black text-white' : ''
                     }`}
                 >
@@ -109,7 +109,7 @@ const Sidebar = () => {
                 </div>
 
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded ml-4 ${
+                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-4 ${
                         isActive('/datasets') ? 'bg-black text-white' : ''
                     }`}
                 >
@@ -122,7 +122,7 @@ const Sidebar = () => {
                 </div>
 
                 <div
-                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded ml-4 ${
+                    className={`flex gap-2 items-center mt-1 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-4 ${
                         isActive('/admin/integration') ? 'bg-black text-white' : ''
                     }`}
                     onClick={() => handleNavigation('/admin/integration')}
@@ -138,7 +138,7 @@ const Sidebar = () => {
                 <hr className="border-t border-gray-300 w-full ml-4" />
 
                 <div
-                    className={`flex gap-2 items-center mt-8 cursor-pointer hover:bg-black hover:text-white p-2 rounded ml-4 ${
+                    className={`flex gap-2 items-center mt-6 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-4 ${
                         isActive('/admin/profile') ? 'bg-black text-white ' : ''
                     }`}
                 >

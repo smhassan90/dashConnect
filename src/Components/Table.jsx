@@ -235,6 +235,7 @@
 // export default Table;
 import React, { useState } from 'react';
 import { MdEdit, MdDelete } from 'react-icons/md';
+import CustomButton from './Button';
 
 function Table() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -544,17 +545,18 @@ function Table() {
 
 
 
-              <div className=" mt-3 flex justify-end space-x-2  mobile:w-60">
-                <button onClick={() => setShowEditModal(false)}
-                            className="bg-white text-black hover:bg-black border-2  hover:text-white border-black font-bold py-2 px-4rounded w-full mt-6"
->
-                  Cancel
-                </button>
-                <button onClick={saveEdit} 
-                            className="bg-white text-black hover:bg-black border-2 hover:text-white border-black font-bold py-2 px-4 rounded w-[342px] h-[44px]  mt-6"
->
-                  Save
-                </button>
+              <div className=" mt-3 flex justify-center space-x-2  mobile:w-60">
+                
+                             <CustomButton
+    text="Cancel"
+    onClick={() => setShowEditModal(false)}
+    className="hover:text-black hover:bg-white border-2 border-black"
+  />
+                               <CustomButton
+    text="Save"
+    onClick={saveEdit}
+    className="hover:text-black hover:bg-white border-2 border-black"
+  />
               </div>
             </form>
           </div>

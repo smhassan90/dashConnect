@@ -1,11 +1,12 @@
 import React from 'react';
 
-const CustomButton = ({ text, onClick }) => {
+const CustomButton = ({ text, onClick,icon = null,className = "", hoverEffect = "" }) => {
   return (
     <button
-      className={`bg-black w-[158px] py-2 px-3 rounded-[10px] h-[44px] hover:bg-gray-800 transition duration-300 text-custom-16 font-normal  text-white ${text}`}
+      className={`bg-black w-[158px] py-2 px-3 rounded-[10px] h-[44px] hover:bg-gray-800 transition duration-300 text-custom-16 font-normal  text-white ${text} ${className} ${hoverEffect}`}
       onClick={onClick}
     >
+
       {text}
     </button>
   );

@@ -60,12 +60,15 @@ module.exports = {
       },
       fontSize: {
         "custom-16": ["16px", "24px"],
-        "custom-18": ["18px", "27px"],
+        "custom-18": ["16px", "22px"],
         "custom-20": ["20px", "30px"],
       },
       spacing: {
         "m-top": "31px", 
       },
+      borderRadius:{
+        '10' : '10px'
+      }
     },
   },
   plugins: [require("daisyui"), require("autoprefixer")],
