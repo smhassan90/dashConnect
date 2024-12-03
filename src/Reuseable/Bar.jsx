@@ -46,6 +46,7 @@ const Bar = ({ title, type, onAddStory, buttonText }) => {
       <hr className="border-t border-[#dddddd]" />
     </div>
   );
+  
 };
 
 export default Bar;
