@@ -47,6 +47,7 @@ const Bar = ({ title, type, onAddStory, buttonText }) => {
       <hr className="mt-2 border-t border-gray-300" />
     </div>
   );
+  
 };
 
 export default Bar;
