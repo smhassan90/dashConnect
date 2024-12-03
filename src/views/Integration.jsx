@@ -121,59 +121,6 @@ function Integration() {
 
 
       
-          <>
-      {isModalOpen && (
-
-        
-        <div className="ml-36 mt-24 fixed inset-0 bg-blue bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white rounded-lg p-6 w-96 relative text-center">
-            <button
-              className="absolute top-3 right-3 text-gray-600 hover:text-gray-800"
-              onClick={handleCloseModal}
-            >
-              <IoClose size={24} />
-            </button>
-            <h2 className="text-lg text-center font-bold mb-4">
-              Connect Integration
-            </h2>
-            {/* <button
-              className="bg-white text-black hover:bg-blue-600 border-2 border-blue-500 font-bold py-2 px-4 rounded w-full mt-6"
-              onClick={handleTestClick}
-            >
-              Test
-            </button> */}
-                    <div className="">
-          <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
-            <legend className="text-gray-500 text-sm px-2">FULL NAME</legend>
-            <input
-              required
-              className=" bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
-              id="firstName"
-              name="firstName"
-            />
-          </fieldset>
-          </div>
-        <div className="flex justify-center space-x-4 mt-10">
-
-<CustomButton
-    text="test"
-    onClick={handleTestClick}
-    className="hover:text-black hover:bg-white border-2 border-black"
-  />
-            <CustomButton
-                text="connect"
-
-              className={`hover:text-black hover:bg-white border-2 border-black ${
-                isConnectEnabled ? "cursor-pointer" : "cursor-not-allowed "
-              }`}
-              disabled={!isConnectEnabled} // Disable the button when `isConnectEnabled` is false
-            
-              
-            />
-            </div>
-          </div>
-        </div>
-      )}
 
 
 {isModalOpen && (
@@ -185,9 +132,10 @@ function Integration() {
         {/* Close Button */}
 
         {/* Add Employees Heading */}
-        <h2 className="text-2xl font-bold mobile:text-center">Add Employees</h2>
+        <h2 className="text-2xl font-bold mobile:text-center">Intergeration</h2>
         <button
           className="text-gray-600 hover:text-gray-800"
+          onClick={handleCloseModal}
         >
           <IoClose size={24} />
         </button>
@@ -233,11 +181,17 @@ function Integration() {
   />
 
          
-            <CustomButton
-    text="Cancel"
-    // onClick={() => setShowAddForm(false)}
-    className="hover:text-black hover:bg-white border-2 border-black"
-  />
+        
+              <CustomButton
+                text="connect"
+
+              className={`hover:text-black hover:bg-white border-2 border-black  ${
+                isConnectEnabled ? "cursor-pointer" : "cursor-not-allowed "
+              }`}
+              disabled={!isConnectEnabled} // Disable the button when `isConnectEnabled` is false
+            
+            
+            />
 
         </div>
       </form>
@@ -252,7 +206,7 @@ function Integration() {
 
 
 
-    </>
+    
     </div>
   );
 }
