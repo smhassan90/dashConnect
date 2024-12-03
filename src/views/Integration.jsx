@@ -82,7 +82,7 @@ function Integration() {
           "url('https://img.freepik.com/premium-vector/geometric-dark-message-board-wallpaper-with-copy-space-modern-designs_796268-123.jpg')",
       }}
     >
-      <div className="flex items-center mb-2">
+      <div className="flex items-center mb-2"> 
         <img
           src={integration.icon}
           alt={`${integration.icon} Icon`}
