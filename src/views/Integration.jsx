@@ -142,6 +142,17 @@ function Integration() {
             >
               Test
             </button> */}
+                    <div className="">
+          <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
+            <legend className="text-gray-500 text-sm px-2">FULL NAME</legend>
+            <input
+              required
+              className=" bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
+              id="firstName"
+              name="firstName"
+            />
+          </fieldset>
+          </div>
         <div className="flex justify-center space-x-4 mt-10">
 
 <CustomButton
@@ -163,6 +174,84 @@ function Integration() {
           </div>
         </div>
       )}
+
+
+{isModalOpen && (
+  <div className="w-[1500px] fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full mobile:w-72 mobile:ml-14">
+      
+      {/* Container for the heading and close button */}
+      <div className="flex items-center justify-between mb-4">
+        {/* Close Button */}
+
+        {/* Add Employees Heading */}
+        <h2 className="text-2xl font-bold mobile:text-center">Add Employees</h2>
+        <button
+          className="text-gray-600 hover:text-gray-800"
+        >
+          <IoClose size={24} />
+        </button>
+
+      </div>
+
+      <form onSubmit={(e) => {
+        e.preventDefault();
+      }}>
+        <div className="">
+          <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
+            <legend className="text-gray-500 text-sm px-2">UserName</legend>
+            <input
+              required
+              className=" bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
+              id="username"
+              name="username"
+            
+            />
+          </fieldset>
+
+          <fieldset className=" mt-3 border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
+            <legend className="text-gray-500 text-sm px-2">Password</legend>
+            <input
+              type="password"
+              required
+              className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
+              id="password"
+              name="password"
+              
+            />
+          </fieldset>
+        </div>
+
+        
+
+        <div className="flex justify-center space-x-4 mt-10">
+        
+            <CustomButton
+            text="test"
+            onClick={handleTestClick}
+            className="hover:text-black hover:bg-white border-2 border-black"
+  />
+
+         
+            <CustomButton
+    text="Cancel"
+    // onClick={() => setShowAddForm(false)}
+    className="hover:text-black hover:bg-white border-2 border-black"
+  />
+
+        </div>
+      </form>
+    </div>
+  </div>
+)}
+
+
+
+
+
+
+
+
     </>
     </div>
   );

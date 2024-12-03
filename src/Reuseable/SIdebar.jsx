@@ -194,10 +194,12 @@ import { FaSearchengin, FaDatabase } from "react-icons/fa";
 import { RiDashboardHorizontalLine } from "react-icons/ri";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [user, setUser] = useState(null);
 
   const [isOpen, setIsOpen] = useState(true);
 
@@ -210,6 +212,13 @@ const Sidebar = () => {
   };
 
   const isActive = (path) => location.pathname === path;
+
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    setUser(storedUser);
+    console.log(storedUser); // Verify user data here
+  }, []);
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -369,7 +378,7 @@ const Sidebar = () => {
           }`}
         >
 
-          <Link to="/admin/profile" className="flex items-center gap-2">
+          {/* <Link to="/admin/profile" className="flex items-center gap-2">
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH-F4ROquOZPV5XtKKC3WUjmDGnDbW7nBbA0b2b-qpY3Lo6N2xk-IGNNl1R7kPUgv0DyQ&usqp=CAU"
               className="w-[50px] object-cover h-[57px] rounded-full"
@@ -382,7 +391,23 @@ const Sidebar = () => {
             >
               Pritam Ghosh
             </span>
-          </Link>
+          </Link> */}
+                  <Link to="/admin/profile" className="flex items-center gap-2">
+            <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH-F4ROquOZPV5XtKKC3WUjmDGnDbW7nBbA0b2b-qpY3Lo6N2xk-IGNNl1R7kPUgv0DyQ&usqp=CAU"
+                className="w-[50px] object-cover h-[57px] rounded-full"
+                alt="Profile"
+            />
+            <span
+                className={`font-poppins text-custom-14 font-normal leading-[30px] text-center ml-7 ${
+                    isOpen ? "block" : "hidden"
+                }`}
+            >
+        {user && user.firstName ? user.firstName : "Guest"}
+
+            </span>
+        </Link>
+
         </div>
       </div>
 
