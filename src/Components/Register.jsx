@@ -41,16 +41,6 @@ const Register = () => {
     
         setError("");
     
-        // Create registration data matching backend expectations
-        // const formData = {
-        //     companyName: businessName,  // Map businessName to companyName
-        //     updateDate: new Date().toISOString(),  // Provide an update date
-        //     Status: "active",  // Set a default status if not from user input
-        //     firstName,
-        //     lastName,
-        //     email,
-        //     password,
-        // };
         const formData = {
             firstName,
             lastName,
@@ -65,6 +55,9 @@ const Register = () => {
             const response = await axios.post('http://localhost:3000/api/user/create', formData);
             // alert(response.data.message || "Registration successful!");
             toast.success(response.data.message || "Registration successful!");
+
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+
 
             navigate('/login');
         } catch (error) {

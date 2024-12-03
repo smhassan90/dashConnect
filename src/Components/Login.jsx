@@ -29,10 +29,14 @@ const Login = () => {
         try {
           const response = await axios.post("http://localhost:3000/api/user/login", formData);
           const token = response.data.token;
+          const userName = response.data.user.name; // Assuming the API returns user data including the name
+
     
           if (token) {
             localStorage.setItem("isLoggedIn", "true"); // Set login status
             localStorage.setItem("your_access_token", token); // Store the token
+            localStorage.setItem("user_name", userName); // Save the user's name
+
             toast.success("Login successful!");
             navigate("/admin/dashboard"); // Redirect to dashboard after login
           } else {
