@@ -88,7 +88,8 @@ function Integration() {
           alt={`${integration.icon} Icon`}
           className="w-32 h-32 mt-8 ml-2 mobile:w-24 mobile:h-24"
         />
-        <div className="ml-5 w-full">
+        <div className='flex flex-col gap-2 items-start'>
+        <div className="ml-5 w-full mt-5">
           <h3 className="text-lg text-left mb-1 font-sans font-bold">
             Integrate With {integration.name}
           </h3>
@@ -97,16 +98,11 @@ function Integration() {
           </p>
         
         </div>
-      </div>
-        <div className="ml-52 ">
-          <button
-      className="bg-blue-500 mb-44 text-white hover:bg-blue-600 border-2 border-blue-500 font-bold  px-4 rounded "
-      
-            onClick={handleOpenModal}
-          >
-            Connect
-          </button>
+        <div className="ml-4 mt-3">
+         <CustomButton text={'Connect'} onClick={handleOpenModal} bg_color="bg-blue-500"  />
         </div>
+        </div>
+      </div>
     </div>
   ))}
 </div>
