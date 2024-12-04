@@ -124,6 +124,7 @@ function Integration() {
           </span>
         </div>
 
+
         {/* Image */}
         <img
           src={image}
@@ -166,7 +167,8 @@ function Integration() {
                   </p>
                 </div>
                 <div className="mt-3 ml-3 items-start">
-                  <CustomButton text={"Connect"} onClick={handleOpenModal} />
+                  <CustomButton     className="hover:text-black hover:bg-white border-2 border-black"
+ text={"Connect Now"} onClick={handleOpenModal} />
                 </div>
               </div>
             </div>

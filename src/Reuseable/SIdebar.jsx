@@ -168,7 +168,7 @@ const Sidebar = () => {
           className={`flex gap-2 items-center mt-1 cursor-pointer ${
             isOpen
               ? "hover:bg-black hover:text-white p-2 rounded-10"
-              : "hover:bg-black hover:text-white p-2 rounded-10 w-[40px] justify-center" // Shrink and center the background
+              : "hover:bg-black hover:text-white p-2 rounded-10 w-[32px] justify-center" // Shrink and center the background
           } ml-4 ${
             isActive("/admin/integration") ? "bg-black text-white" : ""
           }`}
@@ -176,7 +176,7 @@ const Sidebar = () => {
         >
           <RiDashboardHorizontalLine className="text-custom-14" />
           <span
-            className={`font-poppins font-normal text-custom-14 ${
+            className={`font-poppins font-normal w-32 text-custom-14 ${
               isOpen ? "block" : "hidden"
             }`}
           >
@@ -187,8 +187,8 @@ const Sidebar = () => {
 
 
         <div
-          className={`fixed bottom-0 left-0 flex gap-2 items-center mt-4 cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-3 ${
-            isActive("/admin/profile") ? "bg-black text-white " : ""
+          className={`fixed bottom-0 left-0 flex gap-2 items-center mt-4  cursor-pointer hover:bg-black hover:text-white p-2 rounded-10 ml-1 ${
+            isActive("/admin/profile") ? "bg-black text-white  " : ""
           }`}
         >
 
@@ -206,14 +206,14 @@ const Sidebar = () => {
               Pritam Ghosh
             </span>
           </Link> */}
-                  <Link to="/admin/profile" className="flex items-center gap-2">
+                  <Link to="/admin/profile" className="flex items-center ">
             <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH-F4ROquOZPV5XtKKC3WUjmDGnDbW7nBbA0b2b-qpY3Lo6N2xk-IGNNl1R7kPUgv0DyQ&usqp=CAU"
-                className="w-[50px] object-cover h-[57px] rounded-full"
+                className="w-[52px] object-cover h-[54px] rounded-full"
                 alt="Profile"
             />
             <span
-                className={`font-poppins text-custom-14 font-normal leading-[30px] text-center ml-7 ${
+                className={`font-poppins text-custom-14 font-normal w-32 leading-[30px] text-start ml-3  ${
                     isOpen ? "block" : "hidden"
                 }`}
             >
