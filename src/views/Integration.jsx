@@ -131,7 +131,7 @@ function Integration() {
                 className="w-32 h-32 mt-8 ml-2 mobile:w-24 mobile:h-24"
               />
               <div className="flex flex-col gap-2 items-start">
-                <div className="ml-5 w-full mt-5">
+                <div className="ml-3 w-full mt-5 items-start">
                   <h3 className="text-lg text-left mb-1 font-sans font-bold">
                     Integrate With {integration.name}
                   </h3>
@@ -139,11 +139,10 @@ function Integration() {
                     {integration.description}.
                   </p>
                 </div>
-                <div className="mt-3">
+                <div className="mt-3 ml-3 items-start">
                   <CustomButton
                     text={"Connect"}
                     onClick={handleOpenModal}
-                    bg_color="bg-blue-500"
                   />
                 </div>
               </div>
