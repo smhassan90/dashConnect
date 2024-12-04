@@ -7,7 +7,7 @@ import Bar from "../Reuseable/Bar";
 import { ToastContainer, toast } from "react-toastify"; // Importing Toastify
 import image from "../assests/dolori-smart-working-blog-copertina-400x250-removebg-preview.png";
 import CustomButton from "../Components/Button";
-import axios from 'axios'; // Import axios to make API requests
+import axios from "axios"; // Import axios to make API requests
 
 const integrations = [
   {
@@ -41,30 +41,28 @@ function Integration() {
   const [responseMessage, setResponseMessage] = useState("");
 
   const handleTestClick = async () => {
-    const yourAuthToken = localStorage.getItem("authToken");  // Or wherever you get the token
-  
+    const yourAuthToken = localStorage.getItem("authToken"); // Or wherever you get the token
+
     if (!yourAuthToken) {
       console.error("No auth token found");
       return;
     }
-  
+
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/user/testConnection", 
-        { apiKey: "026a5cba5f91d04d501597d0464c3c99", userId: "28884440" },
+        "http://localhost:3000/api/user/testConnection",
+        { userId, apiKey },
         {
           headers: {
             Authorization: `Bearer ${yourAuthToken}`,
           },
         }
       );
-  
+
       if (response.status === 200) {
-        console.log('Data fetched:', response.data);  // Logs the fetched data
+        console.log("Data fetched:", response.data); // Logs the fetched data
         setIsConnectEnabled(true); // Enable the "Connect" button if response is successful
         toast.success("Test connection successful!");
-
-      
       }
     } catch (error) {
       console.error("Error in API connection test:", error);
@@ -72,14 +70,42 @@ function Integration() {
     }
   };
 
-  
+  const savedIntegration = async () => {
+    const yourAuthToken = localStorage.getItem("authToken"); // Or wherever you get the token
+
+    if (!yourAuthToken) {
+      console.error("No auth token found");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/user/updateIntegration",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${yourAuthToken}`,
+          },
+          body: JSON.stringify({ username: userId, password: apiKey }),
+        }
+      );
+
+      const result = await response.json();
+      console.log(result);
+
+      if (response.ok) {
+        toast.success("Data saved successfully!");
+      } else {
+        toast.error(result.message || "Failed to save data");
+      }
+    } catch (error) {
+      toast.error("An error occurred while saving data.");
+    }
+  };
+
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
-
-
-
-
-
 
   return (
     <div className="mobile:w-[400px] mobile:ml-20">
@@ -140,10 +166,7 @@ function Integration() {
                   </p>
                 </div>
                 <div className="mt-3 ml-3 items-start">
-                  <CustomButton
-                    text={"Connect"}
-                    onClick={handleOpenModal}
-                  />
+                  <CustomButton text={"Connect"} onClick={handleOpenModal} />
                 </div>
               </div>
             </div>
@@ -156,7 +179,9 @@ function Integration() {
           <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full mobile:w-72 mobile:ml-14">
             {/* Container for the heading and close button */}
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold mobile:text-center">Integration</h2>
+              <h2 className="text-2xl font-bold mobile:text-center">
+                Integration
+              </h2>
               <button
                 className="text-gray-600 hover:text-gray-800"
                 onClick={handleCloseModal}
@@ -172,7 +197,9 @@ function Integration() {
             >
               <div>
                 <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
-                  <legend className="text-gray-500 text-sm px-2">UserName</legend>
+                  <legend className="text-gray-500 text-sm px-2">
+                    UserName
+                  </legend>
                   <input
                     required
                     className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
@@ -184,7 +211,9 @@ function Integration() {
                 </fieldset>
 
                 <fieldset className="mt-3 border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
-                  <legend className="text-gray-500 text-sm px-2">Password</legend>
+                  <legend className="text-gray-500 text-sm px-2">
+                    Password
+                  </legend>
                   <input
                     type="password"
                     required
@@ -208,6 +237,7 @@ function Integration() {
                 <button
                   type="submit"
                   disabled={!isConnectEnabled}
+                  onClick={savedIntegration}
                   className={`py-2 px-4 rounded ${
                     isConnectEnabled ? "bg-blue-500" : "bg-gray-300"
                   }`}
@@ -219,8 +249,7 @@ function Integration() {
           </div>
         </div>
       )}
-            <ToastContainer />
-
+      <ToastContainer />
     </div>
   );
 }

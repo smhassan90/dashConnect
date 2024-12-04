@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,6 +9,7 @@ function Profile() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [user, setUser] = useState(null);
     const [oldPassword, setOldPassword] = useState("");
     const [profileImage, setProfileImage] = useState(""); 
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
@@ -18,35 +17,19 @@ function Profile() {
     const navigate = useNavigate();
     const token = localStorage.getItem('your_access_token');
 
-
-    useEffect(() => {
-        if (!token) {
-            console.error("No authentication token found");
-            navigate('/login');
-        } else {
-            fetchProfileImage();
-        }
-    }, [navigate, token]);
-
-    
-    // const fetchProfileImage = async () => {
-    //     try {
-    //         const response = await axios.get('http://localhost:3000/api/user/getProfilePicture', {
-    //             headers: {
-    //                 'Authorization': `Bearer ${token}`
-    //             }
-    //         });
-    //         if (response.data.status === 'ok') {
-    //             setProfileImage(response.data.image);
-    //         }
-    //     } catch (error) {
-    //         console.error('Error fetching profile image:', error);
+    // useEffect(() => {
+    //     if (!token) {
+    //         console.error("No authentication token found");
+    //         navigate('/login');
+    //     } else {
+    //         fetchProfileImage();
     //     }
-    // };
+    // }, [navigate, token]);
+
     const fetchProfileImage = async () => {
-        const storedImage = localStorage.getItem('profileImage'); // Check if an image URL is stored in localStorage
+        const storedImage = localStorage.getItem('profileImage');
         if (storedImage) {
-            setProfileImage(storedImage); // Set the profile image from localStorage
+            setProfileImage(storedImage);
         } else {
             try {
                 const response = await axios.get('http://localhost:3000/api/user/getProfilePicture', {
@@ -57,7 +40,7 @@ function Profile() {
                 if (response.data.status === 'ok') {
                     const imageUrl = response.data.image;
                     setProfileImage(imageUrl);
-                    localStorage.setItem('profileImage', imageUrl); // Store the image URL in localStorage
+                    localStorage.setItem('profileImage', imageUrl);
                 }
             } catch (error) {
                 console.error('Error fetching profile image:', error);
@@ -72,15 +55,19 @@ function Profile() {
         setConfirmPassword("");
         setOldPassword("");
     };
+
     const handleOpenUploadModal = () => setIsUploadModalOpen(true);
     const handleCloseUploadModal = () => setIsUploadModalOpen(false);
 
-  
     const handleImageUpload = async (event) => {
         const file = event.target.files[0];
         if (file) {
             const formData = new FormData();
+            // formData.append('profileImage', file);
+            console.log(file); // Add this line in `handleImageUpload` before appending to FormData
+
             formData.append('profileImage', file);
+
     
             try {
                 const response = await axios.post('http://localhost:3000/api/user/uploadImage', formData, {
@@ -92,13 +79,8 @@ function Profile() {
     
                 if (response.data.message === 'Profile picture uploaded successfully.') {
                     const imagePath = `http://localhost:3000/${response.data.path.replace(/\\/g, "/")}`;
-    
-                    // Save image URL in localStorage
                     localStorage.setItem('profileImage', imagePath);
-    
-                    // Update the state with the new image URL
                     setProfileImage(`${imagePath}?timestamp=${new Date().getTime()}`);
-    
                     toast.success("Profile picture updated successfully.");
                     handleCloseUploadModal();
                 } else {
@@ -111,6 +93,30 @@ function Profile() {
             }
         }
     };
+
+    // const handleImageUpload = async (event) => {
+    //     const file = event.target.files[0];
+    //     if (file) {
+    //         const formData = new FormData();
+    //         formData.append('profileImage', file);
+    
+    //         console.log([...formData.entries()]); // Check the form data content
+            
+    //         try {
+    //             const response = await axios.post('http://localhost:3000/api/user/uploadImage', formData, {
+    //                 headers: {
+    //                     'Authorization': `Bearer ${token}`,
+    //                     'Content-Type': 'multipart/form-data',
+    //                 }
+    //             });
+    //             // Response handling...
+    //         } catch (error) {
+    //             console.error('Error:', error);
+    //         }
+    //     }
+    // };
+    
+
     const handleLogout = async () => {
         const cookies = document.cookie.split("; ");
         for (let cookie of cookies) {
@@ -153,7 +159,6 @@ function Profile() {
             }
         } catch (error) {
             console.error('Error:', error);
-
             if (error.response?.data?.message === "Incorrect old password") {
                 toast.error("Incorrect old password.");
             } else {
@@ -161,21 +166,23 @@ function Profile() {
             }
         }
     };
+    
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    setUser(storedUser);
+    console.log(storedUser); // Verify user data here
+  }, []);
+
 
     return (
         <div className="bg-white shadow-md rounded-lg p-6 max-w-md mx-auto mt-10 mobile:w-72">
             <div className="flex justify-center relative mb-4">
-
-<img
-    src={profileImage ? profileImage : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVA_HrQLjkHiJ2Ag5RGuwbFeDKRLfldnDasw&s"}
-    alt="Profile"
-    className="rounded-full w-24 h-24 object-cover"
-    onError={(e) => e.target.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVA_HrQLjkHiJ2Ag5RGuwbFeDKRLfldnDasw&s"}  // Fallback image
-/>
-
-
-
-
+                <img
+                    src={profileImage ? profileImage : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVA_HrQLjkHiJ2Ag5RGuwbFeDKRLfldnDasw&s"}
+                    alt="Profile"
+                    className="rounded-full w-24 h-24 object-cover"
+                    onError={(e) => e.target.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVA_HrQLjkHiJ2Ag5RGuwbFeDKRLfldnDasw&s"}
+                />
                 <button
                     onClick={handleOpenUploadModal}
                     className="absolute bottom-2 right-2 mr-36 bg-blue-500 text-white rounded-full p-2 hover:bg-blue-600"
@@ -189,15 +196,22 @@ function Profile() {
             {/* Profile Details */}
             <div className="flex items-center mb-2">
                 <p className="text-gray-800 font-medium w-24">Name:</p>
-                <span className="text-gray-600">Pritam Ghosh</span>
+                <span className="text-gray-600">
+                {user && user.firstName ? user.firstName : "Guest"}
+                </span>
             </div>
             <div className="flex items-center mb-2">
                 <p className="text-gray-800 font-medium w-24">Email:</p>
-                <span className="text-gray-600">PritamGhosh@gmail.com</span>
+                <span className="text-gray-600">
+                {user && user.email ? user.email : "Not Available"}
+
+                </span>
             </div>
             <div className="flex items-center mb-2">
                 <p className="text-gray-800 font-medium w-24">Company:</p>
-                <span className="text-gray-600">Pritam Traders</span>
+                <span className="text-gray-600">    
+                {user && user.company && user.company.companyName ? user.company.companyName : "Not Available"}
+                </span>
             </div>
 
             <button
@@ -260,8 +274,8 @@ function Profile() {
                             />
                         </fieldset>
 
-                        <fieldset className="border border-gray-400 rounded p-2 w-80 h-14 mt-3 mobile:w-72">
-                            <legend className="text-gray-500 text-sm px-2">Confirm new password</legend>
+                        <fieldset className="border border-gray-400 rounded p-2 w-80 h-14 mt-3 mobile:w-60">
+                            <legend className="text-gray-500 text-sm px-2">Confirm your New password</legend>
                             <input
                                 required
                                 type="password"
@@ -271,22 +285,23 @@ function Profile() {
                             />
                         </fieldset>
 
-                        <button
-                            onClick={handleUpdatePassword}
-                            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-4"
-                        >
-                            Update Password
-                        </button>
-                        <button
-                            onClick={handleCloseModal}
-                            className="bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded hover:bg-gray-400 mt-4"
-                        >
-                            Cancel
-                        </button>
+                        <div className="mt-4">
+                            <button
+                                onClick={handleUpdatePassword}
+                                className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 w-full"
+                            >
+                                Update Password
+                            </button>
+                            <button
+                                onClick={handleCloseModal}
+                                className="mt-2 bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded hover:bg-gray-400 w-full"
+                            >
+                                Cancel
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
-
             <ToastContainer />
         </div>
     );
