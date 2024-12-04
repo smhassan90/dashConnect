@@ -4,6 +4,7 @@ import { IoClose } from "react-icons/io5";
 import imag5 from "../assests/image5.png";
 import Bar from "../Reuseable/Bar";
 
+
 import { ToastContainer, toast } from "react-toastify"; // Importing Toastify
 import image from "../assests/dolori-smart-working-blog-copertina-400x250-removebg-preview.png";
 import CustomButton from "../Components/Button";
@@ -39,7 +40,7 @@ function Integration() {
   const [apiKey, setApiKey] = useState(""); // To store API Key input
   const [userId, setUserId] = useState(""); // To store UserId input
   const [responseMessage, setResponseMessage] = useState("");
-
+const [discooneted,Setdisconneted] = useState(false)
   const handleTestClick = async () => {
     const yourAuthToken = localStorage.getItem("authToken"); // Or wherever you get the token
 
@@ -96,6 +97,9 @@ function Integration() {
 
       if (response.ok) {
         toast.success("Data saved successfully!");
+        Setdisconneted(true); // Enable the "discoonect" button if response is successful
+
+
       } else {
         toast.error(result.message || "Failed to save data");
       }
@@ -169,6 +173,20 @@ function Integration() {
                 <div className="mt-3 ml-3 items-start">
                   <CustomButton     className="hover:text-black hover:bg-white border-2 border-black"
  text={"Connect Now"} onClick={handleOpenModal} />
+  
+                   {/* <CustomButton     className="ml-3 hover:text-black hover:bg-white border-2 border-black"
+ text={"Disconnected "}  /> */}
+               {/* <CustomButton
+                text="Disconnected"
+                disabled={!discooneted}
+
+                className={`py-2 px-4 rounded ${
+                  isConnectEnabled ? "bg-blue-500" : "bg-gray-300"
+                }`}              /> */}
+
+
+
+
                 </div>
               </div>
             </div>
