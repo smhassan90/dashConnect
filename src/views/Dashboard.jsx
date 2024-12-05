@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DashboardCard from '../Reuseable/DashboardCard '
 import Bar from '../Reuseable/Bar'
 import { BsCalendar3 } from "react-icons/bs";
@@ -9,11 +9,21 @@ import Table from "../Components/Table"
 
 function Dashboard() {
   const [entries, setEntries] = useState(25);
+  const [user, setUser] = useState(null);
+
   const currentDate = new Date().toLocaleDateString('en-GB');
 
   const handleChange = (event) => {
     setEntries(parseInt(event.target.value));
+
+
+   
   };
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    setUser(storedUser);
+    console.log(storedUser); // Verify user data here
+  }, []);
   return (
     <div>
 
@@ -23,7 +33,8 @@ function Dashboard() {
 
 
       <div className="flex flex-col md:flex-row justify-between items-center mt-4 mx-auto max-w-7xl px-4">
-        <p className="text-custom-22 font-medium m-0 md:mr-4  whitespace-nowrap">     Welcome Back, Pritam
+        <p className="text-custom-22 font-medium m-0 md:mr-4  whitespace-nowrap">     Welcome Back, {user && user.firstName ? user.firstName : "Guest"}
+
         </p> <div className="flex items-center">
           <BsCalendar3 className="text-custom-20 mr-2" />
           <span className="text-custom-18">{currentDate.replace(/\//g, '.')}</span>

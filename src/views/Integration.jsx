@@ -3,12 +3,10 @@ import { IoSearch } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import imag5 from "../assests/image5.png";
 import Bar from "../Reuseable/Bar";
-
-
-import { ToastContainer, toast } from "react-toastify"; // Importing Toastify
+import { ToastContainer, toast } from "react-toastify";
 import image from "../assests/dolori-smart-working-blog-copertina-400x250-removebg-preview.png";
 import CustomButton from "../Components/Button";
-import axios from "axios"; // Import axios to make API requests
+import axios from "axios";
 
 const integrations = [
   {
@@ -36,13 +34,14 @@ const integrations = [
 
 function Integration() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isConnectEnabled, setIsConnectEnabled] = useState(false); // Controls "Connect" button state
+  const [isConnectEnabled, setIsConnectEnabled] = useState(false); //
   const [apiKey, setApiKey] = useState(""); // To store API Key input
   const [userId, setUserId] = useState(""); // To store UserId input
   const [responseMessage, setResponseMessage] = useState("");
-const [discooneted,Setdisconneted] = useState(false)
+  const [isConnected, setIsConnected] = useState(false);
+  const [discooneted, Setdisconneted] = useState(false)
   const handleTestClick = async () => {
-    const yourAuthToken = localStorage.getItem("authToken"); // Or wherever you get the token
+    const yourAuthToken = localStorage.getItem("authToken");
 
     if (!yourAuthToken) {
       console.error("No auth token found");
@@ -62,7 +61,7 @@ const [discooneted,Setdisconneted] = useState(false)
 
       if (response.status === 200) {
         console.log("Data fetched:", response.data); // Logs the fetched data
-        setIsConnectEnabled(true); // Enable the "Connect" button if response is successful
+        setIsConnectEnabled(true);
         toast.success("Test connection successful!");
       }
     } catch (error) {
@@ -70,6 +69,8 @@ const [discooneted,Setdisconneted] = useState(false)
       setIsConnectEnabled(false);
     }
   };
+
+
 
   const savedIntegration = async () => {
     const yourAuthToken = localStorage.getItem("authToken"); // Or wherever you get the token
@@ -97,7 +98,9 @@ const [discooneted,Setdisconneted] = useState(false)
 
       if (response.ok) {
         toast.success("Data saved successfully!");
-        Setdisconneted(true); // Enable the "discoonect" button if response is successful
+        Setdisconneted(true); // Enable the "Disconnect" button if response is successful
+        setIsConnected(true); // Set as connected after successful save
+        handleCloseModal(); // Close the modal after successful save
 
 
       } else {
@@ -107,6 +110,8 @@ const [discooneted,Setdisconneted] = useState(false)
       toast.error("An error occurred while saving data.");
     }
   };
+  
+
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
@@ -170,23 +175,20 @@ const [discooneted,Setdisconneted] = useState(false)
                     {integration.description}.
                   </p>
                 </div>
-                <div className="mt-3 ml-3 items-start">
-                  <CustomButton     className="hover:text-black hover:bg-white border-2 border-black"
- text={"Connect Now"} onClick={handleOpenModal} />
-  
-                   {/* <CustomButton     className="ml-3 hover:text-black hover:bg-white border-2 border-black"
- text={"Disconnected "}  /> */}
-               {/* <CustomButton
-                text="Disconnected"
-                disabled={!discooneted}
+                <div className="mt-3 mobile:mt-1 mobile:ml-0 mobile:w-24 ml-3 items-start">
+                
+                  <CustomButton
+  className={`hover:text-black hover:bg-white mobile:w-32 border-2 border-black ${isConnected ? 'cursor-not-allowed opacity-50' : ''}`}
+  text={isConnected ? "Connected" : "Connect Now "}
+  onClick={isConnected ? null : handleOpenModal} // Prevent modal opening if already connected
+  disabled={isConnected} // Disable the button when connected
+/>
 
-                className={`py-2 px-4 rounded ${
-                  isConnectEnabled ? "bg-blue-500" : "bg-gray-300"
-                }`}              /> */}
-
-
-
-
+                  <CustomButton
+                    className={`ml-3 mobile:w-32   ${discooneted ? 'bg-red-500 hover:bg-red-700' : 'bg-gray-300 cursor-not-allowed'}`}
+                    text={"Disconnect"}
+                    disabled={!discooneted}
+                  />
                 </div>
               </div>
             </div>
@@ -258,9 +260,8 @@ const [discooneted,Setdisconneted] = useState(false)
                   type="submit"
                   disabled={!isConnectEnabled}
                   onClick={savedIntegration}
-                  className={`py-2 px-4 rounded ${
-                    isConnectEnabled ? "bg-blue-500" : "bg-gray-300"
-                  }`}
+                  className={`py-2 px-4 rounded ${isConnectEnabled ? "bg-blue-500" : "bg-gray-300 cursor-not-allowed"
+                    }`}
                 >
                   Connect
                 </button>

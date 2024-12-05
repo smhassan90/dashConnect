@@ -27,17 +27,17 @@ import CustomButton from '../Components/Button';
         </p>
     
         {/* Centered Search Input */}
-        <div className=" mt-5 relative flex justify-center mobile:ml-5 ">
+        <div className=" mt-5 rounded-[10px] ml-7  relative flex justify-center mobile:ml-5 ">
           <input
             type="text"
-            className="text-sm text-gray-700 mb-4 border border-gray-300 rounded p-3 w-full max-sm mobile:w-3/4 mobile:ml-11"
+            className="text-sm text-gray-700 mb-4 border rounded-[10px] border-gray-300  p-3 w-full max-sm mobile:w-3/4 mobile:ml-11"
             placeholder="Search a Metric..."
           />
           {/* <IoSearch className="absolute left-3 top-2 text-xl sm:text-2xl text-gray-500" /> */}
         </div>
     
         {/* Appointment Info */}
-        <div className="border p-4 rounded-[12px] h-24 mt-5 flex flex-col justify-between mb-5 mobile:ml-5 mobile:h-32" >
+        <div className="border p-4 ml-7 rounded-[14px] h-24 mt-5 flex flex-col justify-between mb-5 mobile:ml-5 mobile:h-32" >
           <div className="flex justify-between items-center"> {/* Flex container for title and button */}
             <div>
               <span className="font-bold text-lg">How many appointments do we have?</span>
@@ -53,9 +53,9 @@ import CustomButton from '../Components/Button';
         </div>
     
         {/* Additional Content Section */}
-        <div className='flex flex-col sm:flex-row justify-between items-start mt-10  gap-8 mobile:ml-5'>
+        <div className='flex flex-col ml-7 sm:flex-row justify-between items-start mt-10  gap-8 mobile:ml-5'>
           {/* Appointments Chart */}
-          <div className="w-full p-4 h-[330px] bg-white rounded-[12px] shadow-md mb-5 border hover:border-black transition-all duration-300  gap-6"> {/* Adjusted width */}
+          <div className="w-full p-4 h-[330px] bg-white rounded-[14px] shadow-md mb-5 border hover:border-black transition-all duration-300  gap-6"> {/* Adjusted width */}
             <div className='flex justify-between items-center'>
               <p className="text-base sm:text-lg">Appointments</p>
               <p className='mr-10 flex items-center whitespace-nowrap text-sm sm:text-base'>
@@ -63,7 +63,7 @@ import CustomButton from '../Components/Button';
               </p>
             </div>
     
-            <div className="w-full">
+            <div className="w-full ">
               <LineChart
                 xAxis={[{ data: [1, 2, 3, 5, 8, 10], showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' }, show: false }]}
                 yAxis={[{ showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' } }]}
@@ -79,7 +79,7 @@ import CustomButton from '../Components/Button';
             </div>
           </div>
     
-          <div className="  mb-12 h-[330px] p-4 bg-white rounded-[12px] shadow-md border hover:border-black transition-all duration-300 ">
+          <div className=" ml-7 mb-12 h-[330px] p-4 bg-white rounded-[14px] shadow-md border hover:border-black transition-all duration-300 ">
             <div className='flex justify-between items-center'>
               <p className='h-10 flex items-center whitespace-nowrap text-sm sm:text-base'>
                 SQL Statement <span className="ml-1"><SlArrowDown /></span>
@@ -104,7 +104,7 @@ import CustomButton from '../Components/Button';
             <div>
       
 
-        <div className="h-[800px] p-5 bg-white rounded-[12px] mt-5 border hover:border-black transition-all duration-300 mobile:ml-5 mobile:p-2 mobile:h-[750px]">
+        <div className=" ml-7 h-[800px] p-5 bg-white rounded-[12px] mt-5 border hover:border-black transition-all duration-300 mobile:ml-5 mobile:p-2 mobile:h-[750px]">
           <div className="flex justify-between items-center">
             <p className="text-base">View all the answers to the questions you have asked.</p>
           
@@ -122,7 +122,7 @@ Close"
           </div>
 
           {/* First chart */}
-          <div className="p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-black transition-all duration-300">
+          <div className="p-4 bg-white rounded-[14px] shadow-md mt-5 border hover:border-black transition-all duration-300">
             <div className="flex justify-between items-center">
               <p className="text-base sm:text-lg">Appointments</p>
               <p className="ml-10 flex items-center whitespace-nowrap text-sm sm:text-base">
@@ -145,7 +145,7 @@ Close"
           </div>
 
           {/* Second chart */}
-          <div className="p-4 bg-white rounded-[12px] shadow-md mt-5 border hover:border-black transition-all duration-300">
+          <div className="p-4 bg-white rounded-[14px] shadow-md mt-5 border hover:border-black transition-all duration-300">
             <div className="flex justify-between items-center">
               <p className="text-base sm:text-lg">Appointments</p>
               <p className="ml-10 flex items-center whitespace-nowrap text-sm sm:text-base">

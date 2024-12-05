@@ -13,7 +13,7 @@ function Profile() {
     const [user, setUser] = useState(null);
     const [oldPassword, setOldPassword] = useState("");
     const [image, setImage] = useState(null);
-    const [profileImage, setProfileImage] = useState(""); 
+    const [profileImage, setProfileImage] = useState("");
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
     const navigate = useNavigate();
     const token = localStorage.getItem('your_access_token');
@@ -54,77 +54,79 @@ function Profile() {
 
     const handleOpenUploadModal = () => setIsUploadModalOpen(true);
     const handleCloseUploadModal = () => setIsUploadModalOpen(false);
-    
-//     const handleImageUpload = async (event) => {
-//     const formData = new FormData();
-//     formData.append("profileImage", event.target.files[0]);
 
-//     const token = localStorage.getItem("authToken");
+    //     const handleImageUpload = async (event) => {
+    //     const formData = new FormData();
+    //     formData.append("profileImage", event.target.files[0]);
 
-//     try {
-//         const response = await axios.post("http://localhost:3000/api/user/uploadImage", formData, {
-//             headers: {
-//                 "Content-Type": "multipart/form-data",
-//                 "Authorization": `Bearer ${token}`,
-//             },
-//         });
+    //     const token = localStorage.getItem("authToken");
 
-//         if (response.data.status === 'ok') {
-//             let imagePath = response.data.path;
-            
-//             // Replace backslashes with forward slashes to make the URL compatible
-//             const imageUrl = `http://localhost:3000/${imagePath.replace(/\\/g, '/')}`;
+    //     try {
+    //         const response = await axios.post("http://localhost:3000/api/user/uploadImage", formData, {
+    //             headers: {
+    //                 "Content-Type": "multipart/form-data",
+    //                 "Authorization": `Bearer ${token}`,
+    //             },
+    //         });
 
-//             // Set the profile image URL and save it to localStorage
-//             setProfileImage(imageUrl);
-//             localStorage.setItem('profileImage', imageUrl);
+    //         if (response.data.status === 'ok') {
+    //             let imagePath = response.data.path;
 
-//             toast.success("Image uploaded successfully!");
-//         } else {
-//             toast.error("Failed to upload image.");
-//             console.error("Error Response:", response.data);
-//         }
-//     } catch (error) {
-//         console.error("Error uploading image:", error);
-//         toast.error("Error uploading image.");
-//         console.error("Error Response:", error.response?.data);
-//     }
-// };
+    //             // Replace backslashes with forward slashes to make the URL compatible
+    //             const imageUrl = `http://localhost:3000/${imagePath.replace(/\\/g, '/')}`;
 
-const handleImageUpload = async (event) => {
-    const formData = new FormData();
-    formData.append("profileImage", event.target.files[0]);
+    //             // Set the profile image URL and save it to localStorage
+    //             setProfileImage(imageUrl);
+    //             localStorage.setItem('profileImage', imageUrl);
 
-    const token = localStorage.getItem("authToken");
+    //             toast.success("Image uploaded successfully!");
+    //         } else {
+    //             toast.error("Failed to upload image.");
+    //             console.error("Error Response:", response.data);
+    //         }
+    //     } catch (error) {
+    //         console.error("Error uploading image:", error);
+    //         toast.error("Error uploading image.");
+    //         console.error("Error Response:", error.response?.data);
+    //     }
+    // };
 
-    try {
-        const response = await axios.post("http://localhost:3000/api/user/uploadImage", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-                "Authorization": `Bearer ${token}`,
-            },
-        });
+    const handleImageUpload = async (event) => {
+        const formData = new FormData();
+        formData.append("profileImage", event.target.files[0]);
 
-        if (response.data?.path) {
-            let imagePath = response.data.path;
-        
-            const imageUrl = `http://localhost:3000/${imagePath.replace(/\\/g, '/')}`;
-            setProfileImage(imageUrl);
-            localStorage.setItem('profileImage', imageUrl);
-        
-            toast.success(response.data.message || "Image uploaded successfully!");
-        } else {
-            toast.error("Failed to upload image. Unexpected response format.");
-            console.error("Unexpected response structure:", response.data);
+        const token = localStorage.getItem("authToken");
+
+        try {
+            const response = await axios.post("http://localhost:3000/api/user/uploadImage", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "Authorization": `Bearer ${token}`,
+                },
+            });
+
+            if (response.data?.path) {
+                let imagePath = response.data.path;
+
+                const imageUrl = `http://localhost:3000/${imagePath.replace(/\\/g, '/')}`;
+                setProfileImage(imageUrl);
+                localStorage.setItem('profileImage', imageUrl);
+
+                toast.success(response.data.message || "Image uploaded successfully!");
+
+
+            } else {
+                toast.error("Failed to upload image. Unexpected response format.");
+                console.error("Unexpected response structure:", response.data);
+            }
+
+        } catch (error) {
+            console.error("Error uploading image:", error);
+            toast.error("Error uploading image. Please check the console for details.");
         }
-        
-    } catch (error) {
-        console.error("Error uploading image:", error);
-        toast.error("Error uploading image. Please check the console for details.");
-    }
-};
+    };
 
-    
+
 
     const handleLogout = async () => {
         const cookies = document.cookie.split("; ");
@@ -175,11 +177,12 @@ const handleImageUpload = async (event) => {
             }
         }
     };
-    useEffect(() => {
-        const storedUser = JSON.parse(localStorage.getItem('user'));
-        setUser(storedUser);
-        console.log(storedUser); // Verify user data here
-    }, []);
+    // useEffect(() => {
+    //     const storedUser = JSON.parse(localStorage.getItem('user'));
+    //     setUser(storedUser);
+    //     console.log(storedUser); // Verify user data here
+    // }, []);
+    
     useEffect(() => {
         const fetchUserDetails = () => {
             const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -190,21 +193,21 @@ const handleImageUpload = async (event) => {
                 console.warn("No user data found in localStorage.");
             }
         };
-    
+
         fetchUserDetails();
     }, []);
-    
+
 
     return (
         <div className="bg-white shadow-md rounded-lg p-6 max-w-md mx-auto mt-10 mobile:w-72">
             <div className="flex justify-center relative mb-4">
-          
-<img 
-    src={profileImage || "https://via.placeholder.com/100"} 
-    alt="Profile" 
-    style={{ width: '100px', height: '100px', borderRadius: '50%' }}
-    onError={(e) => e.target.src = "https://via.placeholder.com/100"} // Fallback if image fails to load
-/>
+
+                <img
+                    src={profileImage || "https://via.placeholder.com/100"}
+                    alt="Profile"
+                    style={{ width: '100px', height: '100px', borderRadius: '50%' }}
+                    onError={(e) => e.target.src = "https://via.placeholder.com/100"} // Fallback if image fails to load
+                />
 
                 <button
                     onClick={handleOpenUploadModal}

@@ -34,9 +34,9 @@ const Login = () => {
     
           if (token) {
             localStorage.setItem("isLoggedIn", "true"); // Set login status
-            // localStorage.setItem("your_access_token", token); // Store the token
-            // After successful login:
-localStorage.setItem('authToken', response.data.token);
+            localStorage.setItem("your_access_token", token); // Store the token
+           // After successful login:
+          localStorage.setItem('authToken', response.data.token);
 
             localStorage.setItem("user_name", userName); // Save the user's name
 
@@ -90,7 +90,7 @@ localStorage.setItem('authToken', response.data.token);
       });
   
       if (response.data.success) {
-          
+
         toast.success(response.data.message); 
         setIsResetPasswordOpen(false); 
       } else {
