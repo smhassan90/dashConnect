@@ -90,6 +90,7 @@ localStorage.setItem('authToken', response.data.token);
       });
   
       if (response.data.success) {
+          
         toast.success(response.data.message); 
         setIsResetPasswordOpen(false); 
       } else {

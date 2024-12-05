@@ -55,7 +55,43 @@ function Profile() {
     const handleOpenUploadModal = () => setIsUploadModalOpen(true);
     const handleCloseUploadModal = () => setIsUploadModalOpen(false);
     
-    const handleImageUpload = async (event) => {
+//     const handleImageUpload = async (event) => {
+//     const formData = new FormData();
+//     formData.append("profileImage", event.target.files[0]);
+
+//     const token = localStorage.getItem("authToken");
+
+//     try {
+//         const response = await axios.post("http://localhost:3000/api/user/uploadImage", formData, {
+//             headers: {
+//                 "Content-Type": "multipart/form-data",
+//                 "Authorization": `Bearer ${token}`,
+//             },
+//         });
+
+//         if (response.data.status === 'ok') {
+//             let imagePath = response.data.path;
+            
+//             // Replace backslashes with forward slashes to make the URL compatible
+//             const imageUrl = `http://localhost:3000/${imagePath.replace(/\\/g, '/')}`;
+
+//             // Set the profile image URL and save it to localStorage
+//             setProfileImage(imageUrl);
+//             localStorage.setItem('profileImage', imageUrl);
+
+//             toast.success("Image uploaded successfully!");
+//         } else {
+//             toast.error("Failed to upload image.");
+//             console.error("Error Response:", response.data);
+//         }
+//     } catch (error) {
+//         console.error("Error uploading image:", error);
+//         toast.error("Error uploading image.");
+//         console.error("Error Response:", error.response?.data);
+//     }
+// };
+
+const handleImageUpload = async (event) => {
     const formData = new FormData();
     formData.append("profileImage", event.target.files[0]);
 
@@ -69,25 +105,22 @@ function Profile() {
             },
         });
 
-        if (response.data.status === 'ok') {
+        if (response.data?.path) {
             let imagePath = response.data.path;
-            
-            // Replace backslashes with forward slashes to make the URL compatible
+        
             const imageUrl = `http://localhost:3000/${imagePath.replace(/\\/g, '/')}`;
-
-            // Set the profile image URL and save it to localStorage
             setProfileImage(imageUrl);
             localStorage.setItem('profileImage', imageUrl);
-
-            toast.success("Image uploaded successfully!");
+        
+            toast.success(response.data.message || "Image uploaded successfully!");
         } else {
-            toast.error("Failed to upload image.");
-            console.error("Error Response:", response.data);
+            toast.error("Failed to upload image. Unexpected response format.");
+            console.error("Unexpected response structure:", response.data);
         }
+        
     } catch (error) {
         console.error("Error uploading image:", error);
-        toast.error("Error uploading image.");
-        console.error("Error Response:", error.response?.data);
+        toast.error("Error uploading image. Please check the console for details.");
     }
 };
 
@@ -147,21 +180,32 @@ function Profile() {
         setUser(storedUser);
         console.log(storedUser); // Verify user data here
     }, []);
+    useEffect(() => {
+        const fetchUserDetails = () => {
+            const storedUser = JSON.parse(localStorage.getItem("user"));
+            if (storedUser) {
+                setUser(storedUser);
+            } else {
+                setUser(null); // Reset state if no user is found
+                console.warn("No user data found in localStorage.");
+            }
+        };
+    
+        fetchUserDetails();
+    }, []);
+    
 
     return (
         <div className="bg-white shadow-md rounded-lg p-6 max-w-md mx-auto mt-10 mobile:w-72">
             <div className="flex justify-center relative mb-4">
-            {/* <img
-        src={profileImage ? profileImage : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVA_HrQLjkHiJ2Ag5RGuwbFeDKRLfldnDasw&s"}
-        alt="Profile"
-        className="rounded-full w-24 h-24 object-cover"
-        onError={(e) => e.target.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVA_HrQLjkHiJ2Ag5RGuwbFeDKRLfldnDasw&s"}
-    /> */}
-    <img 
-  src={`http://localhost:3000/${profileImage}`} 
-  alt="Profile Picture" 
-  style={{ width: '100px', height: '100px', borderRadius: '50%' }}
+          
+<img 
+    src={profileImage || "https://via.placeholder.com/100"} 
+    alt="Profile" 
+    style={{ width: '100px', height: '100px', borderRadius: '50%' }}
+    onError={(e) => e.target.src = "https://via.placeholder.com/100"} // Fallback if image fails to load
 />
+
                 <button
                     onClick={handleOpenUploadModal}
                     className="absolute bottom-2 right-2 mr-36 bg-blue-500 text-white rounded-full p-2 hover:bg-blue-600"

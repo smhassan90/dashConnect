@@ -15,6 +15,9 @@ const Sidebar = () => {
   const location = useLocation();
   const [user, setUser] = useState(null);
 
+  const profileImage = localStorage.getItem("profileImage") || "https://via.placeholder.com/100";
+
+
   const [isOpen, setIsOpen] = useState(true);
 
   const handleNavigation = (path) => {
@@ -192,23 +195,9 @@ const Sidebar = () => {
           }`}
         >
 
-          {/* <Link to="/admin/profile" className="flex items-center gap-2">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH-F4ROquOZPV5XtKKC3WUjmDGnDbW7nBbA0b2b-qpY3Lo6N2xk-IGNNl1R7kPUgv0DyQ&usqp=CAU"
-              className="w-[50px] object-cover h-[57px] rounded-full"
-              alt="Profile"
-            />
-            <span
-              className={`font-poppins text-custom-14 font-normal leading-[30px] text-center ml-7 ${
-                isOpen ? "block" : "hidden"
-              }`}
-            >
-              Pritam Ghosh
-            </span>
-          </Link> */}
                   <Link to="/admin/profile" className="flex items-center ">
             <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH-F4ROquOZPV5XtKKC3WUjmDGnDbW7nBbA0b2b-qpY3Lo6N2xk-IGNNl1R7kPUgv0DyQ&usqp=CAU"
+                src={profileImage}
                 className="w-[52px] object-cover h-[54px] rounded-full"
                 alt="Profile"
             />
