@@ -4,11 +4,24 @@
     import { SlArrowDown } from "react-icons/sl";
     import { LineChart } from '@mui/x-charts/LineChart';
   import Bar from '../Reuseable/Bar';
+  import { ResizableBox } from 'react-resizable';
+import Draggable from 'react-draggable';
+import 'react-resizable/css/styles.css';
 import CustomButton from '../Components/Button';
 
 
   function Storyboard() {
+    const [chartWidth, setChartWidth] = useState(500); // Initial width
+  const [chartHeight, setChartHeight] = useState(250); // Initial height
+
     const [isVisible, setIsVisible] = useState(true);
+    const handleResize = (e, data) => {
+      setChartWidth(data.size.width);
+      setChartHeight(data.size.height);
+    };
+  
+
+
     const handleClose = () => {
       setIsVisible(false);
 
@@ -107,16 +120,11 @@ import CustomButton from '../Components/Button';
             <div>
       
 
-        <div className=" ml-7 h-[800px] p-5 bg-white rounded-[12px] mt-5 border hover:border-black transition-all duration-300 mobile:ml-5 mobile:p-2 mobile:h-[750px]">
+        {/* <div className=" ml-7 h-[800px] p-5 bg-white rounded-[12px] mt-5 border hover:border-black transition-all duration-300 mobile:ml-5 mobile:p-2 mobile:h-[750px]">
           <div className="flex justify-between items-center">
             <p className="text-base">View all the answers to the questions you have asked.</p>
           
-            {/* <button onClick={handleClose} 
-  className="bg-black text-white rounded-[10px]  border-2 border-black font-bold w-32 flex items-center justify-center space-x-2">
-       <IoClose />
-
-    <span>CLOSE</span>
-</button> */}
+            
 <CustomButton text="×
 Close"
   icon={<IoClose />} 
@@ -124,7 +132,6 @@ Close"
 
           </div>
 
-          {/* First chart */}
           <div className="p-4 bg-white rounded-[14px] shadow-md mt-5 border hover:border-black transition-all duration-300">
             <div className="flex justify-between items-center">
               <p className="text-base sm:text-lg">Appointments</p>
@@ -147,7 +154,6 @@ Close"
             </div>
           </div>
 
-          {/* Second chart */}
           <div className="p-4 bg-white rounded-[14px] shadow-md mt-5 border hover:border-black transition-all duration-300">
             <div className="flex justify-between items-center">
               <p className="text-base sm:text-lg">Appointments</p>
@@ -169,8 +175,96 @@ Close"
               />
             </div>
           </div>
+
+          
+
+
+
         </div>
-      
+       */}
+      <div className="ml-7 h-[800px] p-5 bg-white rounded-[12px] mt-5 border hover:border-black transition-all duration-300 mobile:ml-5 mobile:p-2 mobile:h-[750px]">
+      <div className="flex justify-between items-center">
+        <p className="text-base">View all the answers to the questions you have asked.</p>
+        <CustomButton text="× Close" icon={<IoClose />} />
+      </div>
+
+      {/* First chart - Draggable and Resizable */}
+      <div className="p-4 bg-white rounded-[14px] shadow-md mt-5 border hover:border-black transition-all duration-300">
+        <div className="flex justify-between items-center">
+          <p className="text-base sm:text-lg">Appointments</p>
+          <p className="ml-10 flex items-center whitespace-nowrap text-sm sm:text-base">
+            This Month <span className="ml-1"><SlArrowDown /></span>
+          </p>
+        </div>
+
+        {/* Draggable and Resizable Box for the First Chart */}
+        <Draggable handle=".draggable-handle">
+          <ResizableBox
+            width={chartWidth} // Dynamic width
+            height={chartHeight} // Dynamic height
+            minConstraints={[300, 200]} // Min size
+            maxConstraints={[800, 500]} // Max size
+            axis="both" // Allow resizing in both directions
+            resizeHandles={['se']} // Resize handle at the bottom right
+            onResizeStop={handleResize} // Handle resize stop event
+          >
+            <div className="w-full h-full draggable-handle">
+              <LineChart
+                xAxis={[{ data: [1, 2, 3, 5, 8, 10], showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' }, show: false }]}
+                yAxis={[{ showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' } }]}
+                series={[{ data: [2, 6, 2, 8.5, 1.5, 5], area: true, color: '#007bff' }]}
+                height={chartHeight} // Match with the ResizableBox height
+                width={chartWidth} // Match with the ResizableBox width
+                sx={{
+                  '& .MuiAxis-root': {
+                    display: 'none',
+                  },
+                }}
+              />
+            </div>
+          </ResizableBox>
+        </Draggable>
+      </div>
+
+      {/* Second chart - Draggable and Resizable */}
+      <div className="p-4 bg-white rounded-[14px] shadow-md mt-5 border hover:border-black transition-all duration-300">
+        <div className="flex justify-between items-center">
+          <p className="text-base sm:text-lg">Appointments</p>
+          <p className="ml-10 flex items-center whitespace-nowrap text-sm sm:text-base">
+            This Month <span className="ml-1"><SlArrowDown /></span>
+          </p>
+        </div>
+
+        {/* Draggable and Resizable Box for the Second Chart */}
+        <Draggable handle=".draggable-handle">
+          <ResizableBox
+            width={chartWidth} // Dynamic width
+            height={chartHeight} // Dynamic height
+            minConstraints={[300, 200]} // Min size
+            maxConstraints={[800, 500]} // Max size
+            axis="both" // Allow resizing in both directions
+            resizeHandles={['se']} // Resize handle at the bottom right
+            onResizeStop={handleResize} // Handle resize stop event
+          >
+            <div className="w-full h-full draggable-handle">
+              <LineChart
+                xAxis={[{ data: [1, 2, 3, 5, 8, 10], showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' }, show: false }]}
+                yAxis={[{ showGrid: true, grid: { stroke: '#ccc', strokeDasharray: '5 5' } }]}
+                series={[{ data: [2, 6, 2, 8.5, 1.5, 5], area: true, color: '#82e0aa' }]}
+                height={chartHeight} // Match with the ResizableBox height
+                width={chartWidth} // Match with the ResizableBox width
+                sx={{
+                  '& .MuiAxis-root': {
+                    display: 'none',
+                  },
+                }}
+              />
+            </div>
+          </ResizableBox>
+        </Draggable>
+      </div>
+    </div>
+
     </div>
 
     

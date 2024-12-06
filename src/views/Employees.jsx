@@ -11,6 +11,7 @@ function Employees() {
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState(""); // Define the error state
   const [editData, setEditData] = useState({
+    employeeId: "", // Make sure this ID exists and is correct
     firstName: "",
     lastName: "",
     email: "",
@@ -18,7 +19,7 @@ function Employees() {
     password: "",
   });
   const [editIndex, setEditIndex] = useState(null);
-  const [data, setData] = useState([]); // To hold employee data
+  const [data, setData] = useState([]);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deleteIndex, setDeleteIndex] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -46,62 +47,88 @@ function Employees() {
     setEditData(data[index]);
     setIsEditing(true);
   };
-  const handleEditChange = (e) => {
+//   const handleEditChange = (e) => {
+//     const { name, value } = e.target;
+//     setEditData((prev) => ({ ...prev, [name]: value }));
+//   };
+const handleEditChange = (e) => {
     const { name, value } = e.target;
     setEditData((prev) => ({ ...prev, [name]: value }));
   };
-  const updateEmployee = () => {
-    const updatedData = data.map((item, index) =>
-      index === editIndex ? editData : item
-    );
-    setData(updatedData);
-    setIsEditing(false);
-  };
-
-// const addNewEntry = async () => {
-//     try {
-//       const token = localStorage.getItem("your_access_token");
-//       if (
-//         !newEntry.firstName ||
-//         !newEntry.lastName ||
-//         !newEntry.email ||
-//         !newEntry.role ||
-//         !newEntry.password
-//       ) {
-//         throw new Error("All fields are required.");
-//       }
-//       const response = await axios.post(
-//         "http://localhost:3000/api/user/addEmployee",
-//         newEntry,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       );
-//       const newEmployee = response.data;
-//       console.log("Employee added successfully:", newEmployee);
-//       toast.success("Employee added successfully!");
   
-//       // Update the data state with the newly added employee
-//       setData((prevData) => Array.isArray(prevData) ? [...prevData, data] : [data]);
-  
-//       setShowAddForm(false);
-//       setNewEntry({
-//         firstName: "",
-//         lastName: "",
-//         email: "",
-//         role: "",
-//         password: "",
-//       });
-//     } catch (error) {
-//       console.error("Error adding employee:", error.response ? error.response.data : error.message);
-//       setError(
-//         error.response ? error.response.data.message : "Something went wrong!"
-//       );
-//     }
+//   const updateEmployee = () => {
+//     const updatedData = data.map((item, index) =>
+//       index === editIndex ? editData : item
+//     );
+//     setData(updatedData);
+//     setIsEditing(false);
 //   };
+
+// const updateEmployee = async () => {
+//   try {
+//     const token = localStorage.getItem("your_access_token"); // Get token from localStorage or context
+
+//     // Ensure that all required fields are present in editData
+//     if (!editData.firstName || !editData.lastName || !editData.email || !editData.role) {
+//       throw new Error("All fields are required.");
+//     }
+
+//     // Make API request to update the employee
+//     const response = await axios.put(
+//       "http://localhost:3000/api/user/updateEmployee",
+//       editData,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//           "Content-Type": "application/json",
+//         },
+//       }
+//     );
+
+//     // Handle successful response
+//     if (response.data && response.data.employee) {
+//       const updatedEmployee = response.data.employee;
+//       const updatedData = data.map((item, index) =>
+//         index === editIndex ? updatedEmployee : item
+//       );
+//       setData(updatedData); // Update the data state with the updated employee details
+//       toast.success("Employee updated successfully!");
+//       setIsEditing(false); // Close the modal
+//     }
+//   } catch (error) {
+//     console.error("Error updating employee:", error);
+//     toast.error("Error updating employee. Please try again.");
+//   }
+// };
+const updateEmployee = async () => {
+    try {
+      const token = localStorage.getItem("your_access_token");
+  
+      // Ensure employee ID is available before making the request
+      if (!editData.employeeId) {
+        toast.error("Employee ID is required");
+        return;
+      }
+  
+      const response = await axios.put(
+        `http://localhost:3000/api/user/updateEmployee/${editData.employeeId}`,
+        editData,
+        {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+          },
+        }
+      );
+  
+      console.log("Employee updated successfully:", response.data);
+      toast.success("Employee updated successfully!");
+    } catch (error) {
+      console.error("Error updating employee:", error.response ? error.response.data : error.message);
+      toast.error("Error updating employee. Please try again.");
+    }
+  };
+    
+
 const addNewEntry = async () => {
     try {
       const token = localStorage.getItem("your_access_token");
@@ -114,6 +141,7 @@ const addNewEntry = async () => {
       ) {
         throw new Error("All fields are required.");
       }
+  
       const response = await axios.post(
         "http://localhost:3000/api/user/addEmployee",
         newEntry,
@@ -124,12 +152,13 @@ const addNewEntry = async () => {
           },
         }
       );
-      const newEmployee = response.data;
-      console.log("Employee added successfully:", newEmployee);
+      const newEmployee = response.data; // Assuming API returns the new employee object
       toast.success("Employee added successfully!");
   
-      // Add the newly added employee to the `data` state
+      // Update state with the new employee
+      setData((prevData) => Array.isArray(prevData) ? [...prevData, data] : [data]);
   
+      // Reset the form and close the modal
       setShowAddForm(false);
       setNewEntry({
         firstName: "",
@@ -139,7 +168,10 @@ const addNewEntry = async () => {
         password: "",
       });
     } catch (error) {
-      console.error("Error adding employee:", error.response ? error.response.data : error.message);
+      console.error(
+        "Error adding employee:",
+        error.response ? error.response.data : error.message
+      );
       setError(
         error.response ? error.response.data.message : "Something went wrong!"
       );
@@ -147,13 +179,12 @@ const addNewEntry = async () => {
   };
   
   
-  
-  useEffect(() => {
+useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem("your_access_token"); // Retrieve token here
+        const token = localStorage.getItem("your_access_token");
         if (!token) {
-          throw new Error("No token found. Please log in."); // Handle case where token is not found
+          throw new Error("No token found. Please log in.");
         }
         const response = await axios.get(
           "http://localhost:3000/api/user/getEmployees",
@@ -163,23 +194,27 @@ const addNewEntry = async () => {
             },
           }
         );
-        setData(response.data); // Set the fetched data into state
+        console.log("Fetched Data: ", response.data);
+        setData(response.data); // Ensure data is correctly set
       } catch (error) {
         console.error("Error fetching employee data:", error);
-        setError(error.message); // Set error message for display
+        setError(error.message);
       }
     };
     fetchData();
   }, []);
   
-  // Empty dependency array ensures this runs once on mount
-  const handleAddChange = (e) => {
-    const { name, value } = e.target;
-    setNewEntry((prev) => ({ ...prev, [name]: value }));
+
+
+const handleAdd = () => {
+    setData((prevData) => (Array.isArray(prevData) ? [...prevData, newEntry] : [newEntry]));
+    console.log("Updated Data after Add: ", data);
   };
+  
+
+
   return (
     <div className="">
-      {/* <Bar title="Employees" /> */}
       <Bar
         title="Employees"
         onAddStory={() => setShowAddForm(true)}
@@ -280,7 +315,6 @@ const addNewEntry = async () => {
     </tr>
   )}
 </tbody>
-
           </table>
         </div>
         {showDeleteConfirm && (
@@ -310,11 +344,7 @@ const addNewEntry = async () => {
         {showAddForm && (
           <div className="w-[1500px] fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full mobile:w-72 mobile:ml-14">
-              {/* Container for the heading and close button */}
               <div className="flex items-center justify-between mb-4">
-                {/* Close Button */}
-
-                {/* Add Employees Heading */}
                 <h2 className="text-2xl font-bold mobile:text-center">
                   Add Employees
                 </h2>
@@ -325,7 +355,6 @@ const addNewEntry = async () => {
                   <IoClose size={24} />
                 </button>
               </div>
-
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -396,7 +425,6 @@ const addNewEntry = async () => {
                     />
                   </fieldset>
                 </div>
-
                 <fieldset className="mt-3  border border-gray-400 rounded p-2 w-96 h-16 mobile:w-60">
                   <legend className="text-gray-500 text-sm px-2">Role</legend>
                   <select
@@ -415,10 +443,10 @@ const addNewEntry = async () => {
                     <option value="Employee">Employee</option>
                   </select>
                 </fieldset>
-
                 <div className="flex justify-center space-x-4 mt-10">
                   <CustomButton
                     type="submit"
+                    onClick={handleAdd}
                     className="hover:text-black hover:bg-white border-2 border-black"
                     text="Add"
                   />
@@ -432,7 +460,6 @@ const addNewEntry = async () => {
             </div>
           </div>
         )}
-        {/* Edit Entry Modal */}
         {isEditing && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full  mobile:w-72 mobile:ml-14">
@@ -447,7 +474,6 @@ const addNewEntry = async () => {
               >
                 <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
                   {" "}
-                  {/* Adjust width and height */}
                   <legend className="text-gray-500 text-sm px-2">
                     FULL NAME
                   </legend>
@@ -459,10 +485,8 @@ const addNewEntry = async () => {
                     onChange={handleEditChange}
                   />
                 </fieldset>
-
                 <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60 ">
                   {" "}
-                  {/* Adjust width and height */}
                   <legend className="text-gray-500 text-sm px-2">
                     {" "}
                     Last Name{" "}
@@ -493,7 +517,6 @@ const addNewEntry = async () => {
                 </fieldset>
                 <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
                   {" "}
-                  {/* Adjust width and height */}
                   <legend className="text-gray-500 text-sm px-2">
                     {" "}
                     password{" "}
@@ -510,7 +533,6 @@ const addNewEntry = async () => {
                 </fieldset>
                 <fieldset className="border border-gray-400 rounded p-2 w-96 h-16 mobile:w-60 ">
                   {" "}
-                  {/* Adjust width and height */}
                   <legend className="text-gray-500 text-sm px-2">Role</legend>
                   <select
                     id="role"
@@ -535,7 +557,9 @@ const addNewEntry = async () => {
                   <button
                     type="submit"
                     className="bg-blue-500 text-white font-bold py-2 px-4 rounded"
-                  >
+                 onClick={updateEmployee}>Save
+
+                  
                     Save
                   </button>
                 </div>
@@ -547,6 +571,7 @@ const addNewEntry = async () => {
     </div>
   );
 }
+
 const LabelWithInput = ({ label, name, value, onChange }) => (
   <div className="mb-4">
     <label
