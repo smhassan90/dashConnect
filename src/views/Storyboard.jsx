@@ -26,25 +26,18 @@ import CustomButton from '../Components/Button';
           Ask a data question, check the SQL, add it to your model
         </p>
     
-        {/* Centered Search Input */}
-        {/* <div className=" mt-5 rounded-[10px] ml-7  relative flex justify-center mobile:ml-5 ">
-          <input
-            type="text"
-            className="text-sm text-gray-700 mb-4 border rounded-[10px] border-gray-300  p-3 w-full max-sm mobile:w-3/4 mobile:ml-11"
-            placeholder="Search a Metric..."
-            
-          />
-          <IoSearch className="items-right   text-xl sm:text-2xl text-gray-500" />
-
-        </div> */}
-    <div className="mt-5 rounded-[10px] ml-7 relative flex justify-center mobile:ml-5">
+        
+<div className="mt-5 rounded-[10px] ml-7 relative flex justify-center mobile:ml-5">
   <input
     type="text"
-    className="text-sm text-gray-700 mb-4 border rounded-[10px] border-gray-300 p-3 w-full max-sm mobile:w-3/4 mobile:ml-11 pl-10" // Added padding to the left to make space for the icon
-    placeholder="Search a Metric..."
+    className="bg-white text-gray-700 mb-4 border rounded-[10px] border-gray-300 w-full  p-3 pl-10 mobile:w-full"
+    placeholder="Search Integration..."
   />
-  <IoSearch className="items-end left-3 top-1/2 transform -translate-y-1/2 text-xl sm:text-2xl text-gray-500" /> {/* Positioning the icon inside the input */}
+  <span className="absolute mt-6 right-3 transform -translate-y-1/2 text-gray-500">
+    <IoSearch className="text-2xl" />
+  </span>
 </div>
+
 
         {/* Appointment Info */}
         <div className="border p-4 ml-7 rounded-[14px] h-24 mt-5 flex flex-col justify-between mb-5 mobile:ml-5 mobile:h-32" >
