@@ -21,17 +21,17 @@ const DashboardCard = ({ title, value, additionalCount, imgSrc }) => {
         
   <div className="avatar">
     <div className="w-8">
-      <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+      <img src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" />
     </div>
   </div>
   <div className="avatar">
     <div className="w-8">
-      <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+      <img src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=600" />
     </div>
   </div>
   <div className="avatar">
     <div className="w-8">
-      <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+      <img src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=600" />
     </div>
   </div>
   <div className="avatar placeholder">
