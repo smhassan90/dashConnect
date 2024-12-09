@@ -51,11 +51,7 @@ function Storyboard() {
               </span>
               <p className="text-xl font-semibold mt-2">20</p>
             </div>
-            {/* <button
-            className=" text-white  bg-black border-2 border-black font-bold py-2 px-4 rounded-[10px]"
-          >
-            + Add
-          </button> */}
+           
             <CustomButton text="+ Add" />
           </div>
         </div>

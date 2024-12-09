@@ -11,205 +11,160 @@ function Employees() {
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState(""); // Define the error state
   const [editData, setEditData] = useState({
-    employeeId: "", // Make sure this ID exists and is correct
+    employeeId: "", 
     firstName: "",
     lastName: "",
     email: "",
     role: "",
     password: "",
   });
-  const [editIndex, setEditIndex] = useState(null);
-  const [data, setData] = useState([]);
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [deleteIndex, setDeleteIndex] = useState(null);
-  const [showAddForm, setShowAddForm] = useState(false);
-  const [newEntry, setNewEntry] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    role: "",
-    password: "",
-  });
-  const handleDelete = (index) => {
-    setDeleteIndex(index);
-    setShowDeleteConfirm(true);
-  };
-  const confirmDelete = () => {
-    const updatedData = data.filter((_, index) => index !== deleteIndex);
-    setData(updatedData);
-    setShowDeleteConfirm(false);
-  };
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
-  const handleEdit = (index) => {
-    setEditIndex(index);
-    setEditData(data[index]);
-    setIsEditing(true);
-  };
-//   const handleEditChange = (e) => {
-//     const { name, value } = e.target;
-//     setEditData((prev) => ({ ...prev, [name]: value }));
-//   };
-const handleEditChange = (e) => {
-    const { name, value } = e.target;
-    setEditData((prev) => ({ ...prev, [name]: value }));
-  };
-  
-//   const updateEmployee = () => {
-//     const updatedData = data.map((item, index) =>
-//       index === editIndex ? editData : item
-//     );
-//     setData(updatedData);
-//     setIsEditing(false);
-//   };
-
-// const updateEmployee = async () => {
-//   try {
-//     const token = localStorage.getItem("your_access_token"); // Get token from localStorage or context
-
-//     // Ensure that all required fields are present in editData
-//     if (!editData.firstName || !editData.lastName || !editData.email || !editData.role) {
-//       throw new Error("All fields are required.");
-//     }
-
-//     // Make API request to update the employee
-//     const response = await axios.put(
-//       "http://localhost:3000/api/user/updateEmployee",
-//       editData,
-//       {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-
-//     // Handle successful response
-//     if (response.data && response.data.employee) {
-//       const updatedEmployee = response.data.employee;
-//       const updatedData = data.map((item, index) =>
-//         index === editIndex ? updatedEmployee : item
-//       );
-//       setData(updatedData); // Update the data state with the updated employee details
-//       toast.success("Employee updated successfully!");
-//       setIsEditing(false); // Close the modal
-//     }
-//   } catch (error) {
-//     console.error("Error updating employee:", error);
-//     toast.error("Error updating employee. Please try again.");
-//   }
-// };
-const updateEmployee = async () => {
-    try {
-      const token = localStorage.getItem("your_access_token");
-  
-      // Ensure employee ID is available before making the request
-      if (!editData.employeeId) {
-        toast.error("Employee ID is required");
-        return;
-      }
-  
-      const response = await axios.put(
-        `http://localhost:3000/api/user/updateEmployee/${editData.employeeId}`,
-        editData,
-        {
-          headers: {
-            "Authorization": `Bearer ${token}`,
-          },
-        }
-      );
-  
-      console.log("Employee updated successfully:", response.data);
-      toast.success("Employee updated successfully!");
-    } catch (error) {
-      console.error("Error updating employee:", error.response ? error.response.data : error.message);
-      toast.error("Error updating employee. Please try again.");
-    }
-  };
-    
-
-const addNewEntry = async () => {
-    try {
-      const token = localStorage.getItem("your_access_token");
-      if (
-        !newEntry.firstName ||
-        !newEntry.lastName ||
-        !newEntry.email ||
-        !newEntry.role ||
-        !newEntry.password
-      ) {
-        throw new Error("All fields are required.");
-      }
-  
-      const response = await axios.post(
-        "http://localhost:3000/api/user/addEmployee",
-        newEntry,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const newEmployee = response.data; // Assuming API returns the new employee object
-      toast.success("Employee added successfully!");
-  
-      // Update state with the new employee
-      setData((prevData) => Array.isArray(prevData) ? [...prevData, data] : [data]);
-  
-      // Reset the form and close the modal
-      setShowAddForm(false);
-      setNewEntry({
-        firstName: "",
-        lastName: "",
-        email: "",
-        role: "",
-        password: "",
-      });
-    } catch (error) {
-      console.error(
-        "Error adding employee:",
-        error.response ? error.response.data : error.message
-      );
-      setError(
-        error.response ? error.response.data.message : "Something went wrong!"
-      );
-    }
-  };
-  
-  
-useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem("your_access_token");
-        if (!token) {
-          throw new Error("No token found. Please log in.");
-        }
-        const response = await axios.get(
-          "http://localhost:3000/api/user/getEmployees",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        console.log("Fetched Data: ", response.data);
-        setData(response.data); // Ensure data is correctly set
-      } catch (error) {
-        console.error("Error fetching employee data:", error);
-        setError(error.message);
-      }
-    };
-    fetchData();
-  }, []);
-  
 
 
 const handleAdd = () => {
     setData((prevData) => (Array.isArray(prevData) ? [...prevData, newEntry] : [newEntry]));
     console.log("Updated Data after Add: ", data);
   };
+
+
+const [editIndex, setEditIndex] = useState(null);
+const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+const [deleteIndex, setDeleteIndex] = useState(null);
+const [showAddForm, setShowAddForm] = useState(false);
+const [newEntry, setNewEntry] = useState({
+  firstName: "",
+  lastName: "",
+  email: "",
+  role: "",
+  password: "",
+});
+const [data, setData] = useState(() => {
+  const savedData = localStorage.getItem('employees');
+  return savedData ? JSON.parse(savedData) : []; // Load from localStorage if available
+});
+
+// Fetch data from API if localStorage is empty
+useEffect(() => {
+  if (data.length === 0) {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("your_access_token");
+        if (!token) throw new Error("No token found. Please log in.");
+        const response = await axios.get("http://localhost:3000/api/user/getEmployees", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setData(response.data); // Set data from API
+        localStorage.setItem("employees", JSON.stringify(response.data)); // Save to localStorage
+      } catch (error) {
+        console.error("Error fetching employee data:", error);
+      }
+    };
+    fetchData();
+  }
+}, [data]);
+
+const handleDelete = (index) => {
+  setDeleteIndex(index);
+  setShowDeleteConfirm(true);
+};
+
+const confirmDelete = () => {
+  const updatedData = data.filter((_, index) => index !== deleteIndex);
+  setData(updatedData);
+  localStorage.setItem('employees', JSON.stringify(updatedData)); 
+  setShowDeleteConfirm(false);
+};
+
+const handleSearch = (e) => {
+  setSearchTerm(e.target.value);
+};
+
+const handleEdit = (index) => {
+  setEditIndex(index);
+  setEditData(data[index]);
+  setIsEditing(true);
+};
+
+const handleEditChange = (e) => {
+  const { name, value } = e.target;
+  setEditData((prev) => ({ ...prev, [name]: value }));
+};
+
+const updateEmployee = async () => {
+  try {
+    const token = localStorage.getItem("your_access_token");
+    if (!editData.employeeId) {
+      toast.error("Employee ID is required");
+      return;
+    }
+
+    const response = await axios.put(
+      `http://localhost:3000/api/user/updateEmployee/${editData.employeeId}`,
+      editData,
+      {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      }
+    );
+    toast.success("Employee updated successfully!");
+
+    const updatedData = data.map((item) =>
+      item.employeeId === editData.employeeId ? response.data : item
+    );
+    setData(updatedData); // Update data in state
+    localStorage.setItem('employees', JSON.stringify(updatedData)); // Save updated data to localStorage
+  } catch (error) {
+    console.error("Error updating employee:", error.response ? error.response.data : error.message);
+    toast.error("Error updating employee. Please try again.");
+  }
+};
+
+const addNewEntry = async () => {
+  try {
+    const token = localStorage.getItem("your_access_token");
+    if (
+      !newEntry.firstName ||
+      !newEntry.lastName ||
+      !newEntry.email ||
+      !newEntry.role ||
+      !newEntry.password
+    ) {
+      throw new Error("All fields are required.");
+    }
+
+    const response = await axios.post(
+      "http://localhost:3000/api/user/addEmployee",
+      newEntry,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const newEmployee = response.data; // Assuming API returns the new employee object
+    toast.success("Employee added successfully!");
+
+    const updatedData = [...data, newEmployee];
+    setData(updatedData); // Update the state
+    localStorage.setItem('employees', JSON.stringify(updatedData)); // Save updated data to localStorage
+
+    setShowAddForm(false);
+    setNewEntry({
+      firstName: "",
+      lastName: "",
+      email: "",
+      role: "",
+      password: "",
+    });
+  } catch (error) {
+    console.error("Error adding employee:", error.response ? error.response.data : error.message);
+  }
+};
+
   
 
 
@@ -572,7 +527,6 @@ const handleAdd = () => {
     </div>
   );
 }
-
 const LabelWithInput = ({ label, name, value, onChange }) => (
   <div className="mb-4">
     <label
@@ -592,7 +546,6 @@ const LabelWithInput = ({ label, name, value, onChange }) => (
     <ToastContainer  />
   </div>
 );
-
 export default Employees;
 
 
