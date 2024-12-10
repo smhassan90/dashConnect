@@ -9,7 +9,6 @@ import CustomButton from "../Components/Button";
 function Employees() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-  const [error, setError] = useState(""); // Define the error state
   const [editData, setEditData] = useState({
     employeeId: "", 
     firstName: "",
@@ -18,14 +17,10 @@ function Employees() {
     role: "",
     password: "",
   });
-
-
 const handleAdd = () => {
     setData((prevData) => (Array.isArray(prevData) ? [...prevData, newEntry] : [newEntry]));
     console.log("Updated Data after Add: ", data);
   };
-
-
 const [editIndex, setEditIndex] = useState(null);
 const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 const [deleteIndex, setDeleteIndex] = useState(null);
@@ -41,8 +36,6 @@ const [data, setData] = useState(() => {
   const savedData = localStorage.getItem('employees');
   return savedData ? JSON.parse(savedData) : []; // Load from localStorage if available
 });
-
-// Fetch data from API if localStorage is empty
 useEffect(() => {
   if (data.length === 0) {
     const fetchData = async () => {
@@ -69,17 +62,17 @@ const handleDelete = (index) => {
   setShowDeleteConfirm(true);
 };
 
-const confirmDelete = () => {
+const confirmDelete = async (index) => {
+ 
   const updatedData = data.filter((_, index) => index !== deleteIndex);
   setData(updatedData);
   localStorage.setItem('employees', JSON.stringify(updatedData)); 
   setShowDeleteConfirm(false);
+  
 };
-
 const handleSearch = (e) => {
   setSearchTerm(e.target.value);
 };
-
 const handleEdit = (index) => {
   setEditIndex(index);
   setEditData(data[index]);
@@ -90,7 +83,6 @@ const handleEditChange = (e) => {
   const { name, value } = e.target;
   setEditData((prev) => ({ ...prev, [name]: value }));
 };
-
 const updateEmployee = async () => {
   try {
     const token = localStorage.getItem("your_access_token");
@@ -98,7 +90,6 @@ const updateEmployee = async () => {
       toast.error("Employee ID is required");
       return;
     }
-
     const response = await axios.put(
       `http://localhost:3000/api/user/updateEmployee/${editData.employeeId}`,
       editData,
@@ -109,7 +100,6 @@ const updateEmployee = async () => {
       }
     );
     toast.success("Employee updated successfully!");
-
     const updatedData = data.map((item) =>
       item.employeeId === editData.employeeId ? response.data : item
     );
@@ -144,14 +134,11 @@ const addNewEntry = async () => {
         },
       }
     );
-
     const newEmployee = response.data; // Assuming API returns the new employee object
     toast.success("Employee added successfully!");
-
     const updatedData = [...data, newEmployee];
     setData(updatedData); // Update the state
     localStorage.setItem('employees', JSON.stringify(updatedData)); // Save updated data to localStorage
-
     setShowAddForm(false);
     setNewEntry({
       firstName: "",
@@ -164,10 +151,6 @@ const addNewEntry = async () => {
     console.error("Error adding employee:", error.response ? error.response.data : error.message);
   }
 };
-
-  
-
-
   return (
     <div className="">
       <Bar
@@ -189,7 +172,6 @@ const addNewEntry = async () => {
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-300 max-sm mobile:w-3/4 mobile:ml-11">
             {" "}
-            {/* Set min width to make it responsive */}
             <thead>
               <tr className="text-left font-bold">
                 <th className="px-2 py-1 text-xs sm:text-sm md:text-base border-b">
@@ -513,8 +495,6 @@ const addNewEntry = async () => {
                     type="submit"
                     className="bg-blue-500 text-white font-bold py-2 px-4 rounded"
                  onClick={updateEmployee}>Save
-
-                  
                     Save
                   </button>
                 </div>
