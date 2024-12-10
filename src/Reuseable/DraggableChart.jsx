@@ -100,15 +100,15 @@ const DraggableCharts = () => {
     },
   ]);
 
-  const [chartHeights] = useState(250); 
+  const [chartHeights] = useState(250);
   const [chartWidths, setChartWidths] = useState(
     new Array(charts.length).fill(500)
   );
-  const [expandedChart, setExpandedChart] = useState(null); 
-  const [loggedIn, setLoggedIn] = useState(false); 
+  const [expandedChart, setExpandedChart] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    setLoggedIn(true); 
+    setLoggedIn(true);
   }, []);
 
   const moveCard = (fromIndex, toIndex) => {
@@ -129,7 +129,7 @@ const DraggableCharts = () => {
         i === index ? (width > 490 ? 490 : 1000) : width
       )
     );
-    setExpandedChart((prev) => (prev === index ? null : index)); 
+    setExpandedChart((prev) => (prev === index ? null : index));
   };
 
   useEffect(() => {
@@ -138,14 +138,29 @@ const DraggableCharts = () => {
     }
   }, [loggedIn, charts.length]);
 
+  const swapCharts = () => {
+    if (charts.length > 1) {
+      const newCharts = [...charts];
+      const temp = newCharts[0];
+      newCharts[0] = newCharts[1];
+      newCharts[1] = temp;
+
+      setCharts(newCharts);
+    }
+  };
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="ml-7 h-auto p-5 bg-white rounded-[12px] mt-5 border hover:border-black transition-all duration-300">
         <div className="flex justify-between items-center">
-          <p className="text-base">View all the answers to the questions you have asked.</p>
-          <CustomButton text="× Close" />
+          <p className="text-base">
+            View all the answers to the questions you have asked.
+          </p>
+          <div className="flex space-x-3">
+            <CustomButton text="Swap Charts" onClick={swapCharts} />
+            <CustomButton text="× Close" />
+          </div>
         </div>
-
         <div className="charts-container flex flex-wrap gap-4 justify-start">
           {charts.map((chart, index) => (
             <DraggableChart
