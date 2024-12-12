@@ -110,6 +110,25 @@ function Integration() {
       toast.error("An error occurred while saving data.");
     }
   };
+  const handleDisconnect = async () => {
+    try {
+      const response = await axios.put(
+        'http://localhost:3000/api/user/disconnectIntegration',
+        {}, // No request body needed
+      
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`, // Assuming token is stored in localStorage
+          },
+        }
+      );
+      alert(response.data.message); // Show success message
+    } catch (error) {
+      console.error('Error disconnecting integration:', error);
+      alert(error.response?.data?.error || 'An error occurred.');
+    }
+  };
+  
   
 
 
@@ -187,6 +206,8 @@ function Integration() {
                   <CustomButton
                     className={`ml-3 mobile:w-32   ${discooneted ? 'bg-red-500 hover:bg-red-700' : 'bg-gray-300 cursor-not-allowed'}`}
                     text={"Disconnect"}
+                    onClick={handleDisconnect}
+
                     disabled={!discooneted}
                   />
                 </div>
