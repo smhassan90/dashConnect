@@ -17,11 +17,12 @@ function Profile() {
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
     const navigate = useNavigate();
     const token = localStorage.getItem('your_access_token');
+    const baseUrl = process.env.REACT_APP_BASE_URL;
 
     const fetchProfileImage = async () => {
         const token = localStorage.getItem('authToken');
         try {
-            const response = await axios.get('http://localhost:3000/api/user/getProfilePicture', {
+            const response = await axios.get(`${baseUrl}/getProfilePicture`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -98,7 +99,7 @@ function Profile() {
         const token = localStorage.getItem("authToken");
 
         try {
-            const response = await axios.post("http://localhost:3000/api/user/uploadImage", formData, {
+            const response = await axios.post(`${baseUrl}/uploadImage`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     "Authorization": `Bearer ${token}`,
@@ -153,7 +154,7 @@ function Profile() {
         }
         try {
             const response = await axios.put(
-                'http://localhost:3000/api/user/changePassword',
+                `${baseUrl}/changePassword`,
                 { oldPassword, newPassword },
                 {
                     headers: {
@@ -177,11 +178,7 @@ function Profile() {
             }
         }
     };
-    // useEffect(() => {
-    //     const storedUser = JSON.parse(localStorage.getItem('user'));
-    //     setUser(storedUser);
-    //     console.log(storedUser); // Verify user data here
-    // }, []);
+
     
     useEffect(() => {
         const fetchUserDetails = () => {

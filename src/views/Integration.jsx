@@ -40,6 +40,8 @@ function Integration() {
   const [responseMessage, setResponseMessage] = useState("");
   const [isConnected, setIsConnected] = useState(false);
   const [discooneted, Setdisconneted] = useState(false)
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+
   const handleTestClick = async () => {
     const yourAuthToken = localStorage.getItem("authToken");
 
@@ -50,7 +52,7 @@ function Integration() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/user/testConnection",
+        `${baseUrl}/testConnection`,
         { userId, apiKey },
         {
           headers: {
@@ -82,7 +84,7 @@ function Integration() {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/api/user/updateIntegration",
+        `${baseUrl}/updateIntegration`,
         {
           method: "PUT",
           headers: {
@@ -110,31 +112,7 @@ function Integration() {
       toast.error("An error occurred while saving data.");
     }
   };
-  // const handleDisconnect = async () => {
-  //   try {
-  //     const token = localStorage.getItem('authToken');
-  //     if (!token) {
-  //       toast.error('No authentication token found. Please log in again.');
-  //       return;
-  //     }
-  
-  //     const response = await axios.put(
-  //       'http://localhost:3000/api/user/disconnectIntegration',
-  //       null, // No body
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  
-  //     toast.success(response.data.message || 'Disconnected successfully!');
-  //     Setdisconneted(false); // Update UI to reflect disconnection
-  //   } catch (error) {
-  //     console.error('Error disconnecting integration:', error.response || error);
-  //     toast.error(error.response?.data?.error || 'Failed to disconnect.');
-  //   }
-  // };
+
     
   const handleDisconnect = async () => {
     try {
@@ -145,7 +123,7 @@ function Integration() {
       }
   
       const response = await axios.put(
-        "http://localhost:3000/api/user/disconnectIntegration",
+        `${baseUrl}/disconnectIntegration`,
         null, // No body
         {
           headers: {
@@ -230,20 +208,7 @@ function Integration() {
                 </div>
                 <div className="mt-3 mobile:mt-1 mobile:ml-0 mobile:w-24 ml-3 items-start">
                 
-                  {/* <CustomButton
-  className={`hover:text-black hover:bg-white mobile:w-32 border-2 border-black ${isConnected ? 'cursor-not-allowed opacity-50' : ''}`}
-  text={isConnected ? "Connected" : "Connect Now "}
-  onClick={isConnected ? null : handleOpenModal} // Prevent modal opening if already connected
-  disabled={isConnected} // Disable the button when connected
-/>
-
-                  <CustomButton
-                    className={`ml-3 mobile:w-32   ${discooneted ? 'bg-red-500 hover:bg-red-700' : 'bg-gray-300 cursor-not-allowed'}`}
-                    text={"Disconnect"}
-                    onClick={handleDisconnect}
-
-                    disabled={!discooneted}
-                  /> */}
+                  
                   <CustomButton
   className={`hover:text-black hover:bg-white mobile:w-32 border-2 border-black ${
     isConnected ? "cursor-not-allowed opacity-50" : ""

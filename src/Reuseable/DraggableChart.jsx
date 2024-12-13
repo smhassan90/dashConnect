@@ -362,7 +362,7 @@ const DraggableCharts = () => {
 
   const fetchChartData = async () => {
           try {
-            const response = await axios.post("http://localhost:3000/api/user/handleRequest", {
+            const response = await axios.post("http://localhost:3000/api/user/v1/handleRequest", {
               userQuestion: "summary of appointments",
             });
             console.log("API Response:", response);

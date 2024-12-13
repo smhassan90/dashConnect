@@ -20,6 +20,7 @@ const Login = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const navigate = useNavigate();
+  const baseUrl = process.env.REACT_APP_BASE_URL;
 
   
   const handleSubmit = async (event) => {
@@ -27,7 +28,7 @@ const Login = () => {
         const formData = { email, password };
     
         try {
-          const response = await axios.post("http://localhost:3000/api/user/login", formData);
+          const response = await axios.post(`${baseUrl}/login`, formData);
           const token = response.data.token;
           const userName = response.data.user.name; // Assuming the API returns user data including the name
 
@@ -57,7 +58,7 @@ const Login = () => {
     
     try {
 
-      const response = await axios.post("http://localhost:3000/api/user/forgotPassword", { email: forgotEmail });
+      const response = await axios.post(`${baseUrl}/forgotPassword`, { email: forgotEmail });
       
       if (response.data.success) {
         toast.success(response.data.message); 
@@ -84,7 +85,7 @@ const Login = () => {
   
     try {
       // Send token and new password to backend
-      const response = await axios.post("http://localhost:3000/api/user/resetPassword", {
+      const response = await axios.post(`${baseUrl}/resetPassword`, {
         token: resetToken,
         password: newPassword,
       });

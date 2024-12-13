@@ -21,6 +21,7 @@ const Register = () => {
     const [error, setError] = useState("");
     
     const navigate = useNavigate();
+    const baseUrl = process.env.REACT_APP_BASE_URL;
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -52,7 +53,7 @@ const Register = () => {
         };
     
         try {
-            const response = await axios.post('http://localhost:3000/api/user/create', formData);
+            const response = await axios.post(`${baseUrl}/create`, formData);
             // alert(response.data.message || "Registration successful!");
             toast.success(response.data.message || "Registration successful!");
 
