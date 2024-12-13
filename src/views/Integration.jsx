@@ -110,22 +110,56 @@ function Integration() {
       toast.error("An error occurred while saving data.");
     }
   };
+  // const handleDisconnect = async () => {
+  //   try {
+  //     const token = localStorage.getItem('authToken');
+  //     if (!token) {
+  //       toast.error('No authentication token found. Please log in again.');
+  //       return;
+  //     }
+  
+  //     const response = await axios.put(
+  //       'http://localhost:3000/api/user/disconnectIntegration',
+  //       null, // No body
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  
+  //     toast.success(response.data.message || 'Disconnected successfully!');
+  //     Setdisconneted(false); // Update UI to reflect disconnection
+  //   } catch (error) {
+  //     console.error('Error disconnecting integration:', error.response || error);
+  //     toast.error(error.response?.data?.error || 'Failed to disconnect.');
+  //   }
+  // };
+    
   const handleDisconnect = async () => {
     try {
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        toast.error("No authentication token found. Please log in again.");
+        return;
+      }
+  
       const response = await axios.put(
-        'http://localhost:3000/api/user/disconnectIntegration',
-        {}, // No request body needed
-      
+        "http://localhost:3000/api/user/disconnectIntegration",
+        null, // No body
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`, // Assuming token is stored in localStorage
+            Authorization: `Bearer ${token}`,
           },
         }
       );
-      alert(response.data.message); // Show success message
+  
+      toast.success(response.data.message || "Disconnected successfully!");
+      Setdisconneted(false); // Update UI to reflect disconnection
+      setIsConnected(false); // Update state to show "Connect Now"
     } catch (error) {
-      console.error('Error disconnecting integration:', error);
-      alert(error.response?.data?.error || 'An error occurred.');
+      console.error("Error disconnecting integration:", error.response || error);
+      toast.error(error.response?.data?.error || "Failed to disconnect.");
     }
   };
   
@@ -196,7 +230,7 @@ function Integration() {
                 </div>
                 <div className="mt-3 mobile:mt-1 mobile:ml-0 mobile:w-24 ml-3 items-start">
                 
-                  <CustomButton
+                  {/* <CustomButton
   className={`hover:text-black hover:bg-white mobile:w-32 border-2 border-black ${isConnected ? 'cursor-not-allowed opacity-50' : ''}`}
   text={isConnected ? "Connected" : "Connect Now "}
   onClick={isConnected ? null : handleOpenModal} // Prevent modal opening if already connected
@@ -209,7 +243,28 @@ function Integration() {
                     onClick={handleDisconnect}
 
                     disabled={!discooneted}
-                  />
+                  /> */}
+                  <CustomButton
+  className={`hover:text-black hover:bg-white mobile:w-32 border-2 border-black ${
+    isConnected ? "cursor-not-allowed opacity-50" : ""
+  }`}
+  text={isConnected ? "Connected" : "Connect Now"}
+  onClick={isConnected ? null : handleOpenModal} // Prevent modal opening if already connected
+  disabled={isConnected} // Disable the button when connected
+/>
+
+<CustomButton
+  className={`ml-3 mobile:w-32 ${
+    discooneted ? "bg-red-500 hover:bg-red-700" : "bg-gray-300 cursor-not-allowed"
+  }`}
+  text={"Disconnect"}
+  onClick={() => {
+    handleDisconnect();
+    setIsConnected(false); // Reset the state to reflect disconnection
+  }}
+  disabled={!discooneted}
+/>
+
                 </div>
               </div>
             </div>

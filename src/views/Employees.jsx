@@ -26,72 +26,113 @@ const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 const [deleteIndex, setDeleteIndex] = useState(null);
 const [showAddForm, setShowAddForm] = useState(false);
 const [newEntry, setNewEntry] = useState({
+  empId: "",
   firstName: "",
   lastName: "",
   email: "",
   role: "",
   password: "",
 });
-const [data, setData] = useState(() => {
-  const savedData = localStorage.getItem('employees');
-  return savedData ? JSON.parse(savedData) : []; // Load from localStorage if available
-});
+const [data, setData] = useState([])
+console.log(data);
+
+
 useEffect(() => {
-  if (data.length === 0) {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem("your_access_token");
-        if (!token) throw new Error("No token found. Please log in.");
-        const response = await axios.get("http://localhost:3000/api/user/getEmployees", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setData(response.data); // Set data from API
-        localStorage.setItem("employees", JSON.stringify(response.data)); // Save to localStorage
-      } catch (error) {
-        console.error("Error fetching employee data:", error);
-      }
-    };
-    fetchData();
-  }
-}, [data]);
+  const fetchData = async () => {
+    try {
+      const token = localStorage.getItem("your_access_token");
+      if (!token) throw new Error("No token found. Please log in.");
+
+      const response = await axios.get("http://localhost:3000/api/user/getEmployees", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("API Response:", response.data); // Log the response structure
+
+      // Check if the response data is an array
+      const employees = Array.isArray(response.data) ? response.data : response.data.employees; // Adjust property based on the actual structure
+      setData(employees); // Set the employee data
+
+      console.log("Employee IDs:", employees.map((emp) => emp._id)); // Log all employee IDs
+
+    } catch (error) {
+      console.error("Error fetching employee data:", error);
+    }
+  };
+
+  fetchData();
+}, []); // Run only once when the component mounts
 
 const handleDelete = (index) => {
   setDeleteIndex(index);
   setShowDeleteConfirm(true);
 };
 
-const confirmDelete = async (index) => {
- 
-  const updatedData = data.filter((_, index) => index !== deleteIndex);
-  setData(updatedData);
-  localStorage.setItem('employees', JSON.stringify(updatedData)); 
+const confirmDelete = async () => {
+  try {
+    const employeeId = data[deleteIndex]._id;  // Get the employee's ID
+    const token = localStorage.getItem("your_access_token");
+
+    // Send DELETE request to the backend
+    const response = await axios.delete(
+      `http://localhost:3000/api/user/deleteEmployee/${employeeId}`, // Use the correct API endpoint
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      // If the deletion is successful, update the state
+      const updatedData = data.filter((_, index) => index !== deleteIndex); // Remove the employee from the list
+      setData(updatedData); // Update the state with the new list
+      toast.success("Employee deleted successfully!");
+    } else {
+      toast.error("Error deleting employee. Please try again.");
+    }
+  } catch (error) {
+    toast.error("Error deleting employee. Please try again.");
+    console.error("Error deleting employee:", error);
+  }
+
+  // Close the confirmation modal
   setShowDeleteConfirm(false);
-  
 };
 const handleSearch = (e) => {
   setSearchTerm(e.target.value);
 };
+
 const handleEdit = (index) => {
+  console.log('Selected employee data:', data[index]); // Check if employeeId or _id exists here
   setEditIndex(index);
-  setEditData(data[index]);
+  setEditData(data[index]); // Make sure this has all the necessary fields like _id
   setIsEditing(true);
 };
+
+
 
 const handleEditChange = (e) => {
   const { name, value } = e.target;
   setEditData((prev) => ({ ...prev, [name]: value }));
 };
+
+
+
 const updateEmployee = async () => {
+  console.log("Updating employee data:", editData); // Log the object to check its contents
+
+  if (!editData._id) {  // Ensure that _id is present in the edit data
+    toast.error("Employee ID is required");
+    return;
+  }
+
   try {
     const token = localStorage.getItem("your_access_token");
-    if (!editData.employeeId) {
-      toast.error("Employee ID is required");
-      return;
-    }
     const response = await axios.put(
-      `http://localhost:3000/api/user/updateEmployee/${editData.employeeId}`,
+      `http://localhost:3000/api/user/updateEmployee/${editData._id}`, // Ensure _id is used here
       editData,
       {
         headers: {
@@ -99,15 +140,20 @@ const updateEmployee = async () => {
         },
       }
     );
-    toast.success("Employee updated successfully!");
-    const updatedData = data.map((item) =>
-      item.employeeId === editData.employeeId ? response.data : item
-    );
-    setData(updatedData); // Update data in state
-    localStorage.setItem('employees', JSON.stringify(updatedData)); // Save updated data to localStorage
+    
+    if (response.status === 200) {
+      toast.success("Employee updated successfully!");
+      const updatedData = data.map(emp =>
+        emp._id === editData._id ? { ...emp, ...editData } : emp
+      );
+      setData(updatedData); // Update state with the new employee data
+      setIsEditing(false); // Close the edit form
+    } else {
+      toast.error("Error updating employee. Please try again.");
+    }
   } catch (error) {
-    console.error("Error updating employee:", error.response ? error.response.data : error.message);
     toast.error("Error updating employee. Please try again.");
+    console.error("Error updating employee:", error);
   }
 };
 
@@ -138,7 +184,7 @@ const addNewEntry = async () => {
     toast.success("Employee added successfully!");
     const updatedData = [...data, newEmployee];
     setData(updatedData); // Update the state
-    localStorage.setItem('employees', JSON.stringify(updatedData)); // Save updated data to localStorage
+    console.log("Employee IDs:", updatedData.map((emp) => emp._id)); // Log all IDs
     setShowAddForm(false);
     setNewEntry({
       firstName: "",
@@ -151,6 +197,7 @@ const addNewEntry = async () => {
     console.error("Error adding employee:", error.response ? error.response.data : error.message);
   }
 };
+
   return (
     <div className="">
       <Bar
@@ -173,44 +220,34 @@ const addNewEntry = async () => {
           <table className="min-w-full bg-white border border-gray-300 max-sm mobile:w-3/4 mobile:ml-11">
             {" "}
             <thead>
-              <tr className="text-left font-bold">
-                <th className="px-2 py-1 text-xs sm:text-sm md:text-base border-b">
-                  Full Name{" "}
-                </th>
-                <th className="px-2 py-1 text-xs sm:text-sm md:text-base border-b">
-                  Last Name{" "}
-                </th>
-                <th className="px-2 py-1 text-xs sm:text-sm md:text-base border-b">
-                  Email{" "}
-                </th>
-                <th className="px-2 py-1 text-xs sm:text-sm md:text-base border-b">
-                  Role{" "}
-                </th>
-                <th className="px-2 py-1 text-xs sm:text-sm md:text-base border-b">
-                  Password
-                </th>
-                <th className="px-2 py-1 text-xs sm:text-sm md:text-base border-b">
-                  Actions
-                </th>
+  <tr className="text-left font-bold">
+    
+    <th className="px-2 py-1 text-xs sm:text-sm md:text-base border-b">
+      First Name
+    </th>
+    <th className="px-2 py-1 text-xs sm:text-sm md:text-base border-b">
+      Last Name
+    </th>
+    <th className="px-2 py-1 text-xs sm:text-sm md:text-base border-b">
+      Email
+    </th>
+    <th className="px-2 py-1 text-xs sm:text-sm md:text-base border-b">
+      Role
+    </th>
+    <th className="px-2 py-1 text-xs sm:text-sm md:text-base border-b">
+      Actions
+    </th>
+  </tr>
+</thead>
 
-                <th></th>
-              </tr>
-            </thead>
-            
-            <tbody>
+<tbody>
   {data && data.length > 0 ? (
     data
-      .filter(
-        (item) =>
-          item &&
-          item.firstName &&
-          typeof item.firstName === "string" &&
-          item.firstName
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase())
+      .filter((item) =>
+        item.firstName?.toLowerCase().includes(searchTerm.toLowerCase())
       )
       .map((item, index) => (
-        <tr key={index} className="hover:bg-gray-100">
+        <tr data-empId={item._id} key={index} className="hover:bg-gray-100">
           <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">
             {item.firstName}
           </td>
@@ -222,9 +259,6 @@ const addNewEntry = async () => {
           </td>
           <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">
             {item.role}
-          </td>
-          <td className="px-2 py-3 text-xs sm:text-sm md:text-base break-words border-b">
-            {item.password}
           </td>
           <td className="px-2 py-3 text-xs sm:text-sm md:text-base">
             <div className="flex justify-center space-x-3">
@@ -246,12 +280,13 @@ const addNewEntry = async () => {
       ))
   ) : (
     <tr>
-      <td colSpan={6} className="text-center py-4">
-        No employees found
+      <td colSpan={7} className="text-center py-4">
+        No employees found.
       </td>
     </tr>
   )}
 </tbody>
+
           </table>
         </div>
         {showDeleteConfirm && (
@@ -452,22 +487,7 @@ const addNewEntry = async () => {
                     onChange={handleEditChange}
                   />
                 </fieldset>
-                <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
-                  {" "}
-                  <legend className="text-gray-500 text-sm px-2">
-                    {" "}
-                    password{" "}
-                  </legend>
-                  <input
-                    type="password"
-                    required
-                    className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
-                    id="password"
-                    name="password"
-                    value={editData.password}
-                    onChange={handleEditChange}
-                  />
-                </fieldset>
+             
                 <fieldset className="border border-gray-400 rounded p-2 w-96 h-16 mobile:w-60 ">
                   {" "}
                   <legend className="text-gray-500 text-sm px-2">Role</legend>
