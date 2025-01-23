@@ -13,22 +13,26 @@ const integrations = [
     name: "Acuity",
     icon: "https://static.wixstatic.com/media/ec0692_9e284a7992da4b74bcbc91f107606a80~mv2.png/v1/fill/w_220,h_224,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ec0692_9e284a7992da4b74bcbc91f107606a80~mv2.png",
     description: "You can setup your acuity account as source of data here",
+    type: "acuity",
   },
   {
-    name: "Xero",
+    name: "My SQL",
     icon: imag5,
     description: "You can set up your Xero account as a source of data here.",
+    type: "mySQL",
   },
   {
     name: "MYOB",
     icon: "https://haadanalytics.com/wp-content/uploads/2024/01/1-1.png",
     description:
       "You can set up your QuickBooks account as a source of data here.",
+      type: "myob",
   },
   {
     name: "MYOB",
     icon: "https://haadanalytics.com/wp-content/uploads/2024/01/1-1.png",
     description: "You can set up your Square account as a source of data here.",
+    type: "myob",
   },
 ];
 
@@ -37,13 +41,21 @@ function Integration() {
   const [isConnectEnabled, setIsConnectEnabled] = useState(false); //
   const [apiKey, setApiKey] = useState(""); // To store API Key input
   const [userId, setUserId] = useState(""); // To store UserId input
+  const [url, setUrl] = useState(""); 
+  const [type,setType] = useState("")
   const [responseMessage, setResponseMessage] = useState("");
   const [isConnected, setIsConnected] = useState(false);
   const [discooneted, Setdisconneted] = useState(false)
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
+
   const handleTestClick = async () => {
     const yourAuthToken = localStorage.getItem("authToken");
+   console.log("type-->,,,",type);
+   console.log("username-->,,,",userId);
+   console.log("password-->,,,",apiKey);
+   console.log("url-->,,,",url);
+   console.log("base-->,,,",baseUrl);
 
     if (!yourAuthToken) {
       console.error("No auth token found");
@@ -52,8 +64,9 @@ function Integration() {
 
     try {
       const response = await axios.post(
-        `${baseUrl}/testConnection`,
-        { userId, apiKey },
+        `${baseUrl}/testConnectionIntegration`,
+        { username:userId, password:apiKey, url:url, type:type },
+        
         {
           headers: {
             Authorization: `Bearer ${yourAuthToken}`,
@@ -62,10 +75,11 @@ function Integration() {
       );
 
       if (response.status === 200) {
-        console.log("Data fetched:", response.data); // Logs the fetched data
+        console.log("Data fetched:",response.data); // Logs the fetched data
         setIsConnectEnabled(true);
         toast.success("Test connection successful!");
       }
+      
     } catch (error) {
       console.error("Error in API connection test:", error);
       setIsConnectEnabled(false);
@@ -76,6 +90,11 @@ function Integration() {
 
   const savedIntegration = async () => {
     const yourAuthToken = localStorage.getItem("authToken"); // Or wherever you get the token
+    console.log("type-->,,,",type);
+    console.log("username-->,,,",userId);
+    console.log("password-->,,,",apiKey);
+    console.log("url-->,,,",url);
+    console.log("base-->,,,",baseUrl);
 
     if (!yourAuthToken) {
       console.error("No auth token found");
@@ -91,7 +110,7 @@ function Integration() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${yourAuthToken}`,
           },
-          body: JSON.stringify({ username: userId, password: apiKey }),
+          body: JSON.stringify({type:type, username: userId, password: apiKey ,url:url }),
         }
       );
 
@@ -140,11 +159,12 @@ function Integration() {
       toast.error(error.response?.data?.error || "Failed to disconnect.");
     }
   };
-  
-  
 
-
-  const handleOpenModal = () => setIsModalOpen(true);
+  const handleOpenModal = (integration) => {
+    setIsModalOpen(true);
+    // console.log("type is " , integration.type);
+    setType(integration.type)
+  };
   const handleCloseModal = () => setIsModalOpen(false);
 
   return (
@@ -214,7 +234,7 @@ function Integration() {
     isConnected ? "cursor-not-allowed opacity-50" : ""
   }`}
   text={isConnected ? "Connected" : "Connect Now"}
-  onClick={isConnected ? null : handleOpenModal} // Prevent modal opening if already connected
+  onClick={isConnected ? null : () => handleOpenModal(integration)}// Prevent modal opening if already connected
   disabled={isConnected} // Disable the button when connected
 />
 
@@ -259,6 +279,7 @@ function Integration() {
               }}
             >
               <div>
+
                 <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
                   <legend className="text-gray-500 text-sm px-2">
                     UserName
@@ -285,6 +306,19 @@ function Integration() {
                     name="password"
                     value={apiKey}
                     onChange={(e) => setApiKey(e.target.value)}
+                  />
+                </fieldset>
+              <fieldset className="border border-gray-400 rounded p-2 w-96 h-14 mobile:w-60">
+                  <legend className="text-gray-500 text-sm px-2">
+                    URL
+                  </legend>
+                  <input
+                    required
+                    className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
+                    id="url"
+                    name="url"
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
                   />
                 </fieldset>
               </div>
