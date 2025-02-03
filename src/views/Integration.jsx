@@ -38,6 +38,7 @@ const integrations = [
 
 function Integration() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [integeration, Setintegeration] = useState(false);
   const [isConnectEnabled, setIsConnectEnabled] = useState(false); //
   const [apiKey, setApiKey] = useState(""); // To store API Key input
   const [userId, setUserId] = useState(""); // To store UserId input
@@ -46,6 +47,23 @@ function Integration() {
   const [responseMessage, setResponseMessage] = useState("");
   const [isConnected, setIsConnected] = useState(false);
   const [discooneted, Setdisconneted] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [testResult ,setTestResult]=useState()
+  const [formData, setFormData] = useState({
+    platformName: "",
+    integrationName: "",
+    url: "",
+    username: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const tableModal = () => {
+    Setintegeration (!integeration);
+   };
+
+
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
 
@@ -86,7 +104,68 @@ function Integration() {
     }
   };
 
-
+  // const handleTestConnection = async () => {
+  //   try {
+  //     const response = await fetch(`${baseUrl}/testConnectionIntegration`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         platform: formData.platformName.toLowerCase(), // ✅ Convert to lowercase
+  //         url: formData.url,
+  //         username: formData.username,
+  //         password: formData.password,
+  //       }),
+        
+  //     });
+  
+  //     const data = await response.json();
+  
+  //     if (response.ok) {
+  //       setTestResult({ success: true, message: "Connection successful!" });
+  //     } else {
+  //       setTestResult({ success: false, message: data.message || "Connection failed!" });
+  //     }
+  //   } catch (error) {
+  //     setTestResult({ success: false, message: "Error: " + error.message });
+  //   }
+  // };
+  const handleTestConnection = async () => {
+    try {
+      // Token ko localStorage se nikaliye
+      const token = localStorage.getItem("token");
+  
+      // Token ko console par show karwana
+      console.log("Token: ", token);
+  
+      const response = await fetch(`${baseUrl}/testConnectionIntegration`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`, // Authorization header mein token bhej rahe hain
+        },
+        body: JSON.stringify({
+          platform: formData.platformName.toLowerCase(),
+          url: formData.url,
+          username: formData.username,
+          password: formData.password,
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        setTestResult({ success: true, message: "Connection successful!" });
+      } else {
+        setTestResult({ success: false, message: data.message || "Connection failed!" });
+      }
+    } catch (error) {
+      setTestResult({ success: false, message: "Error: " + error.message });
+    }
+  };
+  
+  
 
   const savedIntegration = async () => {
     const yourAuthToken = localStorage.getItem("authToken"); // Or wherever you get the token
@@ -198,9 +277,19 @@ function Integration() {
           ALL
           <span className="ml-7 absolute left-0 right-0 bottom-0 h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
         </p>
+        
       </div>
 
       <hr className="ml-7 mt-2 border-t border-gray-500" />
+      <CustomButton
+        onClick={() => setIsOpen(true)}
+        text={"Add integeration"}
+
+  className="ml-10 mt-5 w-44 mobile:w-32 bg-black hover:bg-white hover:text-black border-2 border-black"
+/>
+
+      
+
       <div className="ml-7 mt-12 rounded-[12px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-14 items-center">
         {integrations.map((integration, index) => (
           <div
@@ -256,6 +345,44 @@ function Integration() {
           </div>
         ))}
       </div>
+      {integeration && (
+  <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
+    <div className="bg-white p-6 rounded-lg w-96 max-h-[80vh] overflow-hidden">
+      <h2 className="text-xl font-semibold mb-4">List of Tables</h2>
+
+      {/* Hardcoded Table List */}
+      <div className="space-y-4 max-h-60 overflow-y-auto">
+        {[
+          { title: "Table 1" },
+          { title: "Table 2" },
+          { title: "Table 3" },
+          { title: "Table 4" },
+          { title: "Table 5" }
+        ].map((table, index) => (
+          <div key={index} className="flex items-start">
+            <input type="checkbox" className="mr-2 mt-1" />
+            <div>
+              <p className="font-semibold">{table.title}</p>
+              <textarea
+                className="w-[290px] border p-2 text-sm text-gray-500 mt-1"
+                placeholder="Enter description..."
+              ></textarea>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Save Button */}
+      <div className="mt-4 flex justify-end">
+        <button className="px-4 py-2 bg-blue-500 text-white rounded">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
 
       {isModalOpen && (
         <div className="w-[1500px] fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -345,6 +472,102 @@ function Integration() {
           </div>
         </div>
       )}
+
+{isOpen && (
+  <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+    <div className="bg-white p-6 rounded-lg w-96">
+      {/* Header with title and close button */}
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-bold">Add Integration</h2>
+        <button
+          className="text-gray-600 hover:text-gray-800"
+          onClick={() => setIsOpen(false)}
+        >
+          <IoClose size={24} />
+        </button>
+      </div>
+
+      {/* Input Fields */}
+      <select
+        name="platformName"
+        value={formData.platformName}
+        onChange={handleChange}
+        className="w-full p-2 mb-2 border rounded"
+      >
+        <option value="" disabled>
+          Select Platform
+        </option>
+        <option value="mysql">mysql</option>
+        <option value="MYOB">MYOB</option>
+        <option value="Actuity">Actuity</option>
+      </select>
+
+      <input
+        type="text"
+        name="integrationName"
+        placeholder="Integration Name"
+        value={formData.integrationName}
+        onChange={handleChange}
+        className="w-full p-2 mb-2 border rounded"
+      />
+      <input
+        type="text"
+        name="url"
+        placeholder="URL"
+        value={formData.url}
+        onChange={handleChange}
+        className="w-full p-2 mb-2 border rounded"
+      />
+      <input
+        type="text"
+        name="username"
+        placeholder="Username"
+        value={formData.username}
+        onChange={handleChange}
+        className="w-full p-2 mb-2 border rounded"
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={formData.password}
+        onChange={handleChange}
+        className="w-full p-2 mb-2 border rounded"
+      />
+
+      {/* Buttons */}
+      <div className="flex items-center justify-center gap-3">
+       
+        <button
+          onClick={() => {
+            console.log(formData);
+            handleTestConnection(); // Trigger API test when button is clicked
+            setIsOpen(false);
+          }}
+          className="px-4 py-2 bg-black text-white rounded"
+        >
+          Test
+        </button>
+        <button
+          onClick={tableModal}
+          className="px-4 py-2 bg-black text-white rounded"
+        >
+          Connect
+        </button>
+      </div>
+
+      {/* Test result message */}
+      {testResult && (
+        <p
+          className={`mt-4 text-sm ${testResult.success ? 'text-green-500' : 'text-red-500'}`}
+        >
+          {testResult.message}
+        </p>
+      )}
+    </div>
+  </div>
+)}
+
       <ToastContainer />
     </div>
   );

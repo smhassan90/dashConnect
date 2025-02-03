@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaPlus } from 'react-icons/fa';
+import FileUpload from "../Reuseable/FileUpload";
 
 function Profile() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -238,6 +239,7 @@ function Profile() {
             <button onClick={handleLogout} className="bg-black hover:bg-gray-700 mt-4 text-white font-bold py-2 px-6 rounded w-full">
                 Logout
             </button>
+            <FileUpload/>
             {/* Upload Modal */}
             {isUploadModalOpen && (
                 <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
