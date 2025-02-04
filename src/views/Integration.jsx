@@ -37,6 +37,7 @@ const integrations = [
 ];
 
 function Integration() {
+  const [tables, setTables] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [integeration, Setintegeration] = useState(false);
   const [isConnectEnabled, setIsConnectEnabled] = useState(false); //
@@ -59,10 +60,58 @@ function Integration() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const tableModal = () => {
-    Setintegeration (!integeration);
-   };
+  // const tableModal = () => {
+  //   Setintegeration (!integeration);
+  //  };
+  // const tableModal = async () => {
+  //   // Toggle the modal visibility
+  //   Setintegeration(!integeration);
 
+  //   if (!integeration) {
+  //     try {
+  //       // Replace with the correct API URL
+  //       const response = await axios.post(`${baseUrl}/integrationCredntial`, { /* Your request body here */ });
+        
+  //       if (response.status === 200) {
+  //         setTables(response.data.tables);  // Dynamically set tables from API
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching tables:", error);
+  //     }
+  //   }
+  // };
+  const tableModal = async () => {
+    Setintegeration(!integeration);
+  
+    if (!integeration) {
+      try {
+        // Retrieve the token using the correct key
+        const token = localStorage.getItem("your_access_token");  // Use the same key
+  
+        if (!token) {
+          console.error("Authorization token is missing.");
+          return;
+        }
+  
+        const response = await axios.post(
+          `${baseUrl}/integrationCredntial`,
+          {},  // Empty body or any necessary request body
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,  // Include the token in the headers
+            },
+          }
+        );
+  
+        if (response.status === 200) {
+          setTables(response.data.tables);  // Set tables from API response
+        }
+      } catch (error) {
+        console.error("Error fetching tables:", error);
+      }
+    }
+  };
+  
 
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -346,42 +395,45 @@ function Integration() {
         ))}
       </div>
       {integeration && (
-  <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-    <div className="bg-white p-6 rounded-lg w-96 max-h-[80vh] overflow-hidden">
-      <h2 className="text-xl font-semibold mb-4">List of Tables</h2>
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg w-96 max-h-[80vh] overflow-hidden">
+          <button
+          className="text-gray-600 hover:text-gray-800"
+          onClick={() => Setintegeration(false)}
+        >
+          <IoClose size={24} />
+        </button>
+            <h2 className="text-xl font-semibold mb-4">List of Tables</h2>
 
-      {/* Hardcoded Table List */}
-      <div className="space-y-4 max-h-60 overflow-y-auto">
-        {[
-          { title: "Table 1" },
-          { title: "Table 2" },
-          { title: "Table 3" },
-          { title: "Table 4" },
-          { title: "Table 5" }
-        ].map((table, index) => (
-          <div key={index} className="flex items-start">
-            <input type="checkbox" className="mr-2 mt-1" />
-            <div>
-              <p className="font-semibold">{table.title}</p>
-              <textarea
-                className="w-[290px] border p-2 text-sm text-gray-500 mt-1"
-                placeholder="Enter description..."
-              ></textarea>
+            {/* Dynamically rendered table list */}
+            <div className="space-y-4 max-h-60 overflow-y-auto">
+              {tables.length > 0 ? (
+                tables.map((table, index) => (
+                  <div key={index} className="flex items-start">
+                    <input type="checkbox" className="mr-2 mt-1" />
+                    <div>
+                      <p className="font-semibold">{table}</p>
+                      <textarea
+                        className="w-[290px] border p-2 text-sm text-gray-500 mt-1"
+                        placeholder="Enter description..."
+                      ></textarea>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>No tables found.</p>
+              )}
+            </div>
+
+            {/* Save Button */}
+            <div className="mt-4 flex justify-end">
+              <button className="px-4 py-2 bg-blue-500 text-white rounded">
+                Save
+              </button>
             </div>
           </div>
-        ))}
-      </div>
-
-      {/* Save Button */}
-      <div className="mt-4 flex justify-end">
-        <button className="px-4 py-2 bg-blue-500 text-white rounded">
-          Save
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
+        </div>
+      )}
 
 
       {isModalOpen && (
