@@ -61,31 +61,9 @@ function Integration() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  // const tableModal = () => {
-  //   Setintegeration (!integeration);
-  //  };
-  // const tableModal = async () => {
-  //   // Toggle the modal visibility
-  //   Setintegeration(!integeration);
 
-  //   if (!integeration) {
-  //     try {
-  //       // Replace with the correct API URL
-  //       const response = await axios.post(`${baseUrl}/integrationCredntial`, { /* Your request body here */ });
-        
-  //       if (response.status === 200) {
-  //         setTables(response.data.tables);  // Dynamically set tables from API
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching tables:", error);
-  //     }
-  //   }
-  // };
-  
-  
-
+ 
   const baseUrl = process.env.REACT_APP_BASE_URL;
-
 
   const handleTestClick = async () => {
     const yourAuthToken = localStorage.getItem("authToken");
@@ -263,9 +241,6 @@ function Integration() {
       console.error("Error:", error.message);
     }
   };
-  
-  
-  
   
   
 

@@ -28,7 +28,7 @@ function Storyboard() {
         {/* Descriptive text */}
         <Bar title="Story Board" buttonText="+ Add Story" />
         <p className="text-center text-black mt-5  mobile:w-64  mobile:ml-5 mobile:text-center">
-          Ask a data question, check the SQL, add it to your model
+          Ask a data question, check the SQL, add it to your model <a  className="text-blue-500" href="">More Suggestion</a>
         </p>
         <div className="mt-5 rounded-[10px] ml-7 relative flex justify-center mobile:ml-5">
           <input
