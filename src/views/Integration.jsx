@@ -37,6 +37,7 @@ const integrations = [
 ];
 
 function Integration() {
+  const [selectedTables, setSelectedTables] = useState([]);
   const [tables, setTables] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [integeration, Setintegeration] = useState(false);
@@ -80,37 +81,7 @@ function Integration() {
   //     }
   //   }
   // };
-  const tableModal = async () => {
-    Setintegeration(!integeration);
   
-    if (!integeration) {
-      try {
-        // Retrieve the token using the correct key
-        const token = localStorage.getItem("your_access_token");  // Use the same key
-  
-        if (!token) {
-          console.error("Authorization token is missing.");
-          return;
-        }
-  
-        const response = await axios.post(
-          `${baseUrl}/integrationCredntial`,
-          {},  // Empty body or any necessary request body
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,  // Include the token in the headers
-            },
-          }
-        );
-  
-        if (response.status === 200) {
-          setTables(response.data.tables);  // Set tables from API response
-        }
-      } catch (error) {
-        console.error("Error fetching tables:", error);
-      }
-    }
-  };
   
 
   const baseUrl = process.env.REACT_APP_BASE_URL;
@@ -153,46 +124,17 @@ function Integration() {
     }
   };
 
-  // const handleTestConnection = async () => {
-  //   try {
-  //     const response = await fetch(`${baseUrl}/testConnectionIntegration`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         platform: formData.platformName.toLowerCase(), // ✅ Convert to lowercase
-  //         url: formData.url,
-  //         username: formData.username,
-  //         password: formData.password,
-  //       }),
-        
-  //     });
-  
-  //     const data = await response.json();
-  
-  //     if (response.ok) {
-  //       setTestResult({ success: true, message: "Connection successful!" });
-  //     } else {
-  //       setTestResult({ success: false, message: data.message || "Connection failed!" });
-  //     }
-  //   } catch (error) {
-  //     setTestResult({ success: false, message: "Error: " + error.message });
-  //   }
-  // };
+
   const handleTestConnection = async () => {
     try {
-      // Token ko localStorage se nikaliye
       const token = localStorage.getItem("token");
-  
-      // Token ko console par show karwana
       console.log("Token: ", token);
   
       const response = await fetch(`${baseUrl}/testConnectionIntegration`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`, // Authorization header mein token bhej rahe hain
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({
           platform: formData.platformName.toLowerCase(),
@@ -203,7 +145,6 @@ function Integration() {
       });
   
       const data = await response.json();
-  
       if (response.ok) {
         setTestResult({ success: true, message: "Connection successful!" });
       } else {
@@ -213,6 +154,118 @@ function Integration() {
       setTestResult({ success: false, message: "Error: " + error.message });
     }
   };
+  
+  
+  
+  
+  const tableModal = async () => {
+    Setintegeration(!integeration);
+  
+    if (!integeration) {
+      try {
+        // Retrieve the correct token
+        const token = localStorage.getItem("your_access_token"); // Ensure this is the correct key
+        console.log("token-->",token);
+        
+  
+        if (!token) {
+          console.error("Authorization token is missing.");
+          return;
+        }
+  
+        const payload = {
+          platformName: formData.platformName, 
+          integrationName: formData.integrationName,
+          url: formData.url, 
+          username: formData.username, 
+          password: formData.password
+        };
+  
+        const response = await axios.post(
+          `${baseUrl}/integrationCredntial`, // Ensure baseUrl is correctly defined
+          payload, // Send payload instead of an empty object
+          {
+            headers: {
+              "Authorization": `Bearer ${token}`,
+              "Content-Type": "application/json"
+            },
+          }
+        );
+  
+        if (response.status === 200 && response.data.tables) {
+          setTables(response.data.tables); // Ensure response contains tables
+        } else {
+          console.error("Unexpected API response:", response);
+        }
+      } catch (error) {
+        console.error("Error fetching tables:", error.response?.data || error.message);
+      }
+    }
+  };
+  const handleTableSelection = (tableName, isChecked, description) => {
+    setSelectedTables((prevState) => {
+      if (isChecked) {
+        return [
+          ...prevState,
+          { tableName, description }
+        ];
+      } else {
+        return prevState.filter((table) => table.tableName !== tableName);
+      }
+    });
+  };
+  
+  const handleDescriptionChange = (tableName, description) => {
+    setSelectedTables((prevState) =>
+      prevState.map((table) =>
+        table.tableName === tableName
+          ? { ...table, description }
+          : table
+      )
+    );
+  };
+  
+  
+  const handleSave = async () => {
+    try {
+      const token = localStorage.getItem("your_access_token"); // Get the token from localStorage
+      console.log(token)
+      if (!token) {
+        console.error("Authorization token is missing.");
+        return;
+      }
+  
+      // Make sure there are selected tables
+      if (selectedTables.length === 0) {
+        console.error("No tables selected.");
+        return;
+      }
+  
+      // Send the selected tables with their descriptions to the server
+      const response = await fetch(`${baseUrl}/MetaIntegrationDetails`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          tables: selectedTables, // Send selected tables and descriptions
+        }),
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Data saved successfully:", data);
+      } else {
+        console.error("Error saving data:", data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+  
+  
+  
   
   
 
@@ -394,46 +447,7 @@ function Integration() {
           </div>
         ))}
       </div>
-      {integeration && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg w-96 max-h-[80vh] overflow-hidden">
-          <button
-          className="text-gray-600 hover:text-gray-800"
-          onClick={() => Setintegeration(false)}
-        >
-          <IoClose size={24} />
-        </button>
-            <h2 className="text-xl font-semibold mb-4">List of Tables</h2>
 
-            {/* Dynamically rendered table list */}
-            <div className="space-y-4 max-h-60 overflow-y-auto">
-              {tables.length > 0 ? (
-                tables.map((table, index) => (
-                  <div key={index} className="flex items-start">
-                    <input type="checkbox" className="mr-2 mt-1" />
-                    <div>
-                      <p className="font-semibold">{table}</p>
-                      <textarea
-                        className="w-[290px] border p-2 text-sm text-gray-500 mt-1"
-                        placeholder="Enter description..."
-                      ></textarea>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p>No tables found.</p>
-              )}
-            </div>
-
-            {/* Save Button */}
-            <div className="mt-4 flex justify-end">
-              <button className="px-4 py-2 bg-blue-500 text-white rounded">
-                Save
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
 
       {isModalOpen && (
@@ -619,6 +633,54 @@ function Integration() {
     </div>
   </div>
 )}
+      {integeration && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg w-96 max-h-[80vh] overflow-hidden">
+          <button
+          className="text-gray-600 hover:text-gray-800"
+          onClick={() => Setintegeration(false)}
+        >
+          <IoClose size={24} />
+        </button>
+            <h2 className="text-xl font-semibold mb-4">List of Tables</h2>
+
+            {/* Dynamically rendered table list */}
+            <div className="space-y-4 max-h-60 overflow-y-auto">
+              {tables.length > 0 ? (
+                tables.map((table, index) => (
+                  <div key={index} className="flex items-start">
+                    <input type="checkbox" className="mr-2 mt-1"
+                    onChange={(e) =>
+                      handleTableSelection(table, e.target.checked, "") // Reset description on selection
+                    }
+                    />
+                    <div>
+                      <p className="font-semibold">{table}</p>
+                      <textarea
+                        className="w-[290px] border p-2 text-sm text-gray-500 mt-1"
+                        placeholder="Enter description..."
+                        value={selectedTables.find((t) => t.tableName === table)?.description || ""}
+                        onChange={(e) =>
+                          handleDescriptionChange(table, e.target.value) // Update description
+                        }
+                      ></textarea>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>No tables found.</p>
+              )}
+            </div>
+
+            {/* Save Button */}
+            <div className="mt-4 flex justify-end">
+              <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={handleSave}>
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <ToastContainer />
     </div>
