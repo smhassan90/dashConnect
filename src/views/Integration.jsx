@@ -38,6 +38,7 @@ const integrations = [
 
 function Integration() {
   const [selectedTables, setSelectedTables] = useState([]);
+  const [waiting, setWaiting ] = useState(false)
   const [tables, setTables] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [integeration, Setintegeration] = useState(false);
@@ -104,6 +105,7 @@ function Integration() {
 
 
   const handleTestConnection = async () => {
+    setWaiting(true);
     try {
       const token = localStorage.getItem("token");
       console.log("Token: ", token);
@@ -125,15 +127,57 @@ function Integration() {
       const data = await response.json();
       if (response.ok) {
         setTestResult({ success: true, message: "Connection successful!" });
+        toast.success("Connection successful!");
+
       } else {
+        toast.error(data.message || "Connection failed!");
         setTestResult({ success: false, message: data.message || "Connection failed!" });
       }
     } catch (error) {
+      setWaiting(false); // Loader stop karein
+      toast.error("Error: " + error.message);
+
       setTestResult({ success: false, message: "Error: " + error.message });
     }
   };
   
+   
+
+// const handleTestConnection = async () => {
+//   setWaiting(true); // Loader start karein
   
+//   try {
+//     const token = localStorage.getItem("your_access_token");
+//     console.log("Token: ", token);
+
+//     const response = await fetch(`${baseUrl}/testConnectionIntegration`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//       },
+//       body: JSON.stringify({
+//         platform: formData.platformName.toLowerCase(),
+//         url: formData.url,
+//         username: formData.username,
+//         password: formData.password,
+//       }),
+//     });
+
+//     const data = await response.json();
+//     setWaiting(false); // Loader stop karein
+
+//     if (response.ok) {
+//       toast.success("Connection successful!");
+//     } else {
+//       toast.error(data.message || "Connection failed!");
+//     }
+//   } catch (error) {
+//     setWaiting(false); // Loader stop karein
+//     toast.error("Error: " + error.message);
+//   }
+// };
+
   
   
   const tableModal = async () => {
@@ -362,7 +406,7 @@ function Integration() {
         onClick={() => setIsOpen(true)}
         text={"Add integeration"}
 
-  className="ml-10 mt-5 w-44 mobile:w-32 bg-black hover:bg-white hover:text-black border-2 border-black"
+  className="ml-10 mt-5 w-48 mobile:w-32 bg-black hover:bg-white hover:text-black border-2 border-black"
 />
 
       
@@ -583,12 +627,28 @@ function Integration() {
           onClick={() => {
             console.log(formData);
             handleTestConnection(); // Trigger API test when button is clicked
-            setIsOpen(false);
           }}
           className="px-4 py-2 bg-black text-white rounded"
         >
-          Test
+          {waiting ? (
+    <span className="animate-spin border-2 border-white border-t-transparent rounded-full w-5 h-5"></span>
+  ) : (
+    "Test"
+  )}
+          
         </button>
+        
+         {/* <button
+  onClick={handleTestConnection}
+  className="px-4 py-2 bg-black text-white rounded flex items-center gap-2"
+>
+  {waiting ? (
+    <span className="animate-spin border-2 border-white border-t-transparent rounded-full w-5 h-5"></span>
+  ) : (
+    "Test"
+  )}
+</button> */}
+
         <button
           onClick={tableModal}
           className="px-4 py-2 bg-black text-white rounded"
