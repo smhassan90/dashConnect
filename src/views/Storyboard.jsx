@@ -40,7 +40,7 @@ function Storyboard() {
     }
 
     try {
-      const response = await fetch(`${baseUrl}/generateGraphQuery`, {
+      const response = await fetch(`${baseUrl}/api/integration/v1/generateGraphQuery`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +70,7 @@ function Storyboard() {
       const token = localStorage.getItem('your_access_token'); 
       console.log( "tokan",token)
   
-      const response = await fetch(`${baseUrl}/sugestionOfGraph`, {
+      const response = await fetch(`${baseUrl}/api/integration/v1/sugestionOfGraph`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
