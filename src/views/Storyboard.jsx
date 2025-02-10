@@ -8,13 +8,22 @@ import Bar from "../Reuseable/Bar";
 import { ResizableBox } from "react-resizable";
 import Draggable from "react-draggable";
 import "react-resizable/css/styles.css";
+import { Line } from "react-chartjs-2"; // Chart.js
+import "chart.js/auto";
 import CustomButton from "../Components/Button";
+
 import DraggableCharts from "../Reuseable/DraggableChart";
 
 function Storyboard() {
+  const [activeTab, setActiveTab] = useState("graphs"); // Default tab
+  const [graphData, setGraphData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [suggestion, setSuggestion] = useState('');
   const [searchText, setSearchText] = useState("");
+  const [reportData, setReportData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
 
 
   // Fetch suggestion data when the modal is opened
@@ -27,42 +36,108 @@ function Storyboard() {
   
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
+//   const handleSearch = async () => {
+//     if (!searchText.trim()) return; // Empty input check
 
-    if (!searchText) return;
+//     setLoading(true);
+//     setError(null);
 
-    const token = localStorage.getItem("your_access_token");  
+//     const token = localStorage.getItem("your_access_token");
+// console.log("Query : " + searchText.trim());
+//     try {
+      
+//       const response = await fetch("http://localhost:3000/api/integration/v1/generateGraphQuery", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${token}`, // Token add kiya
+//         },
+//         body: JSON.stringify({
+//           "requiredGraph":"graph",
+//           "customText" : searchText.trim()
+//       }),
+//       });
+//       /*
+  //     const response = {
+  //       "labels": [
+  //           "Christopher Wilson",
+  //           "Dr. Furqan Ahmed",
+  //           "Emily Davis",
+  //           "Jane Doe",
+  //           "Michelle Johnson",
+  //           "Syed Faheem Ahmed"
+  //       ],
+  //       "datasets": [
+  //           {
+  //               "label": "ID",
+  //               "data": [
+  //                   7,
+  //                   1,
+  //                   6,
+  //                   3,
+  //                   5,
+  //                   2
+  //               ]
+  //           }
+  //       ]
+  //   };
+  //   */
+  //     const data = await response.json();
+  //     console.log("API Response:", data); // Debugging ke liye
 
-    if (!token) {
-      console.error("No token found. Please log in.");
-      return;
-    }
+  //     if (data.requiredGraph === "graph") {
+  //       setGraphData();
+  //       setReportData(null); // Clear report if graph is selected
+  //     } else if (data.requiredGraph === "report") {
+  //       setReportData(JSON.parse(data.output)); // Convert JSON string to Object
+  //       setGraphData(null); // Clear graph if report is selected
+  //     }
+  //   } catch (err) {
+  //     setError("Failed to fetch data. Please try again.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+
+  const handleSearch = async () => {
+    if (!searchText.trim()) return; // Empty input check
+
+    setLoading(true);
+    setError(null);
+
+    const token = localStorage.getItem("your_access_token");
+    console.log("Query : " + searchText.trim());
 
     try {
-      const response = await fetch(`${baseUrl}/api/integration/v1/generateGraphQuery`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          requiredGraph: "yourRequiredGraph", 
-          customText: searchText, 
-        }),
-      });
+        const response = await fetch("http://localhost:3000/api/integration/v1/generateGraphQuery", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                "requiredGraph": activeTab, // Dynamically select graph or report
+                "customText": searchText.trim()
+            }),
+        });
 
-      const data = await response.json();
-      console.log("API Response:", data); 
-      setSearchText(""); 
+        const data = await response.json();
+        console.log("API Response:", data); // Debugging ke liye
 
-
-    } catch (error) {
-      console.error("Error during API call:", error);
+        if (activeTab === "graphs") {
+            setGraphData(data.output); // Assuming data.output contains graph data
+            setReportData(null); // Clear report
+        } else if (activeTab === "report") {
+            setReportData(JSON.parse(data.output)); // Convert JSON string to Object
+            setGraphData(null); // Clear graph
+        }
+    } catch (err) {
+        setError("Failed to fetch data. Please try again.");
+    } finally {
+        setLoading(false);
     }
-  };
-
-
+};
 
 
   const fetchSuggestion = async () => {
@@ -143,39 +218,67 @@ function Storyboard() {
           <a onClick={() => setIsModalOpen(true)}  className="text-blue-500" href="#"> More Suggestion</a>
         </p>
         
-            <div className="mt-5 rounded-[10px] ml-7 relative flex justify-center mobile:ml-5">
-      <input
-        type="text"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-        className="bg-white text-gray-700 mb-4 border rounded-[10px] border-gray-300 w-full p-3 pl-10 mobile:w-full"
-        placeholder="Search Integration..."
-      />
-      <span
-        className="absolute mt-6 right-3 transform -translate-y-1/2 text-gray-500 cursor-pointer"
-        onClick={handleSearch} // Trigger the search on icon click
-      >
-        <IoSearch className="text-2xl" />
-      </span>
+        <div className="w-full mt-5 px-7 mobile:px-5">
+      {/* Tabs */}
+      <div className="flex space-x-4 mb-3 border-b border-gray-300">
+        <button
+          className={`py-2 px-4 text-gray-700 font-semibold ${
+            activeTab === "graph" ? "border-b-2 border-blue-500 text-blue-500" : ""
+          }`}
+          onClick={() => setActiveTab("graph")}
+        >
+          Line of Graphs
+        </button>
+        <button
+          className={`py-2 px-4 text-gray-700 font-semibold ${
+            activeTab === "report" ? "border-b-2 border-blue-500 text-blue-500" : ""
+          }`}
+          onClick={() => setActiveTab("report")}
+        >
+          Report
+        </button>
+      </div>
+
+      {/* Search Bar */}
+      <div className="mt-3 rounded-[10px] relative flex justify-center">
+        <input
+          type="text"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          className="bg-white text-gray-700 border rounded-[10px] border-gray-300 w-full p-3 pl-10 mobile:w-full"
+          placeholder="Search Integration..."
+        />
+        <span
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
+          onClick={handleSearch}
+        >
+          <IoSearch className="text-2xl" />
+        </span>
+      </div>
     </div>
-        
-        {/* Suggestion Modal */}
-        {isModalOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
-            <div className="bg-white p-6 rounded-md w-1/3">
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl font-bold">Suggestion</h2>
-                <button onClick={closeModal} className="text-xl font-bold text-red-500">
-                  <IoClose />
-                </button>
-              </div>
-            
-              <div className="mt-4 max-h-96 overflow-y-auto">
-              <TextWithBold text={suggestion} />
-              </div>
-            </div>
+    {reportData && (
+          <div className="bg-white p-4 rounded-[14px] shadow-md border hover:border-black transition-all duration-300">
+            <h3 className="text-lg font-semibold mb-4">Generated Report</h3>
+            <table className="w-full border-collapse border border-gray-300">
+              <thead>
+                <tr className="bg-gray-200">
+                  <th className="border border-gray-300 px-4 py-2">ID</th>
+                  <th className="border border-gray-300 px-4 py-2">Patient Volume</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reportData.map((row, index) => (
+                  <tr key={index} className="hover:bg-gray-100">
+                    <td className="border border-gray-300 px-4 py-2">{row.ID}</td>
+                    <td className="border border-gray-300 px-4 py-2">{row.patient_volume}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
+        
+       
         
         {/* Additional Content Section */}
         <div className="flex flex-col ml-7 sm:flex-row justify-between items-start mt-10 gap-8 mobile:ml-5">
@@ -224,6 +327,23 @@ function Storyboard() {
         
         <div>
           <DraggableCharts />
+           {/* Suggestion Modal */}
+        {isModalOpen && (
+          <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+            <div className="bg-white p-6 rounded-md w-1/3">
+              <div className="flex justify-between items-center">
+                <h2 className="text-xl font-bold">Suggestion</h2>
+                <button onClick={closeModal} className="text-xl font-bold text-red-500">
+                  <IoClose />
+                </button>
+              </div>
+            
+              <div className="mt-4 max-h-96 overflow-y-auto">
+              <TextWithBold text={suggestion} />
+              </div>
+            </div>
+          </div>
+        )}
         </div>
       </div>
     </div>
