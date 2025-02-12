@@ -4,7 +4,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
-import Sidebar from "./Reuseable/sideBar";
+// import Sidebar from "./Reuseable/sideBar";
+import Sidebar from "./Reuseable/Sidebar"; // Ensure exact match
 import Dashboard from "./views/Dashboard";
 import dashboardRoutes from "./routes";
 import Login from "./Components/Login";
