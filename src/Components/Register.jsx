@@ -53,14 +53,14 @@ const Register = () => {
         };
     
         try {
-            const response = await axios.post(`${baseUrl}/create`, formData);
+            const response = await axios.post(`${baseUrl}/api/user/v1/register`, formData);
             // alert(response.data.message || "Registration successful!");
             toast.success(response.data.message || "Registration successful!");
 
             localStorage.setItem('user', JSON.stringify(response.data.user));
 
 
-            navigate('/login');
+            navigate('/');
         } catch (error) {
             console.error('Error sending data:', error);
             // setError("Registration failed. Please try again.");
@@ -207,7 +207,7 @@ const Register = () => {
 
                                 <div className="flex items-center justify-center">
                                     <p className="text-gray-600">Have an account?</p>
-                                    <Link to="/login" className="text-blue-500 hover:text-blue-700 ml-1">Sign In</Link>
+                                    <Link to="/" className="text-blue-500 hover:text-blue-700 ml-1">Sign In</Link>
                                 </div>
                             </form>
                         </div>

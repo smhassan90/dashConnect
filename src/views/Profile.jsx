@@ -141,7 +141,7 @@ function Profile() {
         localStorage.clear();
         sessionStorage.clear();
         toast.success("You have been logged out.");
-        window.location.href = '/login';
+        window.location.href = '/';
     };
 
     const handleUpdatePassword = async () => {

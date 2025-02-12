@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
-import Sidebar from "./Reuseable/Sidebar";
+import Sidebar from "./Reuseable/sideBar";
 import Dashboard from "./views/Dashboard";
 import dashboardRoutes from "./routes";
 import Login from "./Components/Login";
@@ -20,7 +20,7 @@ const App = () => {
   return (
     <Routes>
       {/* Public routes */}
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Login />} />
       <Route path="/signup" element={<Register />} />
 
       {/* Admin routes with authentication check */}
@@ -40,7 +40,7 @@ const App = () => {
               </div>
             </div>
           ) : (
-            <Navigate to="/login" replace />
+            <Navigate to="/" replace />
           )
         }
       />
