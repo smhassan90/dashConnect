@@ -13,7 +13,7 @@ import dashboardRoutes from "./routes";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 // import Sidebar from "./Reuseable/side";
-import Left from "./Reuseable/sideBar"
+import Left from "./Reuseable/Left"
 
 // Check if user is logged in
 const isAuthenticated = () => {
