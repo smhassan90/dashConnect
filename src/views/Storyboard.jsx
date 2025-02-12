@@ -35,7 +35,7 @@ function Storyboard() {
 
   
   const baseUrl = process.env.REACT_APP_BASE_URL;
-
+  
 //   const handleSearch = async () => {
 //     if (!searchText.trim()) return; // Empty input check
 
