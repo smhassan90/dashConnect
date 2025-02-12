@@ -3,9 +3,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import image1 from "../assests/image1.png";
-import image2 from "../assests/image2.png";
-import image3 from "../assests/image3.png";
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -180,30 +177,7 @@ const Register = () => {
                                     <span className="mx-4 text-gray-700">or, Continue with</span>
                                     <hr className="flex-grow border-t border-gray-500" />
                                 </div>
-{/* 
-                                <div className="flex justify-center gap-4 p-4">
-                                    <div className="flex items-center justify-center border border-gray-300 rounded-[14px] shadow-lg p-1 w-[75px] h-[70px]">
-                                        <img
-                                            src={image1}
-                                            alt="Google Logo"
-                                            className="max-w-full h-auto rounded-lg"
-                                        />
-                                    </div>
-                                    <div className="flex items-center justify-center border border-gray-300 rounded-[14px] shadow-lg p-1 w-[75px] h-[70px]">
-                                        <img
-                                            src={image3}
-                                            alt="Facebook Logo"
-                                            className="max-w-full h-auto rounded-lg"
-                                        />
-                                    </div>
-                                    <div className="flex items-center justify-center border border-gray-300 rounded-[14px] shadow-lg p-1 w-[75px] h-[70px]">
-                                        <img
-                                            src={image2}
-                                            alt="Apple iPhone Logo"
-                                            className="max-w-full h-auto rounded-lg"
-                                        />
-                                    </div>
-                                </div> */}
+ 
 
                                 <div className="flex items-center justify-center">
                                     <p className="text-gray-600">Have an account?</p>

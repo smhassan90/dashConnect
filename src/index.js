@@ -5,11 +5,15 @@ import "./index.css";
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 // import Sidebar from "./Reuseable/sideBar";
-import Sidebar from "./Reuseable/Sidebar"; // Ensure exact match
+// import Sidebar from "./Reuseable/Sidebar";
+
+// import Sidebar from ""; // Ensure exact match
 import Dashboard from "./views/Dashboard";
 import dashboardRoutes from "./routes";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
+// import Sidebar from "./Reuseable/side";
+import Left from "./Reuseable/sideBar"
 
 // Check if user is logged in
 const isAuthenticated = () => {
@@ -30,7 +34,7 @@ const App = () => {
         element={
           isAuthenticated() ? (
             <div className="flex h-screen">
-              <Sidebar className="w-60 fixed top-0 left-0 h-full bg-gray-800 text-white" />
+              <Left className="w-60 fixed top-0 left-0 h-full bg-gray-800 text-white" />
               <div className="p-4 w-full">
                 <Routes>
                   <Route path="dashboard" element={<Dashboard />} />

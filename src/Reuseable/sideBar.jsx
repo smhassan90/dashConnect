@@ -10,7 +10,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
-const Sidebar = () => {
+const sideBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [user, setUser] = useState(null);
@@ -225,4 +225,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default sideBar;

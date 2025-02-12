@@ -22,37 +22,6 @@ const Login = () => {
   const navigate = useNavigate();
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
-  
-  // const handleSubmit = async (event) => {
-  //       event.preventDefault();
-  //       const formData = { email, password };
-    
-  //       try {
-  //         const response = await axios.post(`${baseUrl}/login`, formData);
-  //         const token = response.data.token;
-  //         const userName = response.data.user.name; // Assuming the API returns user data including the name
-
-    
-  //         if (token) {
-  //           localStorage.setItem("isLoggedIn", "true"); // Set login status
-  //           localStorage.setItem("your_access_token", token); // Store the token
-  //          // After successful login:
-  //         localStorage.setItem('authToken', response.data.token);
-
-  //           localStorage.setItem("user_name", userName); // Save the user's name
-
-  //           toast.success("Login successful!");
-  //           navigate("/admin/dashboard"); // Redirect to dashboard after login
-  //         } else {
-  //           setError("Login failed. No token received.");
-  //           toast.error("Login failed. No token received.");
-  //         }
-  //       } catch (error) {
-  //         const errorMessage = error.response && error.response.data ? error.response.data.message : "Login failed. Please try again.";
-  //         setError(errorMessage);
-  //         toast.error(errorMessage);
-  //       }
-  //     }
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = { email, password };
