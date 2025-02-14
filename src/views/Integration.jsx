@@ -784,7 +784,7 @@ function Integration() {
 
     try {
       const response = await axios.post(
-        `${baseUrl}/testConnectionIntegration`,
+        `${baseUrl}/api/integration/v1/testConnectionIntegration`,
         { username:userId, password:apiKey, url:url, type:type },
         
         {
@@ -1006,7 +1006,7 @@ function Integration() {
 
     try {
       const response = await fetch(
-        `${baseUrl}/updateIntegration`,
+        `${baseUrl}/api/integration/v1/updateIntegration`,
         {
           method: "PUT",
           headers: {

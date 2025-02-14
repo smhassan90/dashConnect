@@ -23,7 +23,7 @@ function Profile() {
     const fetchProfileImage = async () => {
         const token = localStorage.getItem('authToken');
         try {
-            const response = await axios.get(`${baseUrl}/getProfilePicture`, {
+            const response = await axios.get(`${baseUrl}/api/user/v1/getProfilePicture`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -100,7 +100,7 @@ function Profile() {
         const token = localStorage.getItem("authToken");
 
         try {
-            const response = await axios.post(`${baseUrl}/uploadImage`, formData, {
+            const response = await axios.post(`${baseUrl}/api/user/v1/uploadImage`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     "Authorization": `Bearer ${token}`,
@@ -110,7 +110,7 @@ function Profile() {
             if (response.data?.path) {
                 let imagePath = response.data.path;
 
-                const imageUrl = `http://localhost:3000/${imagePath.replace(/\\/g, '/')}`;
+                const imageUrl = `${baseUrl}/${imagePath.replace(/\\/g, '/')}`;
                 setProfileImage(imageUrl);
                 localStorage.setItem('profileImage', imageUrl);
 
@@ -155,7 +155,7 @@ function Profile() {
         }
         try {
             const response = await axios.put(
-                `${baseUrl}/changePassword`,
+                `${baseUrl}/api/user/v1/changePassword`,
                 { oldPassword, newPassword },
                 {
                     headers: {
@@ -200,12 +200,24 @@ function Profile() {
         <div className="bg-white shadow-md rounded-lg p-6 max-w-md mx-auto mt-10 mobile:w-72">
             <div className="flex justify-center relative mb-4">
 
-                <img
+                {/* <img
                     src={profileImage || "https://via.placeholder.com/100"}
                     alt="Profile"
                     style={{ width: '100px', height: '100px', borderRadius: '50%' }}
                     onError={(e) => e.target.src = "https://via.placeholder.com/100"} // Fallback if image fails to load
-                />
+                /> */}
+                <img
+    src={profileImage || "https://via.placeholder.com/100"}
+    alt="Profile"
+    style={{ width: '100px', height: '100px', borderRadius: '50%' }}
+    onError={(e) => {
+        if (!e.target.dataset.failed) {
+            e.target.dataset.failed = "true";
+            e.target.src = "https://dummyimage.com/100x100/ccc/fff"; 
+        }
+    }} 
+/>
+
 
                 <button
                     onClick={handleOpenUploadModal}

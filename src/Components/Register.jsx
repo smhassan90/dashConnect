@@ -50,7 +50,7 @@ const Register = () => {
         };
     
         try {
-            const response = await axios.post(`https://dashconnectbackhned2.vercel.app/api/user/v1/register`, formData);
+            const response = await axios.post(`${baseUrl}/api/user/v1/register`, formData);
             console.log("ssss",baseUrl)
             // alert(response.data.message || "Registration successful!");
             toast.success(response.data.message || "Registration successful!");

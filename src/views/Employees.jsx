@@ -43,7 +43,7 @@ useEffect(() => {
       const token = localStorage.getItem("your_access_token");
       if (!token) throw new Error("No token found. Please log in.");
 
-      const response = await axios.get(`${baseUrl}/getEmployees`, {
+      const response = await axios.get(`${baseUrl}/api/employee/v1/getEmployees`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -77,7 +77,7 @@ const confirmDelete = async () => {
 
     // Send DELETE request to the backend
     const response = await axios.delete(
-      `${baseUrl}/deleteEmployee/${employeeId}`, // Use the correct API endpoint
+      `${baseUrl}/api/employee/v1/deleteEmployee/${employeeId}`, // Use the correct API endpoint
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -132,7 +132,7 @@ const updateEmployee = async () => {
   try {
     const token = localStorage.getItem("your_access_token");
     const response = await axios.put(
-      `${baseUrl}/updateEmployee/${editData._id}`, // Ensure _id is used here
+      `${baseUrl}/api/employee/v1/updateEmployee/${editData._id}`, // Ensure _id is used here
       editData,
       {
         headers: {
@@ -171,7 +171,7 @@ const addNewEntry = async () => {
     }
 
     const response = await axios.post(
-      `${baseUrl}/addEmployee`,
+      `${baseUrl}/api/employee/v1/addEmployee`,
       newEntry,
       {
         headers: {

@@ -54,7 +54,7 @@ const Login = () => {
     
     try {
 
-      const response = await axios.post(`${baseUrl}/forgotPassword`, { email: forgotEmail });
+      const response = await axios.post(`${baseUrl}/api/user/v1/forgotPassword`, { email: forgotEmail });
       
       if (response.data.success) {
         toast.success(response.data.message); 
@@ -81,7 +81,7 @@ const Login = () => {
   
     try {
       // Send token and new password to backend
-      const response = await axios.post(`${baseUrl}/resetPassword`, {
+      const response = await axios.post(`${baseUrl}/api/user/v1/resetPassword`, {
         token: resetToken,
         password: newPassword,
       });
@@ -228,7 +228,7 @@ const Login = () => {
           
           <div className="bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-1/2 flex flex-col mobile:h-full mobile:mb-20">
             <div className="p-6 flex-1">
-              <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">Hello Again!</h2>
+              <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">Hello Again!!!!</h2>
               <p className="text-gray-600 text-center mb-8">Welcome back, You’ve been missed!</p>
 
               {error && <p className="text-red-500 text-center">{error}</p>}

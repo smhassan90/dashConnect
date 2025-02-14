@@ -218,7 +218,7 @@ const handleSearch = async () => {
   console.log("Query : " + searchText.trim());
 
   try {
-      const response = await fetch("http://localhost:3000/api/integration/v1/generateGraphQuery", {
+      const response = await fetch(`${baseUrl}/api/integration/v1/generateGraphQuery`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",
