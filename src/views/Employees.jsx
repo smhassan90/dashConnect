@@ -206,7 +206,7 @@ const addNewEntry = async () => {
         buttonText="+ Add Employee"
       />
       <div className=" ml-4 mt-4">
-        <h1 className="text-2xl md:text-3xl font-bold mb-3  md:mb-4 max-sm   mobile:ml-11  ">
+        <h1 className="text-2xl md:text-3xl font-bold mb-3  md:mb-4 max-sm   mobile:ml-16   ">
           Employees List
         </h1>
         <input
@@ -214,10 +214,10 @@ const addNewEntry = async () => {
           value={searchTerm}
           onChange={handleSearch}
           placeholder="Search by Story Board Name"
-          className="text-sm text-gray-700 mb-4 border border-gray-300 rounded p-3 w-full max-sm mobile:w-3/4 mobile:ml-11"
+          className="text-sm text-gray-700 mb-4 border border-gray-300 rounded p-3 w-full max-sm mobile:w-[340px] mobile:ml-16"
         />
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-300 max-sm mobile:w-3/4 mobile:ml-11">
+          <table className="min-w-full bg-white border border-gray-300 max-sm mobile:w-[340px] mobile:ml-16 ">
             {" "}
             <thead>
   <tr className="text-left font-bold">
@@ -261,7 +261,7 @@ const addNewEntry = async () => {
             {item.role}
           </td>
           <td className="px-2 py-3 text-xs sm:text-sm md:text-base">
-            <div className="flex justify-center space-x-3">
+            <div className="flex  space-x-1">
               <button
                 onClick={() => handleDelete(index)}
                 className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs"

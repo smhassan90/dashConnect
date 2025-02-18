@@ -1,5 +1,90 @@
 
 
+// import React, { useEffect, useState } from 'react'
+// import DashboardCard from '../Reuseable/DashboardCard '
+// import Bar from '../Reuseable/Bar'
+// import { BsCalendar3 } from "react-icons/bs";
+// import Table from "../Components/Table"
+
+
+// function Dashboard() {
+//   const [entries, setEntries] = useState(25);
+//   const [user, setUser] = useState(null);
+
+//   const currentDate = new Date().toLocaleDateString('en-GB');
+
+//   const handleChange = (event) => {
+//     setEntries(parseInt(event.target.value));
+
+
+   
+//   };
+//   useEffect(() => {
+//     const storedUser = JSON.parse(localStorage.getItem('user'));
+//     setUser(storedUser);
+//     console.log(storedUser); // Verify user data here
+//   }, []);
+//   return (
+//     <div>
+
+//       <Bar title="DashBoard" buttonText="+ Add Story " />
+
+
+
+
+//       <div className="flex flex-col md:flex-row justify-between items-center mt-4 mx-auto max-w-7xl px-4">
+//         <p className="text-custom-22 font-medium m-0 md:mr-4  whitespace-nowrap">     Welcome Back, {user && user.firstName ? user.firstName : "Guest"}
+
+//         </p> <div className="flex items-center">
+//           <BsCalendar3 className="text-custom-20 mr-2" />
+//           <span className="text-custom-18">{currentDate.replace(/\//g, '.')}</span>
+//         </div>
+//       </div>
+
+//       <div className="grid grid-cols-1 md:grid-cols-2 ml-5  lg:grid-cols-4  mt-6 mx-aut0 mobile:w-3/4 mobile:ml-16
+//       ">
+//         <DashboardCard
+//           title="Sales Board"
+//           value={23}
+//           additionalCount="+20"
+//           imgSrc="https://via.placeholder.com/30"
+//         />
+//         <DashboardCard
+//           title="Appointments"
+//           value={43}
+//           additionalCount="+20"
+//           imgSrc="https://via.placeholder.com/30"
+//         />
+//         <DashboardCard
+//           title="Information of Sales"
+//           value={43}
+//           additionalCount="+20"
+//           imgSrc="https://via.placeholder.com/30"
+//         />
+//         <DashboardCard
+//           title="Information of Appointments"
+//           value={43}
+//           additionalCount="+20"
+//           imgSrc="https://via.placeholder.com/30"
+//         />
+//       </div>
+//       <div className="flex gap-2  ml-2 mt-7 text-custom-14 font-medium  mx-auto max-w-7xl px-4 mobile:w-3/4 mobile:ml-11 ">
+//         <span>Show</span>
+//         <select className="border rounded" value={entries} onChange={handleChange}>
+//           <option value={25}>25</option>
+//           <option value={50}>50</option>
+//           <option value={100}>100</option>
+//         </select>
+//         <span className=''>entries</span>
+//       </div>
+//       <Table className="mt-6" />
+//     </div>
+//   )
+// }
+
+// export default Dashboard
+
+
 import React, { useEffect, useState } from 'react'
 import DashboardCard from '../Reuseable/DashboardCard '
 import Bar from '../Reuseable/Bar'
@@ -25,7 +110,7 @@ function Dashboard() {
     console.log(storedUser); // Verify user data here
   }, []);
   return (
-    <div>
+    <div className=''>
 
       <Bar title="DashBoard" buttonText="+ Add Story " />
 
@@ -33,7 +118,7 @@ function Dashboard() {
 
 
       <div className="flex flex-col md:flex-row justify-between items-center mt-4 mx-auto max-w-7xl px-4">
-        <p className="text-custom-22 font-medium m-0 md:mr-4  whitespace-nowrap">     Welcome Back, {user && user.firstName ? user.firstName : "Guest"}
+        <p className="text-custom-22 font-medium m-0 md:mr-4  whitespace-nowrap mobile:ml-24">     Welcome Back, {user && user.firstName ? user.firstName : "Guest"}
 
         </p> <div className="flex items-center">
           <BsCalendar3 className="text-custom-20 mr-2" />
@@ -41,7 +126,7 @@ function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 ml-5  lg:grid-cols-4  mt-6 mx-aut0 mobile:w-3/4 mobile:ml-16
+      <div className="grid grid-cols-1 md:grid-cols-2 ml-5  lg:grid-cols-4  mt-6 mx-aut0 mobile:w-3/4 mobile:ml-24
       ">
         <DashboardCard
           title="Sales Board"
@@ -68,7 +153,7 @@ function Dashboard() {
           imgSrc="https://via.placeholder.com/30"
         />
       </div>
-      <div className="flex gap-2  ml-2 mt-7 text-custom-14 font-medium  mx-auto max-w-7xl px-4 mobile:w-3/4 mobile:ml-11 ">
+      <div className="flex gap-2  ml-2 mt-7 text-custom-14 font-medium  mx-auto max-w-7xl px-4 mobile:w-3/4 mobile:ml-24 ">
         <span>Show</span>
         <select className="border rounded" value={entries} onChange={handleChange}>
           <option value={25}>25</option>
@@ -77,7 +162,7 @@ function Dashboard() {
         </select>
         <span className=''>entries</span>
       </div>
-      <Table className="mt-6" />
+      <Table className="mt-6 mobile:ml-32" />
     </div>
   )
 }
