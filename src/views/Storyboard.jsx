@@ -95,8 +95,7 @@ function Storyboard() {
   //   }
   // };
 
-  
-// sahi 
+  // sahi
   const handleSearch = async () => {
     if (!searchText.trim()) return; // Empty input check
 
@@ -126,10 +125,7 @@ function Storyboard() {
       console.log("API Response:", data); // Debugging ke liye
 
       if (activeTab === "graph") {
-        if (
-          data && data.labels
-          && data.datasets
-        ) {
+        if (data && data.labels && data.datasets) {
           setGraphData({
             labels: data.labels,
             datasets: data.datasets.map((dataset) => ({
@@ -148,8 +144,8 @@ function Storyboard() {
           setGraphData(null); // Agar response format sahi na ho, to graph remove karein
         }
       } else if (activeTab === "report") {
-        setReportData(JSON.parse(data.output)); 
-        console.log(reportData,"hhh")// Convert JSON string to Object
+        setReportData(JSON.parse(data.output));
+        console.log(reportData, "hhh"); // Convert JSON string to Object
         setGraphData(null); // Clear graph
       }
     } catch (err) {
@@ -158,7 +154,6 @@ function Storyboard() {
       setLoading(false);
     }
   };
-
 
   const fetchSuggestion = async () => {
     try {
@@ -333,8 +328,6 @@ function Storyboard() {
           </div>
         )}
 
-
-
         {/* Additional Content Section */}
         <div className="flex flex-col ml-7 sm:flex-row justify-between items-start mt-10 gap-8 mobile:ml-5">
           {/* <div className="w-full p-4 h-[330px] bg-white rounded-[14px] shadow-md mb-5 border hover:border-black transition-all duration-300 gap-6">
@@ -358,54 +351,50 @@ function Storyboard() {
             </div>
           </div> */}
 
-
           {graphData && (
-  <div className="w-full p-4 h-[330px] bg-white rounded-[14px] shadow-md mb-5 border hover:border-black transition-all duration-300 gap-6">
-    <div className="flex justify-between items-center">
-      <p className="text-base sm:text-lg">Line ofgraph</p>
-      <p className="mr-10 flex items-center whitespace-nowrap text-sm sm:text-base">
-        This Month{" "}
-        <span className="ml-1">
-          <SlArrowDown />
-        </span>
-      </p>
-    </div>
-    <div className="w-full">
-      <LineChart
-        xAxis={[
-          {
-            id: "appointments", // ✅ Unique ID for the X-axis
-            scaleType: "band", // ✅ Ensures categorical X-axis
-            data: graphData.labels || [], // ✅ X-axis Labels
-            tickLabelAngle: -45, // ✅ Rotate labels for better visibility
-          },
-        ]}
-        yAxis={[
-          {
-            // id: "count",
-            label: "Number of Appointments", // ✅ Y-axis label
-            min: 0, // ✅ Ensures no negative values
-          },
-        ]}
-        series={[
-          {
-            data: graphData.datasets[0]?.data || [], // ✅ Y-axis Data
-            // label: graphData.datasets[0]?.label || "Appointments", // ✅ Dynamic label
-            area: true,
-            color: "#007bff", // ✅ Fixed color for visibility
-          },
-        ]}
-        height={300}
-        sx={{
-          "& .MuiAxis-root": { stroke: "#ddd" }, // ✅ Light grey axis for better UI
-        }}
-      />
-    </div>
-  </div>
-)}
-
-
-
+            <div className="w-full mobile:w-[300px] ml-5 mobile:ml-10 p-4 h-[330px] bg-white rounded-[14px] shadow-md mb-5 border hover:border-black transition-all duration-300 gap-6">
+              <div className="flex justify-between items-center">
+                <p className="text-base sm:text-lg">Line ofgraph</p>
+                <p className="mr-10 flex items-center whitespace-nowrap text-sm sm:text-base">
+                  This Month{" "}
+                  <span className="ml-1">
+                    <SlArrowDown />
+                  </span>
+                </p>
+              </div>
+              <div className="w-full">
+                <LineChart
+                  xAxis={[
+                    {
+                      id: "appointments", // ✅ Unique ID for the X-axis
+                      scaleType: "band", // ✅ Ensures categorical X-axis
+                      data: graphData.labels || [], // ✅ X-axis Labels
+                      tickLabelAngle: -45, // ✅ Rotate labels for better visibility
+                    },
+                  ]}
+                  yAxis={[
+                    {
+                      // id: "count",
+                      label: "Number of Appointments", // ✅ Y-axis label
+                      min: 0, // ✅ Ensures no negative values
+                    },
+                  ]}
+                  series={[
+                    {
+                      data: graphData.datasets[0]?.data || [], // ✅ Y-axis Data
+                      // label: graphData.datasets[0]?.label || "Appointments", // ✅ Dynamic label
+                      area: true,
+                      color: "#007bff", // ✅ Fixed color for visibility
+                    },
+                  ]}
+                  height={300}
+                  sx={{
+                    "& .MuiAxis-root": { stroke: "#ddd" }, // ✅ Light grey axis for better UI
+                  }}
+                />
+              </div>
+            </div>
+          )}
 
           <div className="ml-7 mb-12 h-[330px] p-4 bg-white rounded-[14px] shadow-md border hover:border-black transition-all duration-300 ">
             <div className="flex justify-between items-center">
