@@ -232,7 +232,7 @@ function Storyboard() {
         <div className="mr-5">
           <Bar title="Story Board" buttonText="+ Add Story" />
         </div>
-        <p className="text-center text-black mt-5 mobile:w-64 mobile:ml-16 mobile:text-center">
+        <p className="text-center  text-black mt-5 mobile:w-64 mobile:ml-24 mobile:text-center">
           Ask a data question, check the SQL, add it to your model
           <a
             onClick={() => setIsModalOpen(true)}
@@ -244,7 +244,7 @@ function Storyboard() {
           </a>
         </p>
 
-        <div className="w-full mobile:ml-5 mt-5 px-7 mobile:px-5">
+        <div className="w-full mobile:ml-12 mt-5 px-7 mobile:px-5">
           {/* Tabs */}
           <div className="flex space-x-4 mb-3 border-b border-gray-300">
             <button
@@ -270,133 +270,106 @@ function Storyboard() {
           </div>
 
           {/* Search Bar */}
-          <div className="mt-3 mobile:ml-3 rounded-[10px] relative flex">
-            <textarea
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-              className="bg-white ml-5 mobile:ml-3 text-gray-700 border rounded-[10px] border-gray-300 w-full p-3 pl-12 mobile:w-full resize-none overflow-hidden min-h-[40px] max-h-[120px]"
-              placeholder="Search Integration..."
-              rows={1}
-              onInput={(e) => {
-                e.target.style.height = "40px"; // Reset height
-                e.target.style.height = e.target.scrollHeight + "px"; // Adjust height dynamically
-              }}
-            />
-            <span
-              className="absolute left-3 ml-5 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
-              onClick={handleSearch}
-            >
-              <IoSearch className="text-2xl" />
-            </span>
-          </div>
-        </div>
-        {reportData && (
-          <div className="mt-5  mobile:ml-3  rounded-[10px] relative flex justify-left">
-            <div className="bg-white ml-12 text-gray-700 border rounded-[10px] border-gray-300 w-[1000px] p-3 mobile:w-full">
-              <h3 className="text-lg font-semibold mb-4">Generated Report</h3>
-              <table className="w-full border-collapse border border-gray-300">
-                <thead>
-                  <tr className="bg-gray-200">
-                    <th className="border text-left border-gray-300 px-4 py-2">
-                      ID
-                    </th>
-                    <th className="border text-left border-gray-300 px-4 py-2">
-                      Name
-                    </th>
-                    <th className="border text-left border-gray-300 px-4 py-2">
-                      Total Income
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {reportData.map((row, index) => (
-                    <tr key={index} className="hover:bg-gray-100">
-                      <td className="border border-gray-300 px-4 py-2">
-                        {row.ID}
-                      </td>
-                      <td className="border border-gray-300 px-4 py-2">
-                        {row.NAME}
-                      </td>
-                      <td className="border border-gray-300 px-4 py-2">
-                        {row.total_income}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
+          <div className="flex flex-col items-center w-full px-5">
+  {/* Search Bar */}
+  
+<div className="w-full max-w-[1230px] mt-3 relative flex">
+  <textarea
+    value={searchText}
+    onChange={(e) => setSearchText(e.target.value)}
+    className="w-full bg-white text-gray-700 border border-gray-300 rounded-[10px] p-3 pl-12 resize-none overflow-hidden min-h-[60px] max-h-[200px] leading-[30px]"
+    placeholder="Search Integration..."
+    rows={1}
+    onInput={(e) => {
+      e.target.style.height = "10px"; // Start from a smaller height
+      e.target.style.height = e.target.scrollHeight + "px"; // Expand dynamically
+    }}
+  />
+  <span
+    className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
+    onClick={handleSearch}
+  >
+    <IoSearch className="text-2xl" />
+  </span>
+</div>
 
-        {/* Additional Content Section */}
-        <div className="flex flex-col ml-7 sm:flex-row justify-between items-start mt-10 gap-8 mobile:ml-5">
-          {/* <div className="w-full p-4 h-[330px] bg-white rounded-[14px] shadow-md mb-5 border hover:border-black transition-all duration-300 gap-6">
-            <div className="flex justify-between items-center">
-              <p className="text-base sm:text-lg">Appointments</p>
-              <p className="mr-10 flex items-center whitespace-nowrap text-sm sm:text-base">
-                This Month{" "}
-                <span className="ml-1">
-                  <SlArrowDown />
-                </span>
-              </p>
-            </div>
-            <div className="w-full">
-              <LineChart
-                xAxis={[{ data: [1, 2, 3, 5, 8, 10], showGrid: true, grid: { stroke: "#ccc", strokeDasharray: "5 5" }, show: false }]}
-                yAxis={[{ showGrid: true, grid: { stroke: "#ccc", strokeDasharray: "5 5" } }]}
-                series={[{ data: [2, 6, 2, 8.5, 1.5, 5], area: true, color: "#007bff" }]}
-                height={300}
-                sx={{ "& .MuiAxis-root": { display: "none" } }}
-              />
-            </div>
-          </div> */}
 
-          {graphData && (
-            <div className="w-full mobile:w-[300px] ml-5 mobile:ml-10 p-4 h-[330px] bg-white rounded-[14px] shadow-md mb-5 border hover:border-black transition-all duration-300 gap-6">
-              <div className="flex justify-between items-center">
-                <p className="text-base sm:text-lg">Line ofgraph</p>
-                <p className="mr-10 flex items-center whitespace-nowrap text-sm sm:text-base">
-                  This Month{" "}
-                  <span className="ml-1">
-                    <SlArrowDown />
-                  </span>
-                </p>
-              </div>
-              <div className="w-full">
-                <LineChart
-                  xAxis={[
-                    {
-                      id: "appointments", // ✅ Unique ID for the X-axis
-                      scaleType: "band", // ✅ Ensures categorical X-axis
-                      data: graphData.labels || [], // ✅ X-axis Labels
-                      tickLabelAngle: -45, // ✅ Rotate labels for better visibility
-                    },
-                  ]}
-                  yAxis={[
-                    {
-                      // id: "count",
-                      label: "Number of Appointments", // ✅ Y-axis label
-                      min: 0, // ✅ Ensures no negative values
-                    },
-                  ]}
-                  series={[
-                    {
-                      data: graphData.datasets[0]?.data || [], // ✅ Y-axis Data
-                      // label: graphData.datasets[0]?.label || "Appointments", // ✅ Dynamic label
-                      area: true,
-                      color: "#007bff", // ✅ Fixed color for visibility
-                    },
-                  ]}
-                  height={300}
-                  sx={{
-                    "& .MuiAxis-root": { stroke: "#ddd" }, // ✅ Light grey axis for better UI
-                  }}
-                />
-              </div>
-            </div>
-          )}
+  {/* Report Data Table */}
+  {reportData && (
+    <div className="w-full max-w-[1250px] mt-5 bg-white text-gray-700 border border-gray-300 rounded-[10px] p-5">
+      <h3 className="text-lg font-semibold mb-4">Generated Report</h3>
+      <table className="w-full border-collapse border border-gray-300">
+        <thead>
+          <tr className="bg-gray-200">
+            <th className="border border-gray-300 px-4 py-2 text-left">ID</th>
+            <th className="border border-gray-300 px-4 py-2 text-left">Name</th>
+            <th className="border border-gray-300 px-4 py-2 text-left">
+              Total Income
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {reportData.map((row, index) => (
+            <tr key={index} className="hover:bg-gray-100">
+              <td className="border border-gray-300 px-4 py-2">{row.ID}</td>
+              <td className="border border-gray-300 px-4 py-2">{row.NAME}</td>
+              <td className="border border-gray-300 px-4 py-2">
+                {row.total_income}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
 
-          <div className="ml-7 mb-12 h-[330px] p-4 bg-white rounded-[14px] shadow-md border hover:border-black transition-all duration-300 ">
+  {/* Graph Section */}
+  {graphData && (
+    <div className="w-full max-w-[1200px] mt-5 bg-white border border-gray-300 rounded-[14px] shadow-md p-5">
+      <div className="flex justify-between items-center">
+        <p className="text-lg">Line Graph</p>
+        <p className="mr-10 flex items-center whitespace-nowrap text-sm">
+          This Month{" "}
+          <span className="">
+            <SlArrowDown />
+          </span>
+        </p>
+      </div>
+      <div className="w-full">
+        <LineChart
+          xAxis={[
+            {
+              id: "appointments",
+              scaleType: "band",
+              data: graphData.labels || [],
+              tickLabelAngle: -45,
+            },
+          ]}
+          yAxis={[
+            {
+              label: "Number of Appointments",
+              min: 0,
+            },
+          ]}
+          series={[
+            {
+              data: graphData.datasets[0]?.data || [],
+              area: true,
+              color: "#007bff",
+            },
+          ]}
+          height={300}
+          sx={{
+            "& .MuiAxis-root": { stroke: "#ddd" },
+          }}
+        />
+      </div>
+    </div>
+  )}
+</div>
+
+
+          {/* <div className="ml mb-12 h-[330px] p-4 bg-white rounded-[14px] shadow-md border hover:border-black transition-all duration-300 ">
             <div className="flex justify-between items-center">
               <p className="h-10 flex items-center whitespace-nowrap text-sm sm:text-base">
                 SQL Statement{" "}
@@ -422,7 +395,7 @@ function Storyboard() {
               CONSTRAINT customer PRIMARY KEY (CustID)
               <br />)
             </p>
-          </div>
+          </div> */}
         </div>
 
         <div>

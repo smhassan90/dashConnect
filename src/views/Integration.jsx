@@ -426,22 +426,22 @@ function Integration() {
         onClick={() => setIsOpen(true)}
         text={"Add integeration"}
 
-  className="ml-10 mt-5 w-52 mobile:ml-24 mobile:w-44 bg-black hover:bg-white hover:text-black border-2 border-black"
+  className="ml-7 mt-3  mobile:ml-24 mobile:w-44 bg-black hover:bg-white hover:text-black border-2 border-black"
 />
 
       
 
-      <div className="ml-7 mt-12 mobile:ml-24 mobile:w-[400px] rounded-[12px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-14 items-center">
+      <div className="ml-7  mobile:ml-24 mobile:w-[400px] rounded-[12px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-14 items-center">
         {integrations.map((integration, index) => (
           <div
             key={index}
-            className="rounded-[11px] w-full h-[200px] bg-cover bg-center text-white flex flex-col mobile:w-full mobile:mb-4"
+            className="rounded-[11px] mt-4 w-full h-[200px] bg-cover bg-center text-white flex flex-col mobile:w-full mobile:mb-4"
             style={{
               backgroundImage:
                 "url('https://img.freepik.com/premium-vector/geometric-dark-message-board-wallpaper-with-copy-space-modern-designs_796268-123.jpg')",
             }}
           >
-            <div className="flex items-center mb-2">
+            <div className="flex items-center  mb-2">
               <img
                 src={integration.icon}
                 alt={`${integration.icon} Icon`}
@@ -456,10 +456,10 @@ function Integration() {
                     {integration.description}.
                   </p>
                 </div>
-                {/* <div className="mt-3 mobile:mt-1 mobile:ml-0 mobile:w-24 ml-3 items-start">
+                <div className="mt-3 mobile:mt-1 mobile:ml-0 mobile:w-24 ml-3 items-start">
                 
                   
-                  <CustomButton
+                  {/* <CustomButton
   className={`hover:text-black hover:bg-white mobile:w-32 border-2 border-black ${
     isConnected ? "cursor-not-allowed opacity-50" : ""
   }`}
@@ -478,9 +478,9 @@ function Integration() {
     setIsConnected(false); // Reset the state to reflect disconnection
   }}
   disabled={!discooneted}
-/>
+/> */}
 
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
