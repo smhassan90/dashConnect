@@ -7,6 +7,7 @@ import Bar from "../Reuseable/Bar";
 import { ResizableBox } from "react-resizable";
 import Draggable from "react-draggable";
 import "react-resizable/css/styles.css";
+import HashLoader from "react-spinners/HashLoader";
 import { Line } from "react-chartjs-2"; // Chart.js
 import "chart.js/auto";
 import CustomButton from "../Components/Button";
@@ -156,6 +157,7 @@ function Storyboard() {
   };
 
   const fetchSuggestion = async () => {
+    setLoading(true); // Loader start hoga
     try {
       const token = localStorage.getItem("your_access_token");
       console.log("tokan", token);
@@ -182,6 +184,9 @@ function Storyboard() {
       }
     } catch (error) {
       console.error("Error fetching suggestion:", error);
+    }
+    finally {
+      setLoading(false); // Loader stop hoga
     }
   };
 
@@ -226,10 +231,10 @@ function Storyboard() {
   };
 
   return (
-    <div className="">
-      <div className=" ">
+    <div className="w-full ">
+      <div className="w-full">
         {/* Content */}
-        <div className="mr-5">
+        <div className="">
           <Bar title="Story Board" buttonText="+ Add Story" />
         </div>
         <p className="text-center  text-black mt-5 mobile:w-64 mobile:ml-24 mobile:text-center">
@@ -244,7 +249,7 @@ function Storyboard() {
           </a>
         </p>
 
-        <div className="w-full mobile:ml-12 mt-5 px-7 mobile:px-5">
+        <div className="w-full mobile:ml-12 mt-5 px-3  mobile:px-5">
           {/* Tabs */}
           <div className="flex space-x-4 mb-3 border-b border-gray-300">
             <button
@@ -270,14 +275,14 @@ function Storyboard() {
           </div>
 
           {/* Search Bar */}
-          <div className="flex flex-col items-center w-full px-5">
+          <div className="flex flex-col items-center w-full max-w-[1380px]">
   {/* Search Bar */}
   
-<div className="w-full max-w-[1230px] mt-3 relative flex">
+<div className="w-full max-w-[1400px] mt-3 relative flex">
   <textarea
     value={searchText}
     onChange={(e) => setSearchText(e.target.value)}
-    className="w-full bg-white text-gray-700 border border-gray-300 rounded-[10px] p-3 pl-12 resize-none overflow-hidden min-h-[60px] max-h-[200px] leading-[30px]"
+    className="w-full bg-white text-gray-700 border border-gray-300 rounded-[5px] p-3 pl-12 resize-none overflow-hidden min-h-[60px] max-h-[200px] leading-[30px]"
     placeholder="Search Integration..."
     rows={1}
     onInput={(e) => {
@@ -296,7 +301,7 @@ function Storyboard() {
 
   {/* Report Data Table */}
   {reportData && (
-    <div className="w-full max-w-[1250px] mt-5 bg-white text-gray-700 border border-gray-300 rounded-[10px] p-5">
+    <div className="w-full max-w-[1250px] mt-5 bg-white text-gray-700 border border-gray-300 rounded-[5px] p-5">
       <h3 className="text-lg font-semibold mb-4">Generated Report</h3>
       <table className="w-full border-collapse border border-gray-300">
         <thead>
@@ -322,10 +327,22 @@ function Storyboard() {
       </table>
     </div>
   )}
+  {/* Loader Show Karna */}
+  {/* {loading && (
+  <div className="fixed inset-0 flex justify-center items-center bg-white bg-opacity-70 z-70">
+    <HashLoader color="black" size={55} />
+  </div>
+)} */}
+
+{loading && (
+  <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-[9999]">
+    <HashLoader color="black" size={60} />
+  </div>
+)}
 
   {/* Graph Section */}
   {graphData && (
-    <div className="w-full max-w-[1200px] mt-5 bg-white border border-gray-300 rounded-[14px] shadow-md p-5">
+    <div className="w-full max-w-[1280px] mt-5 bg-white border border-gray-300 rounded-[5px] shadow-md p-5">
       <div className="flex justify-between items-center">
         <p className="text-lg">Line Graph</p>
         <p className="mr-10 flex items-center whitespace-nowrap text-sm">

@@ -188,7 +188,7 @@ const DraggableCharts = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="ml-7 h-auto p-5 bg-white rounded-[12px] mt-5 border hover:border-black transition-all duration-300">
+      {/* <div className=" h-auto p-2 bg-white rounded-[12px] mt-5 border hover:border-black transition-all duration-300">
         <div className="flex justify-between items-center">
           <p className="text-base">
             View all the answers to the questions you have asked.
@@ -214,7 +214,7 @@ const DraggableCharts = () => {
             />
           ))}
         </div>
-      </div>
+      </div> */}
     </DndProvider>
   );
 };
