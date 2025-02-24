@@ -97,7 +97,8 @@ function Profile() {
         const formData = new FormData();
         formData.append("profileImage", event.target.files[0]);
 
-        const token = localStorage.getItem("authToken");
+        const token = localStorage.getItem("your_access_token");
+        console.log(token ,)
 
         try {
             const response = await axios.post(`${baseUrl}/api/user/v1/uploadImage`, formData, {
@@ -200,13 +201,13 @@ function Profile() {
         <div className="bg-white shadow-md rounded-lg p-6 max-w-md mx-auto mt-10 mobile:w-72">
             <div className="flex justify-center relative mb-4">
 
-                <img
+                {/* <img
                     src={profileImage || "https://via.placeholder.com/100"}
                     alt="Profile"
                     style={{ width: '100px', height: '100px', borderRadius: '50%' }}
                     onError={(e) => e.target.src = "https://via.placeholder.com/100"} // Fallback if image fails to load
-                />
-                {/* <img
+                /> */}
+                <img
     src={profileImage || "https://via.placeholder.com/100"}
     alt="Profile"
     style={{ width: '100px', height: '100px', borderRadius: '50%' }}
@@ -216,7 +217,7 @@ function Profile() {
             e.target.src = "https://dummyimage.com/100x100/ccc/fff"; 
         }
     }} 
-/> */}
+/>
 
 
                 <button
