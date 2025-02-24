@@ -35,7 +35,7 @@ const App = () => {
           isAuthenticated() ? (
             <div className="flex h-screen">
               <Left className="w-60 fixed top-0 left-0 h-full bg-gray-800 text-white" />
-              <div className="p-4 w-full">
+              <div className="p-1 w-full">
                 <Routes>
                   <Route path="dashboard" element={<Dashboard />} />
                   {dashboardRoutes.map((route, index) => (

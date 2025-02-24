@@ -211,6 +211,7 @@ const addNewEntry = async () => {
         </h1>
         <input
           type="search"
+          maxLength="3"
           value={searchTerm}
           onChange={handleSearch}
           placeholder="Search by Story Board Name"
@@ -340,6 +341,7 @@ const addNewEntry = async () => {
                     </legend>
                     <input
                       required
+                      maxLength="50"
                       className=" bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
                       id="firstName"
                       name="firstName"
@@ -355,6 +357,7 @@ const addNewEntry = async () => {
                     </legend>
                     <input
                       required
+                      maxLength="50"
                       className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
                       id="lastName"
                       name="lastName"
@@ -369,6 +372,7 @@ const addNewEntry = async () => {
                       Email
                     </legend>
                     <input
+                     maxLength="50"
                       type="email"
                       required
                       className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
@@ -385,6 +389,7 @@ const addNewEntry = async () => {
                       Password
                     </legend>
                     <input
+                       maxLength="50"
                       type="password"
                       required
                       className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
@@ -450,6 +455,7 @@ const addNewEntry = async () => {
                     FULL NAME
                   </legend>
                   <input
+                   maxLength="50"
                     className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
                     id="firstName"
                     name="firstName"
@@ -464,6 +470,7 @@ const addNewEntry = async () => {
                     Last Name{" "}
                   </legend>
                   <input
+                   maxLength="50"
                     required
                     className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input
                     id="lastName"
@@ -478,6 +485,7 @@ const addNewEntry = async () => {
                     Email{" "}
                   </legend>
                   <input
+                   maxLength="50"
                     type="Email"
                     required
                     className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none" // No border on input

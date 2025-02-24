@@ -10,6 +10,8 @@ import "react-resizable/css/styles.css";
 import HashLoader from "react-spinners/HashLoader";
 import { Line } from "react-chartjs-2"; // Chart.js
 import "chart.js/auto";
+import { FaMicrophone } from "react-icons/fa"; // Mic Icon
+
 import CustomButton from "../Components/Button";
 
 import DraggableCharts from "../Reuseable/DraggableChart";
@@ -17,6 +19,8 @@ import DraggableCharts from "../Reuseable/DraggableChart";
 function Storyboard() {
   const [activeTab, setActiveTab] = useState("graph"); // Default tab
   const [graphData, setGraphData] = useState(null);
+  
+  const [isListening, setIsListening] = useState(false); 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [suggestion, setSuggestion] = useState("");
   const [searchText, setSearchText] = useState("");
@@ -155,6 +159,34 @@ function Storyboard() {
       setLoading(false);
     }
   };
+  const handleVoiceSearch = () => {
+    const recognition = new (window.SpeechRecognition ||
+      window.webkitSpeechRecognition)();
+  
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+  
+    recognition.onstart = () => {
+      setIsListening(true); // Mic ON => Blue color
+      console.log("Voice recognition started...");
+    };
+  
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setSearchText((prevText) => (prevText ? prevText + " " + transcript : transcript));
+    };
+  
+    recognition.onerror = (event) => {
+      console.error("Error occurred in speech recognition: ", event.error);
+    };
+  
+    recognition.onend = () => {
+      setIsListening(false); // Mic OFF => Default color
+      console.log("Voice recognition stopped.");
+    };
+  
+    recognition.start();
+  };
 
   const fetchSuggestion = async () => {
     setLoading(true); // Loader start hoga
@@ -249,11 +281,11 @@ function Storyboard() {
           </a>
         </p>
 
-        <div className="w-full mobile:ml-12 mt-5 px-3  mobile:px-5">
+        <div className="w-full ml-2 mobile:ml-12 mt-5 px-2  mobile:px-5">
           {/* Tabs */}
-          <div className="flex space-x-4 mb-3 border-b border-gray-300">
+          <div className=" ml-2 flex space-x-4 mb-3 border-b border-gray-300">
             <button
-              className={`py-2 px-4 text-gray-700 font-semibold ${
+              className={`py-2 px-2 text-gray-700 font-semibold ${
                 activeTab === "graph"
                   ? "border-b-2 border-blue-500 text-blue-500"
                   : ""
@@ -263,7 +295,7 @@ function Storyboard() {
               Graphs
             </button>
             <button
-              className={`py-2 px-4 text-gray-700 font-semibold ${
+              className={`py-2 px-2 text-gray-700 ml-2 font-semibold ${
                 activeTab === "report"
                   ? "border-b-2 border-blue-500 text-blue-500"
                   : ""
@@ -275,7 +307,7 @@ function Storyboard() {
           </div>
 
           {/* Search Bar */}
-          <div className="flex flex-col items-center w-full max-w-[1380px]">
+          <div className="flex ml-2 flex-col items-center w-full">
   {/* Search Bar */}
   
 <div className="w-full max-w-[1400px] mt-3 relative flex">
@@ -296,6 +328,14 @@ function Storyboard() {
   >
     <IoSearch className="text-2xl" />
   </span>
+  <span
+      className={`absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer ${
+        isListening ? "text-blue-500" : "text-gray-500"
+      }`}
+      onClick={handleVoiceSearch}
+    >
+      <FaMicrophone className="text-2xl" />
+    </span>
 </div>
 
 

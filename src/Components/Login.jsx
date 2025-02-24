@@ -27,7 +27,7 @@ const Login = () => {
     const formData = { email, password };
   
     try {
-      const response = await axios.post(`http://localhost:3000/api/user/v1/login`, formData);
+      const response = await axios.post(`${baseUrl}/api/user/v1/login`, formData);
       const token = response.data.token;
       const userName = response.data.user.name; // Assuming the API returns user data including the name
   

@@ -517,6 +517,7 @@ function Integration() {
                     UserName
                   </legend>
                   <input
+                   maxLength="50"
                     required
                     className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
                     id="username"
@@ -531,6 +532,7 @@ function Integration() {
                     Password
                   </legend>
                   <input
+                   maxLength="50"
                     type="password"
                     required
                     className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
@@ -545,6 +547,7 @@ function Integration() {
                     URL
                   </legend>
                   <input
+                   maxLength="50"
                     required
                     className="bg-transparent rounded w-full h-5 py-1 px-3 text-gray-700 leading-tight focus:outline-none border-none"
                     id="url"
@@ -609,6 +612,7 @@ function Integration() {
       </select>
 
       <input
+       maxLength="50"
         type="text"
         name="integrationName"
         placeholder="Integration Name"
@@ -617,6 +621,7 @@ function Integration() {
         className="w-full p-2 mb-2 border rounded"
       />
       <input
+       maxLength="50"
         type="text"
         name="url"
         placeholder="URL"
@@ -625,6 +630,7 @@ function Integration() {
         className="w-full p-2 mb-2 border rounded"
       />
       <input
+       maxLength="50"
         type="text"
         name="username"
         placeholder="Username"
@@ -633,6 +639,7 @@ function Integration() {
         className="w-full p-2 mb-2 border rounded"
       />
       <input
+       maxLength="50"
         type="password"
         name="password"
         placeholder="Password"
@@ -713,6 +720,7 @@ function Integration() {
                     <div>
                       <p className="font-semibold">{table}</p>
                       <textarea
+                      
                         className="w-[290px] border p-2 text-sm text-gray-500 mt-1"
                         placeholder="Enter description..."
                         value={selectedTables.find((t) => t.tableName === table)?.description || ""}
